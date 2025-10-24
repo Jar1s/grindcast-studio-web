@@ -12,9 +12,9 @@ import mixer from "./assets/mixer.jpg";
 import studioDetail from "./assets/studio-detail.jpg";
 import heroTech from "./assets/hero-tech.jpg";
 import recodeAudioCover from "./assets/recode-body-new.jpg";
-import galleryStudio1 from "./assets/mixer.jpg";
-import galleryStudio2 from "./assets/studio-detail.jpg";
-import galleryStudio3 from "./assets/detail-mic.jpg";
+import galleryStudio1 from "./assets/studio-space-1.jpg";
+import galleryStudio2 from "./assets/studio-space-2.jpg";
+import galleryStudio3 from "./assets/studio-space-3.jpg";
 
 const CALENDLY_URL = "https://calendly.com/vas-calendly/podcast-studio";
 
@@ -201,6 +201,7 @@ function useScrollReveal(threshold = 0.25, delay = 0) {
 
 function App() {
   const [activeSession, setActiveSession] = useState(sessionOptions[0].id);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const activeSessionMeta =
     sessionOptions.find((option) => option.id === activeSession) || sessionOptions[0];
   const heroReveal = useScrollReveal(0.35);
@@ -218,24 +219,32 @@ function App() {
         <div className="logo" aria-label="Grindcast - Podcastové štúdio">
           <span className="logo-word">Grindcast</span>
         </div>
-        <nav className="nav" role="navigation" aria-label="Hlavná navigácia">
+        
+        {/* Mobile hamburger menu button */}
+        <button 
+          className="mobile-menu-toggle"
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          aria-label="Otvoriť/zatvoriť menu"
+        >
+          <span className={`hamburger ${isMobileMenuOpen ? 'active' : ''}`}>
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+        </button>
+
+        {/* Desktop navigation */}
+        <nav className="nav desktop-nav" role="navigation" aria-label="Hlavná navigácia">
           {navigation.map((item) => (
             <a key={item.href} href={item.href} aria-label={`Prejsť na sekciu ${item.label}`}>
               {item.label}
             </a>
           ))}
         </nav>
+        
+        {/* Desktop CTA button */}
         <a
-          className="nav-social"
-          href="https://www.instagram.com/grindcaststudio/"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Sledujte nás na Instagrame - Grindcast Studio"
-        >
-          <img src="/icons/instagram.svg" alt="Instagram ikona" />
-        </a>
-        <a
-          className="cta-button"
+          className="cta-button desktop-cta"
           href={CALENDLY_URL}
           target="_blank"
           rel="noopener noreferrer"
@@ -243,6 +252,42 @@ function App() {
         >
           Rezervovať
         </a>
+
+        {/* Mobile navigation menu */}
+        <AnimatePresence>
+          {isMobileMenuOpen && (
+            <motion.nav 
+              className="nav mobile-nav"
+              role="navigation"
+              aria-label="Mobilná navigácia"
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              {navigation.map((item) => (
+                <a 
+                  key={item.href} 
+                  href={item.href} 
+                  aria-label={`Prejsť na sekciu ${item.label}`}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  {item.label}
+                </a>
+              ))}
+              <a
+                className="cta-button mobile-cta"
+                href={CALENDLY_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Rezervovať termín v podcastovom štúdiu"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Rezervovať
+              </a>
+            </motion.nav>
+          )}
+        </AnimatePresence>
       </header>
 
       <main role="main">
@@ -636,7 +681,7 @@ function App() {
             rel="noopener noreferrer"
             aria-label="Instagram Grindcast"
           >
-            <img src="/icons/instagram.svg" alt="Instagram" />
+            <img src="/grindcast-studio-web/icons/instagram.svg" alt="Instagram" />
           </a>
         </div>
         <p className="footer-meta">© {new Date().getFullYear()} Grindcast Studio Bratislava</p>

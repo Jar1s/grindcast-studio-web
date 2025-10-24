@@ -979,19 +979,108 @@
   }
 }
 
+/* Mobile hamburger menu styles */
+.mobile-menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  z-index: 1001;
+}
+
+/* Desktop navigation styles */
+.desktop-nav {
+  display: flex;
+}
+
+.desktop-cta {
+  display: inline-block;
+}
+
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  width: 24px;
+  height: 18px;
+  justify-content: space-between;
+}
+
+.hamburger span {
+  display: block;
+  height: 2px;
+  width: 100%;
+  background: #f1c94c;
+  border-radius: 1px;
+  transition: all 0.3s ease;
+}
+
+.hamburger.active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(7px, -6px);
+}
+
 @media (max-width: 768px) {
   .top-bar {
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     gap: 1rem;
     padding: 1rem 2vw;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .logo {
+    flex: 1;
+    justify-content: center;
+    margin-bottom: 0;
   }
 
-  .nav {
-    width: 100%;
-    justify-content: center;
-    flex-wrap: wrap;
+  .mobile-menu-toggle {
+    display: block;
+  }
+
+  .desktop-nav,
+  .desktop-cta {
+    display: none;
+  }
+
+  .mobile-nav {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: rgba(7, 7, 9, 0.98);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(241, 201, 76, 0.2);
+    flex-direction: column;
+    padding: 1rem 2vw;
+    gap: 1rem;
+    z-index: 1000;
+  }
+
+  .mobile-nav a {
+    padding: 0.75rem 1rem;
+    text-align: center;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+  }
+
+  .mobile-nav a:hover {
+    background: rgba(241, 201, 76, 0.1);
+  }
+
+  .mobile-cta {
     margin-top: 0.5rem;
-    gap: 1.5rem;
+    background: linear-gradient(135deg, #f1c94c 0%, #d4af37 100%);
+    color: #0b0c10;
+    font-weight: 600;
   }
 
   .nav a {
