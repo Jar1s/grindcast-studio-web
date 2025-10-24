@@ -1,0 +1,21 @@
+{
+  "name": "Grindcast Studio - Podcastové Štúdio Bratislava",
+  "short_name": "Grindcast",
+  "description": "Profesionálne podcastové štúdio v Bratislave pre audio a video produkciu",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0b0c10",
+  "theme_color": "#f1c94c",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["business", "entertainment", "productivity"],
+  "lang": "sk",
+  "dir": "ltr"
+}

@@ -1,0 +1,19 @@
+User-agent: *
+Allow: /
+
+# Mobile-specific optimizations
+User-agent: Googlebot-Mobile
+Allow: /
+
+# Sitemap
+Sitemap: https://grindcast.sk/sitemap.xml
+
+# Crawl-delay
+Crawl-delay: 1
+
+# Disallow admin or private areas (if any)
+# Disallow: /admin/
+# Disallow: /private/
+
+# Allow mobile-specific content
+Allow: /mobile/
