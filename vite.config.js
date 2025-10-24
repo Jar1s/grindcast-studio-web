@@ -4,7 +4,7 @@ import react from "@vitejs/plugin-react";
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: "/", // Custom domain - root path
+  base: "/grindcast-studio-web/", // GitHub Pages subdirectory
   build: {
     outDir: "dist",
     assetsDir: "assets",
