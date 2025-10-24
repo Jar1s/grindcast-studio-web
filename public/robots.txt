@@ -6,7 +6,7 @@ User-agent: Googlebot-Mobile
 Allow: /
 
 # Sitemap
-Sitemap: https://grindcast.sk/sitemap.xml
+Sitemap: https://grindcaststudio.sk/sitemap.xml
 
 # Crawl-delay
 Crawl-delay: 1
