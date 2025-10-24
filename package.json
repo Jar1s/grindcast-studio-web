@@ -5,9 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "node scripts/update-sitemap.js && vite build",
     "preview": "vite preview",
-    "deploy": "gh-pages -d dist"
+    "deploy": "npm run build && gh-pages -d dist",
+    "update-sitemap": "node scripts/update-sitemap.js"
   },
   "dependencies": {
     "framer-motion": "^12.23.24",
