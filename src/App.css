@@ -1083,31 +1083,41 @@
     top: 100%;
     left: 0;
     right: 0;
-    background: rgba(7, 7, 9, 0.98);
-    backdrop-filter: blur(10px);
-    border-top: 1px solid rgba(241, 201, 76, 0.2);
+    background: rgba(11, 12, 16, 0.95);
+    backdrop-filter: blur(20px);
+    border-top: 1px solid rgba(241, 201, 76, 0.3);
     flex-direction: column;
-    padding: 1rem 2vw;
-    gap: 1rem;
+    padding: 2rem 2vw;
+    gap: 0.5rem;
     z-index: 1000;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
   }
 
   .mobile-nav a {
-    padding: 0.75rem 1rem;
+    padding: 1rem 1.5rem;
     text-align: center;
-    border-radius: 8px;
-    transition: background-color 0.3s ease;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #ffffff;
+    border: 1px solid transparent;
   }
 
   .mobile-nav a:hover {
-    background: rgba(241, 201, 76, 0.1);
+    background: rgba(241, 201, 76, 0.15);
+    border-color: rgba(241, 201, 76, 0.3);
+    transform: translateY(-1px);
   }
 
   .mobile-cta {
-    margin-top: 0.5rem;
+    margin-top: 1rem;
     background: linear-gradient(135deg, #f1c94c 0%, #d4af37 100%);
     color: #0b0c10;
     font-weight: 600;
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(241, 201, 76, 0.3);
   }
 
   .nav a {
