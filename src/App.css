@@ -1014,9 +1014,9 @@
 
 .hamburger span {
   display: block;
-  height: 1px;
+  height: 2px;
   width: 100%;
-  background: #f1c94c;
+  background: #0b0c10;
   border-radius: 0;
   transition: all 0.2s ease;
 }
@@ -1049,7 +1049,10 @@
   }
 
   .mobile-menu-toggle {
-    display: block;
+    display: block !important;
+    background: #f1c94c;
+    border-radius: 4px;
+    padding: 0.75rem;
   }
 
   .desktop-nav,
@@ -1083,11 +1086,12 @@
     top: 100%;
     left: 0;
     right: 0;
-    background: #0b0c10;
-    border-top: 1px solid rgba(241, 201, 76, 0.2);
+    background: #1a1a1a;
+    border-top: 2px solid #f1c94c;
     flex-direction: column;
     padding: 1rem 0;
     z-index: 1000;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
   }
 
   .mobile-nav a {
