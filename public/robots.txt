@@ -5,11 +5,17 @@ Allow: /
 User-agent: Googlebot-Mobile
 Allow: /
 
+# Security crawlers
+User-agent: Cisco-Umbrella
+Allow: /
+
 # Sitemap
 Sitemap: https://grindcaststudio.sk/sitemap.xml
 
-# Security
+# Security and verification files
 Allow: /.well-known/security.txt
+Allow: /.well-known/apple-app-site-association
+Allow: /.well-known/assetlinks.json
 
 # Crawl-delay
 Crawl-delay: 1
