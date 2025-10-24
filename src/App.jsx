@@ -12,9 +12,9 @@ import mixer from "./assets/mixer.jpg";
 import studioDetail from "./assets/studio-detail.jpg";
 import heroTech from "./assets/hero-tech.jpg";
 import recodeAudioCover from "./assets/recode-body-new.jpg";
-import galleryStudio1 from "./assets/studio-space-1.jpg";
-import galleryStudio2 from "./assets/studio-space-2.jpg";
-import galleryStudio3 from "./assets/studio-space-3.jpg";
+import galleryStudio1 from "./assets/mixer.jpg";
+import galleryStudio2 from "./assets/studio-detail.jpg";
+import galleryStudio3 from "./assets/detail-mic.jpg";
 
 const CALENDLY_URL = "https://calendly.com/vas-calendly/podcast-studio";
 
