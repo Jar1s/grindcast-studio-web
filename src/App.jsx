@@ -377,7 +377,7 @@ function App() {
           aria-labelledby="gallery-heading"
         >
           <div className="section-header">
-            <span className="section-overline">Fotogaléria</span>
+            <span className="section-overline">Prostredie štúdia</span>
             <h2 id="gallery-heading">Nahliadnite do nášho priestoru</h2>
           </div>
           <div className="gallery-grid">
@@ -402,7 +402,7 @@ function App() {
           animate={pricingReveal.controls}
         >
           <div className="section-header">
-            <span className="section-overline">Rezervácia nahrávania</span>
+            <span className="section-overline">Cenník</span>
             <h2>Vyberte si balík, ktorý vám najviac sedí</h2>
             <p className="pricing-subtitle single-line">
               Pri prvej návšteve získate <strong>25 % zľavu</strong> na ktorýkoľvek balík.
