@@ -89,7 +89,7 @@ const faqs = [
 
 const packages = [
   {
-    title: "Súbory a základná postprodukcia",
+    title: "Základná postprodukcia",
     description:
       "Po nahrávaní dostanete všetky audio a video súbory + hrubý strih pripravený pre vašu ďalšiu úpravu.",
     pricing: {
