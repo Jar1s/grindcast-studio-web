@@ -125,12 +125,12 @@
   white-space: nowrap;
 }
 
-/* Make CTA button oval when inside nav */
+/* Make CTA button pill-shaped when inside nav */
 .nav .cta-button {
   padding: 0.75rem 1.5rem;
   width: auto;
-  height: 3rem;
-  border-radius: 50%;
+  height: 2.5rem;
+  border-radius: 999px;
   font-size: 0.9rem;
   min-width: auto;
   font-weight: 700;
