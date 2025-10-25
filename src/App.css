@@ -26,7 +26,20 @@
 .mobile-header {
   display: none;
   align-items: center;
+  justify-content: space-between;
+  width: 100%;
   gap: 1rem;
+}
+
+.mobile-logo {
+  flex: 1;
+}
+
+.mobile-logo .logo-word {
+  color: #f1c94c;
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-decoration: none;
 }
 
 .mobile-rezervacia {
@@ -1171,11 +1184,11 @@
   }
   
   .desktop-nav {
-    display: none;
+    display: none !important;
   }
   
   .mobile-header {
-    display: flex;
+    display: flex !important;
   }
   
   .logo {
