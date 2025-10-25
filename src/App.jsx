@@ -83,7 +83,7 @@ const faqs = [
   {
     question: "Máme k dispozícii parkovanie a catering?",
     answer:
-      "Parkovanie je možné priamo v areáli Melrose Apartments. Na želanie zabezpečíme kávový servis alebo občerstvenie cez našich partnerov.",
+      "Parkovanie je možné priamo v areáli. Na želanie zabezpečíme kávový servis alebo občerstvenie cez našich partnerov.",
   },
 ];
 
@@ -639,11 +639,6 @@ function App() {
             <div className="contact-details">
               <p>
                 Kliknite na tlačidlo nižšie, rezervujte si termín.
-              </p>
-              <p>
-                Štúdio nájdete v objekte <strong>Melrose Apartments</strong> na adrese
-                <strong> Betliarska 3769/12, 851 07 Petržalka</strong>. Parkovanie je
-                dostupné priamo v areáli.
               </p>
               <a
                 className="cta-button"
