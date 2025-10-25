@@ -1097,10 +1097,12 @@
     z-index: 1000;
     box-shadow: 2px 0 20px rgba(0, 0, 0, 0.3);
     transition: left 0.3s ease;
+    display: none;
   }
 
   .mobile-nav.open {
     left: 0;
+    display: flex;
   }
 
   .mobile-nav a {
