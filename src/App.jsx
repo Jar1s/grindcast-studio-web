@@ -226,18 +226,16 @@ function App() {
               {item.label}
             </a>
           ))}
+          <a
+            className="cta-button"
+            href={CALENDLY_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Rezervovať termín v podcastovom štúdiu"
+          >
+            Rezervovať
+          </a>
         </nav>
-        
-        {/* CTA button */}
-        <a
-          className="cta-button"
-          href={CALENDLY_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Rezervovať termín v podcastovom štúdiu"
-        >
-          Rezervovať
-        </a>
       </header>
 
       <main role="main">
