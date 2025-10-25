@@ -107,7 +107,7 @@ const packages = [
   {
     title: "Kompletná postprodukcia",
     description:
-      "Dodáme kompletný audio aj video výstup pripravený na publikovanie + titulky podľa brand manuálu.",
+      "Dodáme kompletný audio aj video výstup pripravený na publikovanie.",
     pricing: {
       "1h": { price: "249 €", note: VAT_NOTE },
       "2h": { price: "339 €", note: VAT_NOTE },
@@ -117,7 +117,7 @@ const packages = [
     features: [
       "{durationMinutes} min nahrávanie + 30 min príprava",
       "Finálny strih videa a audia vo Full HD",
-      "Color grading + titulky a grafika",
+      "Color grading a grafika",
       "Jedno kolo zapracovania pripomienok",
     ],
   },
@@ -133,7 +133,7 @@ const packages = [
     features: [
       "{durationMinutes} min nahrávanie + 30 min príprava",
       "Finálny strih videa a audia vo Full HD",
-      "Color grading + titulky a grafika",
+      "Color grading a grafika",
       "4 vertikálne klipy s titulkami",
     ],
   },
