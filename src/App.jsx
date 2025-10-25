@@ -535,28 +535,11 @@ function App() {
                   loading="lazy" 
                 />
                 <div className="recording-overlay">
-                  <span className="recording-play" aria-hidden="true">
-                    {item.isAudioBook ? (
-                      <svg viewBox="0 0 24 24" width="20" height="20">
-                        <path
-                          d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
-                          fill="currentColor"
-                        />
-                      </svg>
-                    ) : (
-                      <svg viewBox="0 0 24 24" width="20" height="20">
-                        <path
-                          d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9v-8h2v8zm4 0h-2V8h2v8z"
-                          fill="currentColor"
-                        />
-                      </svg>
-                    )}
-                  </span>
                   <div className="recording-text">
                     <strong>{item.title}</strong>
                     <p>{item.description}</p>
                     <span className="recording-label">
-                      {item.isAudioBook ? "Pozrieť audio knihu" : "Pozrieť video"}
+                      {item.isAudioBook ? "POZRIEŤ AUDIO KNIHU" : "POZRIEŤ VIDEO"}
                     </span>
                   </div>
                 </div>
