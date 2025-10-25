@@ -652,42 +652,20 @@ function App() {
             </div>
             <div className="contact-meta">
               <div className="contact-map">
-                <a 
-                  href="https://www.google.com/maps/search/Bratislava,+Slovakia/@48.1486,17.1077,13z"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{
-                    display: 'flex',
-                    width: '100%',
-                    height: '300px',
-                    background: 'linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%)',
+                <iframe
+                  title="Mapa Podcast Studio Bratislava"
+                  src="https://maps.google.com/maps?width=100%25&amp;height=300&amp;hl=sk&amp;q=Bratislava,%20Slovakia&amp;t=&amp;z=13&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
+                  width="100%"
+                  height="300"
+                  style={{ 
                     border: '1px solid rgba(241, 201, 76, 0.3)',
                     borderRadius: '12px',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    textDecoration: 'none',
-                    color: '#f1c94c',
-                    fontSize: '1.1rem',
-                    fontWeight: '500',
-                    transition: 'all 0.3s ease'
+                    filter: 'grayscale(20%) contrast(1.1)'
                   }}
-                  onMouseOver={(e) => {
-                    e.target.style.background = 'linear-gradient(135deg, #2a2a2a 0%, #3a3a3a 100%)';
-                    e.target.style.borderColor = 'rgba(241, 201, 76, 0.6)';
-                  }}
-                  onMouseOut={(e) => {
-                    e.target.style.background = 'linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%)';
-                    e.target.style.borderColor = 'rgba(241, 201, 76, 0.3)';
-                  }}
-                >
-                  <div style={{ textAlign: 'center' }}>
-                    <div style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>📍</div>
-                    <div>Kliknite pre otvorenie mapy</div>
-                    <div style={{ fontSize: '0.9rem', opacity: 0.8, marginTop: '0.25rem' }}>
-                      Bratislava, Slovensko
-                    </div>
-                  </div>
-                </a>
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
               </div>
             </div>
           </div>
