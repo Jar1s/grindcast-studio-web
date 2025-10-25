@@ -201,7 +201,6 @@ function useScrollReveal(threshold = 0.25, delay = 0) {
 
 function App() {
   const [activeSession, setActiveSession] = useState(sessionOptions[0].id);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const activeSessionMeta =
     sessionOptions.find((option) => option.id === activeSession) || sessionOptions[0];
   const heroReveal = useScrollReveal(0.35);
@@ -220,21 +219,8 @@ function App() {
           <span className="logo-word">Grindcast</span>
         </div>
         
-        {/* Mobile hamburger menu button */}
-        <button 
-          className="mobile-menu-toggle"
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          aria-label="Otvoriť/zatvoriť menu"
-        >
-          <span className={`hamburger ${isMobileMenuOpen ? 'active' : ''}`}>
-            <span></span>
-            <span></span>
-            <span></span>
-          </span>
-        </button>
-
-        {/* Desktop navigation */}
-        <nav className="nav desktop-nav" role="navigation" aria-label="Hlavná navigácia">
+        {/* Navigation */}
+        <nav className="nav" role="navigation" aria-label="Hlavná navigácia">
           {navigation.map((item) => (
             <a key={item.href} href={item.href} aria-label={`Prejsť na sekciu ${item.label}`}>
               {item.label}
@@ -242,9 +228,9 @@ function App() {
           ))}
         </nav>
         
-        {/* Desktop CTA button */}
+        {/* CTA button */}
         <a
-          className="cta-button desktop-cta"
+          className="cta-button"
           href={CALENDLY_URL}
           target="_blank"
           rel="noopener noreferrer"
@@ -252,42 +238,6 @@ function App() {
         >
           Rezervovať
         </a>
-
-        {/* Mobile menu overlay */}
-        {isMobileMenuOpen && (
-          <div 
-            className={`mobile-menu-overlay ${isMobileMenuOpen ? 'open' : ''}`}
-            onClick={() => setIsMobileMenuOpen(false)}
-          />
-        )}
-
-        {/* Mobile navigation menu */}
-        <nav 
-          className={`nav mobile-nav ${isMobileMenuOpen ? 'open' : ''}`}
-          role="navigation"
-          aria-label="Mobilná navigácia"
-        >
-          {navigation.map((item) => (
-            <a 
-              key={item.href} 
-              href={item.href} 
-              aria-label={`Prejsť na sekciu ${item.label}`}
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              {item.label}
-            </a>
-          ))}
-          <a
-            className="cta-button mobile-cta"
-            href={CALENDLY_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Rezervovať termín v podcastovom štúdiu"
-            onClick={() => setIsMobileMenuOpen(false)}
-          >
-            Rezervovať
-          </a>
-        </nav>
       </header>
 
       <main role="main">
