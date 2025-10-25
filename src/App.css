@@ -22,6 +22,29 @@
   display: flex;
 }
 
+/* Mobile Header */
+.mobile-header {
+  display: none;
+  align-items: center;
+  gap: 1rem;
+}
+
+.mobile-rezervacia {
+  color: #f1c94c;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid #f1c94c;
+  border-radius: 20px;
+  transition: all 0.3s ease;
+}
+
+.mobile-rezervacia:hover {
+  background: #f1c94c;
+  color: #0b0c10;
+}
+
 /* Mobile Hamburger Button */
 .mobile-menu-toggle {
   display: none;
@@ -1100,8 +1123,8 @@
     display: none;
   }
   
-  .mobile-menu-toggle {
-    display: block;
+  .mobile-header {
+    display: flex;
   }
   
   .logo {

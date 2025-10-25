@@ -238,18 +238,30 @@ function App() {
           </a>
         </nav>
 
-        {/* Mobile Hamburger Button */}
-        <button
-          className="mobile-menu-toggle"
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          aria-label="Otvoriť/zavrieť menu"
-        >
-          <div className={`hamburger ${isMobileMenuOpen ? 'active' : ''}`}>
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
-        </button>
+        {/* Mobile Header */}
+        <div className="mobile-header">
+          <a
+            className="mobile-rezervacia"
+            href={CALENDLY_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Rezervovať termín v podcastovom štúdiu"
+          >
+            Rezervácia
+          </a>
+          
+          <button
+            className="mobile-menu-toggle"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label="Otvoriť/zavrieť menu"
+          >
+            <div className={`hamburger ${isMobileMenuOpen ? 'active' : ''}`}>
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          </button>
+        </div>
 
         {/* Mobile Menu */}
         <AnimatePresence>
