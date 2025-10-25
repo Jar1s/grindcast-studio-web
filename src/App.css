@@ -381,12 +381,11 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0;
+  gap: 1.75rem;
   position: relative;
   overflow: hidden;
   text-align: center;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  min-height: 500px;
 }
 
 .pricing-card.highlighted {
@@ -397,10 +396,8 @@
 .pricing-card-header {
   display: flex;
   flex-direction: column;
+  gap: 0.75rem;
   align-items: center;
-  flex: 1;
-  justify-content: space-between;
-  margin-bottom: 2rem;
 }
 
 .pricing-card-header h3 {
@@ -413,10 +410,7 @@
   color: #d8d4c5;
   max-width: 22rem;
   text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex: 1;
+  min-height: 4.2rem;
 }
 
 .pricing-card-price {
