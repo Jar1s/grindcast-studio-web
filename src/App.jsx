@@ -659,7 +659,7 @@ function App() {
                 <div className="address-card">
                   <h3>📍 Naša adresa</h3>
                   <p>
-                    <strong>Grindcast Studio</strong><br />
+                    <strong>Melrose Apartments</strong><br />
                     Betliarska 3769/12<br />
                     851 07 Petržalka<br />
                     Bratislava, Slovensko<br />
@@ -697,7 +697,7 @@ function App() {
             rel="noopener noreferrer"
             aria-label="Instagram Grindcast"
           >
-            <img src="/grindcast-studio-web/icons/instagram.svg" alt="Instagram" />
+            <img src="/icons/instagram.svg" alt="Instagram" />
           </a>
         </div>
         <p className="footer-meta">© {new Date().getFullYear()} Grindcast Studio Bratislava</p>
