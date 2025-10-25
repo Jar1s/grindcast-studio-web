@@ -10,8 +10,8 @@ User-agent: Cisco-Umbrella
 Allow: /
 
 # Sitemaps
-Sitemap: https://grindcaststudio.sk/sitemap.xml
-Sitemap: https://grindcaststudio.sk/sitemap-index.xml
+Sitemap: https://www.grindcaststudio.sk/sitemap.xml
+Sitemap: https://www.grindcaststudio.sk/sitemap-index.xml
 
 # Security and verification files
 Allow: /.well-known/security.txt
