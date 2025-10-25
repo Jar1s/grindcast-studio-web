@@ -661,7 +661,6 @@ function App() {
                   <h3>📍 Naša adresa</h3>
                   <p>
                     <strong>Grindcast Studio</strong><br />
-                    Objekte Melrose Apartments<br />
                     Betliarska 3769/12<br />
                     851 07 Petržalka<br />
                     Bratislava, Slovensko<br />
