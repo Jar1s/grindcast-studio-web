@@ -127,12 +127,13 @@
 
 /* Make CTA button circular when inside nav */
 .nav .cta-button {
-  padding: 0.75rem;
-  width: 2.5rem;
-  height: 2.5rem;
+  padding: 1rem;
+  width: 3.5rem;
+  height: 3.5rem;
   border-radius: 50%;
-  font-size: 0.8rem;
-  min-width: 2.5rem;
+  font-size: 0.9rem;
+  min-width: 3.5rem;
+  font-weight: 700;
 }
 
 .cta-button:hover {
