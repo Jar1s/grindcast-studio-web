@@ -661,10 +661,13 @@ function App() {
                   <h3>📍 Naša adresa</h3>
                   <p>
                     <strong>Grindcast Studio</strong><br />
+                    Objekte Melrose Apartments<br />
+                    Betliarska 3769/12<br />
+                    851 07 Petržalka<br />
                     Bratislava, Slovensko<br />
                     <br />
                     <a 
-                      href="https://maps.google.com/?q=Bratislava,Slovakia" 
+                      href="https://maps.google.com/?q=Betliarska+3769/12,+851+07+Petržalka,+Bratislava" 
                       target="_blank" 
                       rel="noopener noreferrer"
                       className="map-link"
