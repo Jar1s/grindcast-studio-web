@@ -638,7 +638,7 @@ function App() {
             </div>
             <div className="contact-details">
               <p>
-                Kliknite na tlačidlo nižšie, rezervujte si termín priamo v Calendly a my
+                Kliknite na tlačidlo nižšie, rezervujte si termín a my
                 vám do 24 hodín pošleme checklist aj potvrdenie nahrávania.
               </p>
               <p>
