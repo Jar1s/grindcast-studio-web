@@ -85,6 +85,11 @@ const faqs = [
     answer:
       "Parkovanie je možné priamo v areáli. Na želanie zabezpečíme kávový servis alebo občerstvenie cez našich partnerov.",
   },
+  {
+    question: "Kde sa dá zaparkovať a ako sa k nám dostanete MHD?",
+    answer:
+      "Parkovanie je dostupné priamo v areáli štúdia. MHD zastávka je v bezprostrednej blízkosti - autobusy a električky zastavujú na zastávke 'Betliarska', ktorá je len 2 minúty chôdze od štúdia.",
+  },
 ];
 
 const packages = [
