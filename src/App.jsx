@@ -99,7 +99,7 @@ const packages = [
     },
     features: [
       "{durationMinutes} min nahrávanie + 30 min príprava",
-      "Full HD záznam na 2 kamery",
+      "Full HD záznam na 3 kamery",
       "Zvuk v štúdiovej kvalite (4 mikrofóny)",
       "Technik v štúdiu počas celého času",
     ],
