@@ -245,10 +245,6 @@ function App() {
 
         {/* Mobile Header */}
         <div className="mobile-header">
-          <div className="mobile-logo">
-            <span className="logo-word">Grindcast</span>
-          </div>
-          
           <a
             className="mobile-rezervacia"
             href={CALENDLY_URL}
