@@ -16,7 +16,7 @@ import galleryStudio1 from "./assets/studio-space-1.jpg";
 import galleryStudio2 from "./assets/studio-space-2.jpg";
 import galleryStudio3 from "./assets/studio-space-3.jpg";
 
-const CALENDLY_URL = "https://calendly.com/vas-calendly/podcast-studio";
+const CALENDLY_URL = "https://calendly.com/grindcaststudio/new-meeting";
 
 const navigation = [
   { href: "#cennik", label: "Cenník" },
