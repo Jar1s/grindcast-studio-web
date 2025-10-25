@@ -253,41 +253,41 @@ function App() {
           Rezervovať
         </a>
 
+        {/* Mobile menu overlay */}
+        {isMobileMenuOpen && (
+          <div 
+            className={`mobile-menu-overlay ${isMobileMenuOpen ? 'open' : ''}`}
+            onClick={() => setIsMobileMenuOpen(false)}
+          />
+        )}
+
         {/* Mobile navigation menu */}
-        <AnimatePresence>
-          {isMobileMenuOpen && (
-            <motion.nav 
-              className="nav mobile-nav"
-              role="navigation"
-              aria-label="Mobilná navigácia"
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.3 }}
+        <nav 
+          className={`nav mobile-nav ${isMobileMenuOpen ? 'open' : ''}`}
+          role="navigation"
+          aria-label="Mobilná navigácia"
+        >
+          {navigation.map((item) => (
+            <a 
+              key={item.href} 
+              href={item.href} 
+              aria-label={`Prejsť na sekciu ${item.label}`}
+              onClick={() => setIsMobileMenuOpen(false)}
             >
-              {navigation.map((item) => (
-                <a 
-                  key={item.href} 
-                  href={item.href} 
-                  aria-label={`Prejsť na sekciu ${item.label}`}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  {item.label}
-                </a>
-              ))}
-              <a
-                className="cta-button mobile-cta"
-                href={CALENDLY_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Rezervovať termín v podcastovom štúdiu"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                Rezervovať
-              </a>
-            </motion.nav>
-          )}
-        </AnimatePresence>
+              {item.label}
+            </a>
+          ))}
+          <a
+            className="cta-button mobile-cta"
+            href={CALENDLY_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Rezervovať termín v podcastovom štúdiu"
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+            Rezervovať
+          </a>
+        </nav>
       </header>
 
       <main role="main">
