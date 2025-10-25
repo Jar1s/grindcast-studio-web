@@ -16,9 +16,9 @@ export default defineConfig({
           vendor: ['react', 'react-dom'],
           animations: ['framer-motion']
         },
-        entryFileNames: 'assets/[name]-[hash]-v5.js',
-        chunkFileNames: 'assets/[name]-[hash]-v5.js',
-        assetFileNames: 'assets/[name]-[hash]-v5.[ext]'
+        entryFileNames: 'assets/[name]-[hash]-v6.js',
+        chunkFileNames: 'assets/[name]-[hash]-v6.js',
+        assetFileNames: 'assets/[name]-[hash]-v6.[ext]'
       }
     }
   },
