@@ -638,8 +638,7 @@ function App() {
             </div>
             <div className="contact-details">
               <p>
-                Kliknite na tlačidlo nižšie, rezervujte si termín a my
-                vám do 24 hodín pošleme checklist aj potvrdenie nahrávania.
+                Kliknite na tlačidlo nižšie, rezervujte si termín.
               </p>
               <p>
                 Štúdio nájdete v objekte <strong>Melrose Apartments</strong> na adrese
