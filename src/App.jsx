@@ -652,70 +652,16 @@ function App() {
             </div>
             <div className="contact-meta">
               <div className="contact-map">
-                <a 
-                  href="https://www.google.com/maps/search/Bratislava,+Slovakia/@48.1486,17.1077,13z"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    width: '100%',
-                    height: '300px',
-                    background: 'linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 50%, #1a1a1a 100%)',
+                <iframe
+                  title="Mapa Bratislava"
+                  src="https://www.openstreetmap.org/export/embed.html?bbox=17.0%2C48.1%2C17.2%2C48.2&layer=mapnik&marker=48.1486%2C17.1077"
+                  width="100%"
+                  height="300"
+                  style={{ 
                     border: '1px solid rgba(241, 201, 76, 0.3)',
-                    borderRadius: '12px',
-                    position: 'relative',
-                    overflow: 'hidden',
-                    transition: 'all 0.3s ease',
-                    textDecoration: 'none',
-                    color: '#f1c94c'
+                    borderRadius: '12px'
                   }}
-                  onMouseOver={(e) => {
-                    e.target.style.borderColor = 'rgba(241, 201, 76, 0.6)';
-                    e.target.style.transform = 'scale(1.02)';
-                    e.target.style.background = 'linear-gradient(135deg, #2a2a2a 0%, #3a3a3a 50%, #2a2a2a 100%)';
-                  }}
-                  onMouseOut={(e) => {
-                    e.target.style.borderColor = 'rgba(241, 201, 76, 0.3)';
-                    e.target.style.transform = 'scale(1)';
-                    e.target.style.background = 'linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 50%, #1a1a1a 100%)';
-                  }}
-                >
-                  <div style={{
-                    fontSize: '3rem',
-                    marginBottom: '1rem',
-                    filter: 'drop-shadow(0 0 10px rgba(241, 201, 76, 0.3))'
-                  }}>
-                    🗺️
-                  </div>
-                  <div style={{
-                    fontSize: '1.2rem',
-                    fontWeight: '600',
-                    marginBottom: '0.5rem',
-                    textAlign: 'center'
-                  }}>
-                    Bratislava, Slovensko
-                  </div>
-                  <div style={{
-                    fontSize: '0.9rem',
-                    opacity: 0.8,
-                    textAlign: 'center',
-                    maxWidth: '200px'
-                  }}>
-                    Kliknite pre otvorenie Google Maps
-                  </div>
-                  <div style={{
-                    position: 'absolute',
-                    top: '1rem',
-                    right: '1rem',
-                    fontSize: '1.5rem',
-                    opacity: 0.6
-                  }}>
-                    ↗️
-                  </div>
-                </a>
+                />
               </div>
             </div>
           </div>
