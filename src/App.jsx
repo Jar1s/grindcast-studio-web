@@ -221,9 +221,13 @@ function App() {
   return (
     <div className="page">
       <header className="top-bar" role="banner">
-        <div className="logo" aria-label="Grindcast - Podcastové štúdio">
+        <button 
+          className="logo" 
+          aria-label="Grindcast - Podcastové štúdio - Prejsť na začiatok stránky"
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        >
           <span className="logo-word">Grindcast</span>
-        </div>
+        </button>
         
         {/* Desktop Navigation */}
         <nav className="nav desktop-nav" role="navigation" aria-label="Hlavná navigácia">
