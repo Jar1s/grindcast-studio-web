@@ -656,17 +656,23 @@ function App() {
               </a>
             </div>
             <div className="contact-meta">
-              <div className="contact-map">
-                <iframe
-                  title="Mapa Bratislava"
-                  src="https://www.openstreetmap.org/export/embed.html?bbox=17.0%2C48.1%2C17.2%2C48.2&layer=mapnik&marker=48.1486%2C17.1077"
-                  width="100%"
-                  height="300"
-                  style={{ 
-                    border: '1px solid rgba(241, 201, 76, 0.3)',
-                    borderRadius: '12px'
-                  }}
-                />
+              <div className="contact-address">
+                <div className="address-card">
+                  <h3>📍 Naša adresa</h3>
+                  <p>
+                    <strong>Grindcast Studio</strong><br />
+                    Bratislava, Slovensko<br />
+                    <br />
+                    <a 
+                      href="https://maps.google.com/?q=Bratislava,Slovakia" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="map-link"
+                    >
+                      📍 Otvoriť v Google Maps
+                    </a>
+                  </p>
+                </div>
               </div>
             </div>
           </div>
