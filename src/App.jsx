@@ -654,9 +654,13 @@ function App() {
               <div className="contact-map">
                 <iframe
                   title="Mapa Podcast Studio Bratislava"
-                  src="https://maps.google.com/maps?q=Betliarska%203769%2F12%2C%20Bratislava&t=&z=16&ie=UTF8&iwloc=&output=embed"
-                  loading="lazy"
+                  src="https://maps.google.com/maps?q=Bratislava,+Slovakia&t=&z=13&ie=UTF8&iwloc=&output=embed"
+                  width="100%"
+                  height="300"
+                  style={{ border: 0 }}
                   allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
                 />
               </div>
             </div>
