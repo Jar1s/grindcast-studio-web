@@ -201,7 +201,6 @@ function useScrollReveal(threshold = 0.25, delay = 0) {
 
 function App() {
   const [activeSession, setActiveSession] = useState(sessionOptions[0].id);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const activeSessionMeta =
     sessionOptions.find((option) => option.id === activeSession) || sessionOptions[0];
   const heroReveal = useScrollReveal(0.35);
@@ -216,39 +215,12 @@ function App() {
   return (
     <div className="page">
       <header className="top-bar" role="banner">
-        {/* Mobile Header */}
-        <div className="mobile-header">
-          <div className="logo" aria-label="Grindcast - Podcastové štúdio">
-            <span className="logo-word">Grindcast</span>
-          </div>
-          
-          <div className="mobile-nav-right">
-            <a
-              className="mobile-rezervacia"
-              href={CALENDLY_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Rezervovať termín v podcastovom štúdiu"
-            >
-              Rezervácia
-            </a>
-            
-            <button
-              className={`mobile-menu-toggle ${isMobileMenuOpen ? 'active' : ''}`}
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              aria-label="Otvoriť/zavrieť menu"
-            >
-              <div className="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
-              </div>
-            </button>
-          </div>
+        <div className="logo" aria-label="Grindcast - Podcastové štúdio">
+          <span className="logo-word">Grindcast</span>
         </div>
         
-        {/* Desktop Navigation */}
-        <nav className="nav desktop-nav" role="navigation" aria-label="Hlavná navigácia">
+        {/* Navigation */}
+        <nav className="nav" role="navigation" aria-label="Hlavná navigácia">
           {navigation.map((item) => (
             <a key={item.href} href={item.href} aria-label={`Prejsť na sekciu ${item.label}`}>
               {item.label}
@@ -264,30 +236,6 @@ function App() {
             Rezervovať
           </a>
         </nav>
-
-        {/* Mobile Menu */}
-        <AnimatePresence>
-          {isMobileMenuOpen && (
-            <motion.nav
-              className="mobile-nav"
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.2 }}
-            >
-              {navigation.map((item) => (
-                <a 
-                  key={item.href} 
-                  href={item.href} 
-                  aria-label={`Prejsť na sekciu ${item.label}`}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  {item.label}
-                </a>
-              ))}
-            </motion.nav>
-          )}
-        </AnimatePresence>
       </header>
 
       <main role="main">
