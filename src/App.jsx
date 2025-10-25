@@ -238,10 +238,8 @@ function App() {
           ))}
           <a
             className="cta-button"
-            href={CALENDLY_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Rezervovať termín v podcastovom štúdiu"
+            href="#cennik"
+            aria-label="Prejsť na sekciu cenník"
           >
             Rezervovať
           </a>
@@ -308,10 +306,8 @@ function App() {
               ))}
               <a
                 className="mobile-cta"
-                href={CALENDLY_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Rezervovať termín v podcastovom štúdiu"
+                href="#cennik"
+                aria-label="Prejsť na sekciu cenník"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Rezervovať
@@ -345,10 +341,8 @@ function App() {
             <div className="hero-actions">
               <a
                 className="cta-button"
-                href={CALENDLY_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Dohodnúť termín v podcastovom štúdiu - otvorí sa v novom okne"
+                href="#cennik"
+                aria-label="Prejsť na sekciu cenník"
               >
                 Dohodnúť termín
               </a>
