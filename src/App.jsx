@@ -18,6 +18,82 @@ import galleryStudio3 from "./assets/studio-space-3.jpg";
 
 const CALENDLY_URL = "https://calendly.com/grindcaststudio/new-meeting";
 
+// Form validation and enhancement
+const validateForm = (formData) => {
+  const errors = {};
+  
+  if (!formData.name?.trim()) {
+    errors.name = "Meno je povinné";
+  }
+  
+  if (!formData.email?.trim()) {
+    errors.email = "Email je povinný";
+  } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+    errors.email = "Neplatný email formát";
+  }
+  
+  if (!formData.phone?.trim()) {
+    errors.phone = "Telefónne číslo je povinné";
+  }
+  
+  if (!formData['preferred-date']) {
+    errors['preferred-date'] = "Dátum je povinný";
+  } else {
+    const selectedDate = new Date(formData['preferred-date']);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    if (selectedDate < today) {
+      errors['preferred-date'] = "Dátum nemôže byť v minulosti";
+    }
+  }
+  
+  if (!formData['preferred-time']) {
+    errors['preferred-time'] = "Čas je povinný";
+  }
+  
+  if (!formData['service-type']) {
+    errors['service-type'] = "Typ služby je povinný";
+  }
+  
+  if (!formData.duration) {
+    errors.duration = "Dĺžka nahrávania je povinná";
+  }
+  
+  return errors;
+};
+
+const handleFormSubmit = (e) => {
+  e.preventDefault();
+  
+  const formData = new FormData(e.target);
+  const data = Object.fromEntries(formData.entries());
+  
+  const errors = validateForm(data);
+  
+  if (Object.keys(errors).length > 0) {
+    // Show validation errors
+    Object.keys(errors).forEach(fieldName => {
+      const field = e.target.querySelector(`[name="${fieldName}"]`);
+      if (field) {
+        field.style.borderColor = '#e74c3c';
+        field.style.boxShadow = '0 0 0 3px rgba(231, 76, 60, 0.1)';
+      }
+    });
+    
+    alert('Prosím vyplňte všetky povinné polia správne.');
+    return;
+  }
+  
+  // Clear any previous error styling
+  e.target.querySelectorAll('input, select, textarea').forEach(field => {
+    field.style.borderColor = '';
+    field.style.boxShadow = '';
+  });
+  
+  // Submit the form
+  e.target.submit();
+};
+
 const navigation = [
   { href: "#cennik", label: "Cenník" },
   { href: "#ponuka", label: "Ponuka" },
@@ -639,19 +715,171 @@ function App() {
               <span className="section-overline">Rezervácia štúdia</span>
               <h2>Rezervujte si termín v našom štúdiu</h2>
             </div>
-            <div className="contact-details">
-              <p>
-                Kliknite na tlačidlo nižšie, rezervujte si termín.
-              </p>
-              <a
-                className="cta-button"
-                href={CALENDLY_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Rezervovať termín
-              </a>
-            </div>
+            
+            {/* Custom Booking Form */}
+            <form 
+              name="booking" 
+              method="POST" 
+              data-netlify="true" 
+              data-netlify-honeypot="bot-field"
+              className="booking-form"
+              onSubmit={handleFormSubmit}
+            >
+              <input type="hidden" name="form-name" value="booking" />
+              <div className="honeypot">
+                <label>Don't fill this out if you're human: <input name="bot-field" /></label>
+              </div>
+              
+              <div className="form-section">
+                <h3>📞 Kontaktné informácie</h3>
+                <div className="form-row">
+                  <div className="form-group">
+                    <label htmlFor="name">Meno a priezvisko *</label>
+                    <input 
+                      type="text" 
+                      id="name" 
+                      name="name" 
+                      required 
+                      placeholder="Vaše meno a priezvisko"
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="email">Email *</label>
+                    <input 
+                      type="email" 
+                      id="email" 
+                      name="email" 
+                      required 
+                      placeholder="vas@email.sk"
+                    />
+                  </div>
+                </div>
+                <div className="form-row">
+                  <div className="form-group">
+                    <label htmlFor="phone">Telefónne číslo *</label>
+                    <input 
+                      type="tel" 
+                      id="phone" 
+                      name="phone" 
+                      required 
+                      placeholder="+421 123 456 789"
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="company">Spoločnosť</label>
+                    <input 
+                      type="text" 
+                      id="company" 
+                      name="company" 
+                      placeholder="Názov spoločnosti (voliteľné)"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div className="form-section">
+                <h3>📅 Detaily rezervácie</h3>
+                <div className="form-row">
+                  <div className="form-group">
+                    <label htmlFor="preferred-date">Preferovaný dátum *</label>
+                    <input 
+                      type="date" 
+                      id="preferred-date" 
+                      name="preferred-date" 
+                      required 
+                      min={new Date().toISOString().split('T')[0]}
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="preferred-time">Preferovaný čas *</label>
+                    <select id="preferred-time" name="preferred-time" required>
+                      <option value="">Vyberte čas</option>
+                      <option value="09:00">09:00</option>
+                      <option value="10:00">10:00</option>
+                      <option value="11:00">11:00</option>
+                      <option value="12:00">12:00</option>
+                      <option value="13:00">13:00</option>
+                      <option value="14:00">14:00</option>
+                      <option value="15:00">15:00</option>
+                      <option value="16:00">16:00</option>
+                      <option value="17:00">17:00</option>
+                      <option value="18:00">18:00</option>
+                      <option value="19:00">19:00</option>
+                      <option value="20:00">20:00</option>
+                    </select>
+                  </div>
+                </div>
+                <div className="form-row">
+                  <div className="form-group">
+                    <label htmlFor="service-type">Typ služby *</label>
+                    <select id="service-type" name="service-type" required>
+                      <option value="">Vyberte službu</option>
+                      <option value="1h-zakladna">1h - Základná postprodukcia (149€)</option>
+                      <option value="2h-zakladna">2h - Základná postprodukcia (249€)</option>
+                      <option value="3h-zakladna">3h - Základná postprodukcia (349€)</option>
+                      <option value="1h-kompletna">1h - Kompletná postprodukcia (199€)</option>
+                      <option value="2h-kompletna">2h - Kompletná postprodukcia (299€)</option>
+                      <option value="3h-kompletna">3h - Kompletná postprodukcia (399€)</option>
+                      <option value="1h-pro">1h - Kompletná postprodukcia Pro (249€)</option>
+                      <option value="2h-pro">2h - Kompletná postprodukcia Pro (349€)</option>
+                      <option value="3h-pro">3h - Kompletná postprodukcia Pro (449€)</option>
+                    </select>
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="duration">Dĺžka nahrávania *</label>
+                    <select id="duration" name="duration" required>
+                      <option value="">Vyberte dĺžku</option>
+                      <option value="1h">1 hodina</option>
+                      <option value="2h">2 hodiny</option>
+                      <option value="3h">3 hodiny</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <div className="form-section">
+                <h3>💬 Dodatočné informácie</h3>
+                <div className="form-group">
+                  <label htmlFor="guests">Počet hosťov</label>
+                  <input 
+                    type="number" 
+                    id="guests" 
+                    name="guests" 
+                    min="1" 
+                    max="10" 
+                    placeholder="Koľko ľudí bude v štúdiu?"
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="equipment">Špeciálne vybavenie</label>
+                  <input 
+                    type="text" 
+                    id="equipment" 
+                    name="equipment" 
+                    placeholder="Potrebujete špeciálne vybavenie?"
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="message">Správa</label>
+                  <textarea 
+                    id="message" 
+                    name="message" 
+                    rows="4" 
+                    placeholder="Máte nejaké špeciálne požiadavky alebo otázky?"
+                  ></textarea>
+                </div>
+              </div>
+
+              <div className="form-submit">
+                <button type="submit" className="cta-button">
+                  📅 Odoslať rezervačnú požiadavku
+                </button>
+                <p className="form-note">
+                  Po odoslaní formulára vás budeme kontaktovať do 24 hodín na potvrdenie termínu.
+                </p>
+              </div>
+            </form>
+
             <div className="contact-meta">
               <div className="contact-address">
                 <div className="address-card">
