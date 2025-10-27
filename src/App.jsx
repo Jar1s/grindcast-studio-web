@@ -386,7 +386,7 @@ function App() {
               ))}
               <a
                 className="mobile-cta"
-                href="#kontakt"
+                href="#rezervacia"
                 aria-label="Prejsť na sekciu cenník"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
@@ -421,14 +421,14 @@ function App() {
             <div className="hero-actions">
               <a
                 className="cta-button"
-                href="#kontakt"
+                href="#rezervacia"
                 aria-label="Prejsť na sekciu cenník"
               >
                 Dohodnúť termín
               </a>
               <a 
                 className="secondary-button" 
-                href="#kontakt"
+                href="#rezervacia"
                 aria-label="Prejsť na sekciu cenník"
               >
                 Pozrieť cenník
@@ -709,14 +709,14 @@ function App() {
 
         <motion.section
           ref={contactReveal.ref}
-          id="kontakt"
-          className="section contact"
+          id="rezervacia"
+          className="section contact booking-section"
           initial={{ opacity: 0, y: 40 }}
           animate={contactReveal.controls}
         >
           <div className="contact-card">
             <div className="section-header">
-              <span className="section-overline">Rezervácia štúdia</span>
+              <span className="section-overline">Rezervácia</span>
               <h2>Rezervujte si termín v našom štúdiu</h2>
             </div>
             
@@ -872,7 +872,22 @@ function App() {
                 </p>
               </div>
             </form>
+          </div>
+        </motion.section>
 
+        <motion.section
+          ref={contactReveal.ref}
+          id="kontakt"
+          className="section contact"
+          initial={{ opacity: 0, y: 40 }}
+          animate={contactReveal.controls}
+        >
+          <div className="contact-card">
+            <div className="section-header">
+              <span className="section-overline">Kontakt</span>
+              <h2>Kontaktujte nás</h2>
+            </div>
+            
             <div className="contact-meta">
               <div className="contact-address">
                 <div className="address-card">
