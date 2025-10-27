@@ -59,8 +59,8 @@ const validateForm = (formData) => {
     errors.billing = "Fakturačné údaje sú povinné";
   }
   
-  if (!formData.message?.trim()) {
-    errors.message = "Správa je povinná";
+  if (!formData.guests?.trim()) {
+    errors.guests = "Počet hosťov je povinný";
   }
   
   return errors;
@@ -824,23 +824,23 @@ function App() {
               <div className="form-section">
                 <h3>💬 Dodatočné informácie</h3>
                 <div className="form-group">
-                  <label htmlFor="guests">Počet hosťov</label>
+                  <label htmlFor="guests">Počet hosťov *</label>
                   <input 
                     type="number" 
                     id="guests" 
                     name="guests" 
                     min="1" 
                     max="4" 
+                    required
                     placeholder="Koľko ľudí bude v štúdiu?"
                   />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="message">Vaša správa alebo otázka *</label>
+                  <label htmlFor="message">Vaša správa alebo otázka</label>
                   <textarea 
                     id="message" 
                     name="message" 
                     rows="4" 
-                    required
                     placeholder="Máte nejaké špeciálne požiadavky alebo otázky?"
                   ></textarea>
                 </div>
