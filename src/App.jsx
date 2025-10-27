@@ -55,8 +55,12 @@ const validateForm = (formData) => {
     errors['service-type'] = "Typ služby je povinný";
   }
   
-  if (!formData.duration) {
-    errors.duration = "Dĺžka nahrávania je povinná";
+  if (!formData.billing?.trim()) {
+    errors.billing = "Fakturačné údaje sú povinné";
+  }
+  
+  if (!formData.message?.trim()) {
+    errors.message = "Správa je povinná";
   }
   
   return errors;
@@ -382,7 +386,7 @@ function App() {
               ))}
               <a
                 className="mobile-cta"
-                href="#cennik"
+                href="#kontakt"
                 aria-label="Prejsť na sekciu cenník"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
@@ -417,14 +421,14 @@ function App() {
             <div className="hero-actions">
               <a
                 className="cta-button"
-                href="#cennik"
+                href="#kontakt"
                 aria-label="Prejsť na sekciu cenník"
               >
                 Dohodnúť termín
               </a>
               <a 
                 className="secondary-button" 
-                href="#cennik"
+                href="#kontakt"
                 aria-label="Prejsť na sekciu cenník"
               >
                 Pozrieť cenník
@@ -766,12 +770,13 @@ function App() {
                     />
                   </div>
                   <div className="form-group">
-                    <label htmlFor="company">Spoločnosť</label>
+                    <label htmlFor="billing">Fakturačné údaje (adresa alebo IČO) *</label>
                     <input 
                       type="text" 
-                      id="company" 
-                      name="company" 
-                      placeholder="Názov spoločnosti (voliteľné)"
+                      id="billing" 
+                      name="billing" 
+                      required 
+                      placeholder="Adresa bydliska alebo IČO"
                     />
                   </div>
                 </div>
@@ -794,23 +799,28 @@ function App() {
                     <label htmlFor="preferred-time">Preferovaný čas *</label>
                     <select id="preferred-time" name="preferred-time" required>
                       <option value="">Vyberte čas</option>
-                      <option value="09:00">09:00</option>
                       <option value="10:00">10:00</option>
+                      <option value="10:30">10:30</option>
                       <option value="11:00">11:00</option>
+                      <option value="11:30">11:30</option>
                       <option value="12:00">12:00</option>
+                      <option value="12:30">12:30</option>
                       <option value="13:00">13:00</option>
+                      <option value="13:30">13:30</option>
                       <option value="14:00">14:00</option>
+                      <option value="14:30">14:30</option>
                       <option value="15:00">15:00</option>
+                      <option value="15:30">15:30</option>
                       <option value="16:00">16:00</option>
+                      <option value="16:30">16:30</option>
                       <option value="17:00">17:00</option>
+                      <option value="17:30">17:30</option>
                       <option value="18:00">18:00</option>
-                      <option value="19:00">19:00</option>
-                      <option value="20:00">20:00</option>
                     </select>
                   </div>
                 </div>
                 <div className="form-row">
-                  <div className="form-group">
+                  <div className="form-group full-width">
                     <label htmlFor="service-type">Typ služby *</label>
                     <select id="service-type" name="service-type" required>
                       <option value="">Vyberte službu</option>
@@ -825,15 +835,6 @@ function App() {
                       <option value="3h-pro">3h - Kompletná postprodukcia Pro (449€)</option>
                     </select>
                   </div>
-                  <div className="form-group">
-                    <label htmlFor="duration">Dĺžka nahrávania *</label>
-                    <select id="duration" name="duration" required>
-                      <option value="">Vyberte dĺžku</option>
-                      <option value="1h">1 hodina</option>
-                      <option value="2h">2 hodiny</option>
-                      <option value="3h">3 hodiny</option>
-                    </select>
-                  </div>
                 </div>
               </div>
 
@@ -846,25 +847,17 @@ function App() {
                     id="guests" 
                     name="guests" 
                     min="1" 
-                    max="10" 
+                    max="4" 
                     placeholder="Koľko ľudí bude v štúdiu?"
                   />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="equipment">Špeciálne vybavenie</label>
-                  <input 
-                    type="text" 
-                    id="equipment" 
-                    name="equipment" 
-                    placeholder="Potrebujete špeciálne vybavenie?"
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="message">Správa</label>
+                  <label htmlFor="message">Vaša správa alebo otázka *</label>
                   <textarea 
                     id="message" 
                     name="message" 
                     rows="4" 
+                    required
                     placeholder="Máte nejaké špeciálne požiadavky alebo otázky?"
                   ></textarea>
                 </div>
