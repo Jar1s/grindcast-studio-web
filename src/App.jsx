@@ -60,7 +60,7 @@ const validateForm = (formData) => {
   }
   
   if (!formData.guests?.trim()) {
-    errors.guests = "Počet hosťov je povinný";
+    errors.guests = "Počet hostí je povinný";
   }
   
   return errors;
@@ -839,7 +839,7 @@ function App() {
               <div className="form-section">
                 <h3>💬 Dodatočné informácie</h3>
                 <div className="form-group">
-                  <label htmlFor="guests">Počet hosťov *</label>
+                  <label htmlFor="guests">Počet hostí *</label>
                   <input 
                     type="number" 
                     id="guests" 
