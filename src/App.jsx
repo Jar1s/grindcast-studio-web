@@ -94,12 +94,13 @@ const handleFormSubmit = async (e) => {
     field.style.boxShadow = '';
   });
   
-  // Submit to Formspree
+  // Submit to Formsubmit.co
   try {
-    const response = await fetch('https://formspree.io/f/mgvpoebn', {
+    const response = await fetch('https://formsubmit.co/ajax/info@grindcaststudio.sk', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'Accept': 'application/json'
       },
       body: JSON.stringify(data)
     });
