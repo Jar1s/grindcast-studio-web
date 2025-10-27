@@ -96,22 +96,40 @@ const handleFormSubmit = async (e) => {
   
   // Submit to Formsubmit.co
   try {
+    const submitData = {
+      name: data.name,
+      email: data.email,
+      phone: data.phone,
+      billing: data.billing,
+      'preferred-date': data['preferred-date'],
+      'preferred-time': data['preferred-time'],
+      'service-type': data['service-type'],
+      guests: data.guests || '0',
+      message: data.message || '',
+      _subject: 'Nová rezervačná požiadavka - Grindcast Studio',
+      _captcha: 'false',
+      _template: 'table'
+    };
+    
     const response = await fetch('https://formsubmit.co/ajax/info@grindcaststudio.sk', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
-      body: JSON.stringify(data)
+      body: JSON.stringify(submitData)
     });
 
-    if (response.ok) {
+    const result = await response.json();
+    
+    if (response.ok && result.success) {
       alert('Rezervačná požiadavka bola úspešne odoslaná! Ozveme sa vám do 24 hodín.');
       e.target.reset();
     } else {
-      throw new Error('Nastala chyba pri odosielaní');
+      throw new Error(result.message || 'Nastala chyba pri odosielaní');
     }
   } catch (error) {
+    console.error('Form submission error:', error);
     alert('Nastala chyba pri odosielaní. Skúste to prosím znova alebo nás kontaktujte priamo na info@grindcaststudio.sk');
   }
 };
