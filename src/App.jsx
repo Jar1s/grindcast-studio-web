@@ -94,31 +94,31 @@ const handleFormSubmit = async (e) => {
     field.style.boxShadow = '';
   });
   
-  // Create email body
-  const emailBody = `
-Rezervačná požiadavka - Grindcast Studio
-
-Kontaktné informácie:
-Meno: ${data.name}
-Email: ${data.email}
-Telefón: ${data.phone}
-Fakturačné údaje: ${data.billing}
-
-Detaily rezervácie:
-Dátum: ${data['preferred-date']}
-Čas: ${data['preferred-time']}
-Typ služby: ${data['service-type']}
-Počet hostí: ${data.guests || 'N/A'}
-
-Dodatočné informácie:
-${data.message || 'Žiadne'}
-`.trim();
-  
-  // Create mailto link
-  const mailtoLink = `mailto:info@grindcaststudio.sk?subject=Nova%20rezervacna%20poziadavka&body=${encodeURIComponent(emailBody)}`;
-  
-  // Open email client
-  window.location.href = mailtoLink;
+  // Submit via EmailJS
+  try {
+    await emailjs.send(
+      'service_64040au',
+      'template_54i3915',
+      {
+        name: data.name,
+        email: data.email,
+        phone: data.phone,
+        billing: data.billing,
+        'preferred-date': data['preferred-date'],
+        'preferred-time': data['preferred-time'],
+        'service-type': data['service-type'],
+        guests: data.guests || '0',
+        message: data.message || 'Žiadne'
+      },
+      'S3qDc0FdS4g1VH59l'
+    );
+    
+    alert('Rezervačná požiadavka bola úspešne odoslaná! Ozveme sa vám do 24 hodín.');
+    e.target.reset();
+  } catch (error) {
+    console.error('EmailJS error:', error);
+    alert('Nastala chyba pri odosielaní. Skúste to prosím znova alebo nás kontaktujte priamo na info@grindcaststudio.sk');
+  }
 };
 
 const navigation = [
