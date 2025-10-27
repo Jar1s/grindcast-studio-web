@@ -94,10 +94,31 @@ const handleFormSubmit = async (e) => {
     field.style.boxShadow = '';
   });
   
-  // Submit form directly (no AJAX, using HTML form submission)
-  // The form will submit to Formsubmit.co via action attribute
-  // Submit the form manually
-  e.target.submit();
+  // Create email body
+  const emailBody = `
+Rezervačná požiadavka - Grindcast Studio
+
+Kontaktné informácie:
+Meno: ${data.name}
+Email: ${data.email}
+Telefón: ${data.phone}
+Fakturačné údaje: ${data.billing}
+
+Detaily rezervácie:
+Dátum: ${data['preferred-date']}
+Čas: ${data['preferred-time']}
+Typ služby: ${data['service-type']}
+Počet hostí: ${data.guests || 'N/A'}
+
+Dodatočné informácie:
+${data.message || 'Žiadne'}
+`.trim();
+  
+  // Create mailto link
+  const mailtoLink = `mailto:info@grindcaststudio.sk?subject=Nova%20rezervacna%20poziadavka&body=${encodeURIComponent(emailBody)}`;
+  
+  // Open email client
+  window.location.href = mailtoLink;
 };
 
 const navigation = [
@@ -712,15 +733,9 @@ function App() {
             {/* Custom Booking Form */}
             <form 
               name="booking" 
-              action="https://formsubmit.co/info@grindcaststudio.sk"
-              method="POST"
               className="booking-form"
               onSubmit={handleFormSubmit}
             >
-              <input type="hidden" name="form-name" value="booking" />
-              <input type="hidden" name="_subject" value="Nová rezervačná požiadavka - Grindcast Studio" />
-              <input type="hidden" name="_captcha" value="false" />
-              <input type="hidden" name="_template" value="table" />
               
               <div className="form-section">
                 <h3>📞 Kontaktné informácie</h3>
