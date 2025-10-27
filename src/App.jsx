@@ -102,7 +102,7 @@ const navigation = [
   { href: "#cennik", label: "Cenník" },
   { href: "#ponuka", label: "Ponuka" },
   { href: "#faq", label: "FAQ" },
-  { href: "#kontakt", label: "Kontakt" },
+  { href: "#footer", label: "Kontakt" },
 ];
 
 const VAT_NOTE = "Cena s DPH";
@@ -318,8 +318,8 @@ function App() {
           ))}
           <a
             className="cta-button"
-            href="#cennik"
-            aria-label="Prejsť na sekciu cenník"
+            href="#kontakt"
+            aria-label="Prejsť na sekciu kontakt a rezervácia"
           >
             Rezervovať
           </a>
@@ -386,7 +386,7 @@ function App() {
               ))}
               <a
                 className="mobile-cta"
-                href="#rezervacia"
+                href="#kontakt"
                 aria-label="Prejsť na sekciu cenník"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
@@ -421,14 +421,14 @@ function App() {
             <div className="hero-actions">
               <a
                 className="cta-button"
-                href="#rezervacia"
+                href="#kontakt"
                 aria-label="Prejsť na sekciu cenník"
               >
                 Dohodnúť termín
               </a>
               <a 
                 className="secondary-button" 
-                href="#rezervacia"
+                href="#kontakt"
                 aria-label="Prejsť na sekciu cenník"
               >
                 Pozrieť cenník
@@ -555,9 +555,8 @@ function App() {
                 </div>
                 <a
                   className="cta-button"
-                  href={CALENDLY_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href="#kontakt"
+                  aria-label="Rezervovať termín v podcastovom štúdiu"
                 >
                   Rezervovať
                 </a>
@@ -681,36 +680,9 @@ function App() {
         </motion.section>
 
         <motion.section
-          ref={faqReveal.ref}
-          id="faq"
-          className="section faq"
-          initial={{ opacity: 0, y: 40 }}
-          animate={faqReveal.controls}
-        >
-          <div className="section-header">
-            <span className="section-overline">Časté otázky</span>
-            <h2>Opýtajte sa, radi poradíme</h2>
-          </div>
-          <div className="faq-list">
-            {faqs.map((faq) => (
-              <motion.div
-                key={faq.question}
-                initial={{ opacity: 0, y: 24 }}
-                animate={faqReveal.controls}
-              >
-                <details>
-                  <summary>{faq.question}</summary>
-                  <p>{faq.answer}</p>
-                </details>
-              </motion.div>
-            ))}
-          </div>
-        </motion.section>
-
-        <motion.section
           ref={contactReveal.ref}
-          id="rezervacia"
-          className="section contact booking-section"
+          id="kontakt"
+          className="section contact"
           initial={{ opacity: 0, y: 40 }}
           animate={contactReveal.controls}
         >
@@ -876,65 +848,63 @@ function App() {
         </motion.section>
 
         <motion.section
-          ref={contactReveal.ref}
-          id="kontakt"
-          className="section contact"
+          ref={faqReveal.ref}
+          id="faq"
+          className="section faq"
           initial={{ opacity: 0, y: 40 }}
-          animate={contactReveal.controls}
+          animate={faqReveal.controls}
         >
-          <div className="contact-card">
-            <div className="section-header">
-              <span className="section-overline">Kontakt</span>
-              <h2>Kontaktujte nás</h2>
-            </div>
-            
-            <div className="contact-meta">
-              <div className="contact-address">
-                <div className="address-card">
-                  <h3>📍 Naša adresa</h3>
-                  <p>
-                    <strong>Melrose Apartments</strong><br />
-                    Betliarska 3769/12<br />
-                    851 07 Petržalka<br />
-                    Bratislava, Slovensko<br />
-                    <br />
-                    <a 
-                      href="https://maps.google.com/?q=Betliarska+3769/12,+851+07+Petržalka,+Bratislava" 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="map-link"
-                    >
-                      📍 Otvoriť v Google Maps
-                    </a>
-                  </p>
-                </div>
-              </div>
-            </div>
+          <div className="section-header">
+            <span className="section-overline">Časté otázky</span>
+            <h2>Opýtajte sa, radi poradíme</h2>
+          </div>
+          <div className="faq-list">
+            {faqs.map((faq) => (
+              <motion.div
+                key={faq.question}
+                initial={{ opacity: 0, y: 24 }}
+                animate={faqReveal.controls}
+              >
+                <details>
+                  <summary>{faq.question}</summary>
+                  <p>{faq.answer}</p>
+                </details>
+              </motion.div>
+            ))}
           </div>
         </motion.section>
       </main>
 
-      <footer className="footer">
-        <div className="footer-brand">
-          <strong>Grindcast Studio Bratislava</strong>
-          <p>Profesionálny partner pre váš audio a video obsah.</p>
-        </div>
+      <footer id="footer" className="footer">
+        <div className="footer-content">
+          <div className="footer-brand">
+            <strong>Grindcast Studio Bratislava</strong>
+            <p>
+              Melrose Apartments<br />
+              Betliarska 3769/12<br />
+              851 07 Petržalka<br />
+              Bratislava, Slovensko
+            </p>
+          </div>
           <div className="footer-contact">
             <a href="mailto:info@grindcaststudio.sk">info@grindcaststudio.sk</a>
             <span>+421 907 513 318</span>
           </div>
-        <div className="footer-social">
-          <a
-            className="social-icon instagram"
-            href="https://www.instagram.com/grindcaststudio/"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Instagram Grindcast"
-          >
-            <img src="/icons/instagram.svg" alt="Instagram" />
-          </a>
+          <div className="footer-social">
+            <a
+              className="social-icon instagram"
+              href="https://www.instagram.com/grindcaststudio/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram Grindcast"
+            >
+              <img src="/icons/instagram.svg" alt="Instagram" />
+            </a>
+          </div>
         </div>
-        <p className="footer-meta">© {new Date().getFullYear()} Grindcast Studio Bratislava</p>
+        <div className="footer-bottom">
+          <p className="footer-meta">© {new Date().getFullYear()} Grindcast Studio Bratislava</p>
+        </div>
       </footer>
     </div>
   );
