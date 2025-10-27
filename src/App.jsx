@@ -66,7 +66,7 @@ const validateForm = (formData) => {
   return errors;
 };
 
-const handleFormSubmit = (e) => {
+const handleFormSubmit = async (e) => {
   e.preventDefault();
   
   const formData = new FormData(e.target);
@@ -94,8 +94,25 @@ const handleFormSubmit = (e) => {
     field.style.boxShadow = '';
   });
   
-  // Submit the form
-  e.target.submit();
+  // Submit to Formspree
+  try {
+    const response = await fetch('https://formspree.io/f/mgvpoebn', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data)
+    });
+
+    if (response.ok) {
+      alert('Rezervačná požiadavka bola úspešne odoslaná! Ozveme sa vám do 24 hodín.');
+      e.target.reset();
+    } else {
+      throw new Error('Nastala chyba pri odosielaní');
+    }
+  } catch (error) {
+    alert('Nastala chyba pri odosielaní. Skúste to prosím znova alebo nás kontaktujte priamo na info@grindcaststudio.sk');
+  }
 };
 
 const navigation = [
@@ -695,16 +712,10 @@ function App() {
             {/* Custom Booking Form */}
             <form 
               name="booking" 
-              method="POST" 
-              data-netlify="true" 
-              data-netlify-honeypot="bot-field"
               className="booking-form"
               onSubmit={handleFormSubmit}
             >
               <input type="hidden" name="form-name" value="booking" />
-              <div className="honeypot">
-                <label>Don't fill this out if you're human: <input name="bot-field" /></label>
-              </div>
               
               <div className="form-section">
                 <h3>📞 Kontaktné informácie</h3>
