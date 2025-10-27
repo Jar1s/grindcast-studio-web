@@ -304,6 +304,21 @@ function useScrollReveal(threshold = 0.25, delay = 0) {
 function App() {
   const [activeSession, setActiveSession] = useState(sessionOptions[0].id);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  // Restrict date picker to weekdays only (Mon-Fri)
+  useEffect(() => {
+    const dateInput = document.getElementById('preferred-date');
+    if (dateInput) {
+      dateInput.addEventListener('change', (e) => {
+        const selectedDate = new Date(e.target.value);
+        const day = selectedDate.getDay(); // 0 = Sunday, 6 = Saturday
+        if (day === 0 || day === 6) {
+          alert('Natáčanie je možné len v pracovné dni (Pondelok - Piatok)');
+          e.target.value = '';
+        }
+      });
+    }
+  }, []);
   const activeSessionMeta =
     sessionOptions.find((option) => option.id === activeSession) || sessionOptions[0];
   const heroReveal = useScrollReveal(0.35);
