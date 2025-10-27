@@ -98,7 +98,7 @@ const handleFormSubmit = async (e) => {
   try {
     await emailjs.send(
       'service_64040au',
-      'template_54i3915',
+      'template_r4zniu8',
       {
         name: data.name,
         email: data.email,
