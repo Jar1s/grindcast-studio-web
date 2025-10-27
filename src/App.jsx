@@ -94,44 +94,11 @@ const handleFormSubmit = async (e) => {
     field.style.boxShadow = '';
   });
   
-  // Submit to Formsubmit.co
-  try {
-    const submitData = {
-      name: data.name,
-      email: data.email,
-      phone: data.phone,
-      billing: data.billing,
-      'preferred-date': data['preferred-date'],
-      'preferred-time': data['preferred-time'],
-      'service-type': data['service-type'],
-      guests: data.guests || '0',
-      message: data.message || '',
-      _subject: 'Nová rezervačná požiadavka - Grindcast Studio',
-      _captcha: 'false',
-      _template: 'table'
-    };
-    
-    const response = await fetch('https://formsubmit.co/ajax/info@grindcaststudio.sk', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-      body: JSON.stringify(submitData)
-    });
-
-    const result = await response.json();
-    
-    if (response.ok && result.success) {
-      alert('Rezervačná požiadavka bola úspešne odoslaná! Ozveme sa vám do 24 hodín.');
-      e.target.reset();
-    } else {
-      throw new Error(result.message || 'Nastala chyba pri odosielaní');
-    }
-  } catch (error) {
-    console.error('Form submission error:', error);
-    alert('Nastala chyba pri odosielaní. Skúste to prosím znova alebo nás kontaktujte priamo na info@grindcaststudio.sk');
-  }
+  // Submit form directly (no AJAX, using HTML form submission)
+  // The form will submit to Formsubmit.co via action attribute
+  alert('Odosielam rezervačnú požiadavku...');
+  // Form will submit normally via HTML
+  return true;
 };
 
 const navigation = [
@@ -746,10 +713,15 @@ function App() {
             {/* Custom Booking Form */}
             <form 
               name="booking" 
+              action="https://formsubmit.co/info@grindcaststudio.sk"
+              method="POST"
               className="booking-form"
               onSubmit={handleFormSubmit}
             >
               <input type="hidden" name="form-name" value="booking" />
+              <input type="hidden" name="_subject" value="Nová rezervačná požiadavka - Grindcast Studio" />
+              <input type="hidden" name="_captcha" value="false" />
+              <input type="hidden" name="_template" value="table" />
               
               <div className="form-section">
                 <h3>📞 Kontaktné informácie</h3>
