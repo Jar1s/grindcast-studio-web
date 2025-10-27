@@ -85,7 +85,7 @@ const handleFormSubmit = async (e) => {
     });
     
     alert('Prosím vyplňte všetky povinné polia správne.');
-    return;
+    return false;
   }
   
   // Clear any previous error styling
@@ -96,9 +96,8 @@ const handleFormSubmit = async (e) => {
   
   // Submit form directly (no AJAX, using HTML form submission)
   // The form will submit to Formsubmit.co via action attribute
-  alert('Odosielam rezervačnú požiadavku...');
-  // Form will submit normally via HTML
-  return true;
+  // Submit the form manually
+  e.target.submit();
 };
 
 const navigation = [
