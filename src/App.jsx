@@ -164,6 +164,11 @@ const faqs = [
       "V balíku máte technika, 4 mikrofóny, 3 statické kamery, profesionálne osvetlenie a monitoring zvuku počas celej session.",
   },
   {
+    question: "Aké máme vybavenie v štúdiu?",
+    answer:
+      "Naše štúdio je vybavené 4x Rode Pod Mic mikrofónmi, 1x Rodecaster Pro 2 mixážnym pultom, profesionálnym štúdiovým osvetlením, 2x Sony Alpha ZV-E10 II kamerami a 1x Sony A6400 kamerou.",
+  },
+  {
     question: "Ako rýchlo vieme dostať finálny výstup?",
     answer:
       "Pri balíkoch s postprodukciou posielame hotové video a audio spravidla do 3 pracovných dní. Reels dodávame v rovnakom čase, alebo podľa dohody expresne.",
