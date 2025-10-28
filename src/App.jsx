@@ -194,7 +194,7 @@ const packages = [
   {
     title: "Základná postprodukcia",
     description:
-      "Po nahrávaní dostanete všetky audio a video súbory + hrubý strih pripravený pre vašu ďalšiu úpravu.",
+      "Po nahrávaní dostanete všetky audio a video súbory pripravené pre vašu ďalšiu úpravu.",
     pricing: {
       "1h": { price: "149 €", note: VAT_NOTE },
       "2h": { price: "239 €", note: VAT_NOTE },
