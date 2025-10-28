@@ -1410,16 +1410,14 @@
     font-size: 1.1rem;
   }
   
-  .pricing-grid {
-    grid-template-columns: 1fr;
-    max-width: 320px;
-    margin: 2.5rem auto 0;
+  .pricing-tabs {
+    max-width: 280px;
+    margin: 2rem auto 0;
   }
   
-  .pricing-card {
-    padding: 1.25rem 0.75rem;
-    gap: 1rem;
-    width: 100%;
+  .pricing-tab {
+    padding: 0.45rem 1rem;
+    font-size: 0.9rem;
   }
   
   .pricing-card-header {
