@@ -19,10 +19,4 @@
   
   <!-- Microphone base -->
   <rect x="12" y="22" width="8" height="2" rx="1" fill="url(#grad)"/>
-  
-  <!-- Sound waves -->
-  <path d="M20 10 Q24 10 24 16 Q24 22 20 22" 
-        stroke="url(#grad)" stroke-width="1.5" fill="none"/>
-  <path d="M22 12 Q25 12 25 16 Q25 20 22 20" 
-        stroke="url(#grad)" stroke-width="1" fill="none"/>
 </svg>
