@@ -1411,11 +1411,22 @@
   }
   
   .pricing-card {
-    padding: 1.5rem;
+    padding: 1.5rem 1rem;
+    gap: 1.25rem;
   }
   
   .pricing-card-header {
-    padding: 1.5rem;
+    min-height: auto;
+    gap: 0.5rem;
+  }
+  
+  .pricing-card-header p {
+    min-height: auto;
+    font-size: 0.9rem;
+  }
+  
+  .pricing-card-price strong {
+    font-size: 2rem;
   }
 }
 
