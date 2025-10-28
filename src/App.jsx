@@ -181,12 +181,7 @@ const faqs = [
   {
     question: "Ako prebieha rezervácia termínu?",
     answer:
-      "Vyberte si balík a dĺžku nahrávania, kliknite na Rezervovať a zvoľte voľný slot v Calendly. Po potvrdení vám do 24 hodín pošleme detailnú prípravu a checklist.",
-  },
-  {
-    question: "Máme k dispozícii parkovanie a catering?",
-    answer:
-      "Parkovanie je možné priamo v areáli. Na želanie zabezpečíme kávový servis alebo občerstvenie cez našich partnerov.",
+      "Vyberte si balík a dĺžku nahrávania, kliknite na Rezervovať a vyplňte rezervačný formulár. Po odoslaní vám do 24 hodín pošleme detailnú prípravu a checklist.",
   },
   {
     question: "Kde sa dá zaparkovať a ako sa k nám dostanete MHD?",
