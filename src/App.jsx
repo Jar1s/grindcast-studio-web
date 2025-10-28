@@ -820,15 +820,15 @@ function App() {
                     <label htmlFor="service-type">Typ služby *</label>
                     <select id="service-type" name="service-type" required>
                       <option value="">Vyberte službu</option>
-                      <option value="1h-zakladna">1h - Základná postprodukcia (149€)</option>
-                      <option value="2h-zakladna">2h - Základná postprodukcia (249€)</option>
-                      <option value="3h-zakladna">3h - Základná postprodukcia (349€)</option>
-                      <option value="1h-kompletna">1h - Kompletná postprodukcia (199€)</option>
-                      <option value="2h-kompletna">2h - Kompletná postprodukcia (299€)</option>
-                      <option value="3h-kompletna">3h - Kompletná postprodukcia (399€)</option>
-                      <option value="1h-pro">1h - Kompletná postprodukcia Pro (249€)</option>
-                      <option value="2h-pro">2h - Kompletná postprodukcia Pro (349€)</option>
-                      <option value="3h-pro">3h - Kompletná postprodukcia Pro (449€)</option>
+                      <option value="1h-zakladna">1h - Základný záznam (149€)</option>
+                      <option value="2h-zakladna">2h - Základný záznam (239€)</option>
+                      <option value="3h-zakladna">3h - Základný záznam (329€)</option>
+                      <option value="1h-kompletna">1h - Kompletná postprodukcia (249€)</option>
+                      <option value="2h-kompletna">2h - Kompletná postprodukcia (339€)</option>
+                      <option value="3h-kompletna">3h - Kompletná postprodukcia (429€)</option>
+                      <option value="1h-pro">1h - Kompletná postprodukcia Pro (349€)</option>
+                      <option value="2h-pro">2h - Kompletná postprodukcia Pro (449€)</option>
+                      <option value="3h-pro">3h - Kompletná postprodukcia Pro (549€)</option>
                     </select>
                   </div>
                 </div>
