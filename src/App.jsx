@@ -367,10 +367,8 @@ function App() {
         <div className="mobile-header">
           <a
             className="mobile-rezervacia"
-            href={CALENDLY_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Rezervovať termín v podcastovom štúdiu"
+            href="#kontakt"
+            aria-label="Prejsť na sekciu kontakt a rezervácia"
           >
             Rezervácia
           </a>
