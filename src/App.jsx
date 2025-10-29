@@ -546,7 +546,7 @@ function App() {
             <span className="section-overline">Cenník</span>
             <h2>Vyberte si balík, ktorý vám najviac sedí</h2>
             <p className="pricing-subtitle single-line">
-              Pri prvej návšteve získate <strong>25 % zľavu</strong> na ktorýkoľvek balík.
+              Pri prvej návšteve <strong>25% zľava na vyžiadanie</strong> na ktorýkoľvek balík.
             </p>
           </div>
           <div className="pricing-tabs" role="tablist" aria-label="Dĺžka nahrávania">
