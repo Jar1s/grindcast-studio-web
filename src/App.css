@@ -1166,6 +1166,12 @@
   justify-content: center;
 }
 
+.footer-language {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
 .social-icon {
   display: inline-flex;
   align-items: center;

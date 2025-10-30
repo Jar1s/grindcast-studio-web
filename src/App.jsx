@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, useAnimation } from "framer-motion";
 import "./App.css";
+import { useI18n } from "./i18n/I18nProvider";
+import { LanguageSwitcher } from "./components/LanguageSwitcher";
 import heroImage from "./assets/hero.jpg";
 import recordingThumbOne from "./assets/recording-1.jpg";
 import recordingThumbTwo from "./assets/recording-2.jpg";
@@ -19,60 +21,60 @@ import galleryStudio3 from "./assets/studio-space-3.jpg";
 const CALENDLY_URL = "https://calendly.com/grindcaststudio/new-meeting";
 
 // Form validation and enhancement
-const validateForm = (formData) => {
+const validateForm = (formData, t) => {
   const errors = {};
   
   if (!formData.name?.trim()) {
-    errors.name = "Meno je povinné";
+    errors.name = t("contact.validation.nameRequired");
   }
   
   if (!formData.email?.trim()) {
-    errors.email = "Email je povinný";
+    errors.email = t("contact.validation.emailRequired");
   } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-    errors.email = "Neplatný email formát";
+    errors.email = t("contact.validation.emailInvalid");
   }
   
   if (!formData.phone?.trim()) {
-    errors.phone = "Telefónne číslo je povinné";
+    errors.phone = t("contact.validation.phoneRequired");
   }
   
   if (!formData['preferred-date']) {
-    errors['preferred-date'] = "Dátum je povinný";
+    errors['preferred-date'] = t("contact.validation.dateRequired");
   } else {
     const selectedDate = new Date(formData['preferred-date']);
     const today = new Date();
     today.setHours(0, 0, 0, 0);
     if (selectedDate < today) {
-      errors['preferred-date'] = "Dátum nemôže byť v minulosti";
+      errors['preferred-date'] = t("contact.validation.datePast");
     }
   }
   
   if (!formData['preferred-time']) {
-    errors['preferred-time'] = "Čas je povinný";
+    errors['preferred-time'] = t("contact.validation.timeRequired");
   }
   
   if (!formData['service-type']) {
-    errors['service-type'] = "Typ služby je povinný";
+    errors['service-type'] = t("contact.validation.serviceRequired");
   }
   
   if (!formData.billing?.trim()) {
-    errors.billing = "Fakturačné údaje sú povinné";
+    errors.billing = t("contact.validation.billingRequired");
   }
   
   if (!formData.guests?.trim()) {
-    errors.guests = "Počet hostí je povinný";
+    errors.guests = t("contact.validation.guestsRequired");
   }
   
   return errors;
 };
 
-const handleFormSubmit = async (e) => {
+const createHandleFormSubmit = (t) => async (e) => {
   e.preventDefault();
   
   const formData = new FormData(e.target);
   const data = Object.fromEntries(formData.entries());
   
-  const errors = validateForm(data);
+  const errors = validateForm(data, t);
   
   if (Object.keys(errors).length > 0) {
     // Show validation errors
@@ -84,7 +86,7 @@ const handleFormSubmit = async (e) => {
       }
     });
     
-    alert('Prosím vyplňte všetky povinné polia správne.');
+    alert(t("contact.validation.fillAllFields"));
     return false;
   }
   
@@ -108,16 +110,16 @@ const handleFormSubmit = async (e) => {
         'preferred-time': data['preferred-time'],
         'service-type': data['service-type'],
         guests: data.guests || '0',
-        message: data.message || 'Žiadne'
+        message: data.message || t("contact.messages.none")
       },
       'S3qDc0FdS4g1VH59l'
     );
     
-    alert('Rezervačná požiadavka bola úspešne odoslaná! Ozveme sa vám do 24 hodín.');
+    alert(t("contact.messages.success"));
     e.target.reset();
   } catch (error) {
     console.error('EmailJS error:', error);
-    alert('Nastala chyba pri odosielaní. Skúste to prosím znova alebo nás kontaktujte priamo na info@grindcaststudio.sk');
+    alert(t("contact.messages.error"));
   }
 };
 
@@ -247,27 +249,6 @@ const packages = [
   },
 ];
 
-const recordings = [
-  {
-    title: "Leader X Cast",
-    description: "Nefiltrované príbehy a dimenzie vplyvných osobností sveta.",
-    thumbnail: lxcLogo,
-    url: "https://www.youtube.com/@jaroslavbircak",
-  },
-  {
-    title: "Grindcast",
-    description: "Ako sa pripraviť na podnikanie v roku 2025.",
-    thumbnail: grindcastLogo,
-    url: "https://www.youtube.com/@grindsetacademy",
-  },
-  {
-    title: "ReCode Body Príbeh",
-    description: "Audio kniha o zmene mindsetu a zdravom tele, ktorú sme vytvorili pre klienta.",
-    thumbnail: recodeAudioCover,
-    url: "https://www.mirkaluberdova.sk/recodebody/",
-    isAudioBook: true,
-  },
-];
 
 const hosts = [
 ];
@@ -308,8 +289,114 @@ function useScrollReveal(threshold = 0.25, delay = 0) {
 }
 
 function App() {
-  const [activeSession, setActiveSession] = useState(sessionOptions[0].id);
+  const { t, language } = useI18n();
+  const [activeSession, setActiveSession] = useState("1h");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  // Get translated data based on language
+  const navigation = [
+    { href: "#cennik", label: t("navigation.pricing") },
+    { href: "#ponuka", label: t("navigation.offer") },
+    { href: "#faq", label: t("navigation.faq") },
+    { href: "#footer", label: t("navigation.contact") },
+  ];
+
+  const sessionOptions = [
+    { id: "1h", label: t("pricing.sessions.1h"), minutes: 60 },
+    { id: "2h", label: t("pricing.sessions.2h"), minutes: 120 },
+    { id: "3h", label: t("pricing.sessions.3h"), minutes: 180 },
+  ];
+
+  const services = [
+    {
+      title: t("services.recording.title"),
+      description: t("services.recording.description"),
+      icon: "🎙️",
+    },
+    {
+      title: t("services.technical.title"),
+      description: t("services.technical.description"),
+      icon: "🛠️",
+    },
+    {
+      title: t("services.postproduction.title"),
+      description: t("services.postproduction.description"),
+      icon: "🎬",
+    },
+  ];
+
+  const faqs = t("faq.questions") || [];
+
+  const recordings = [
+    {
+      title: "Leader X Cast",
+      description: t("recordings.leaderXCast"),
+      thumbnail: lxcLogo,
+      url: "https://www.youtube.com/@jaroslavbircak",
+    },
+    {
+      title: "Grindcast",
+      description: t("recordings.grindcast"),
+      thumbnail: grindcastLogo,
+      url: "https://www.youtube.com/@grindsetacademy",
+    },
+    {
+      title: "ReCode Body Príbeh",
+      description: t("recordings.recodeBody"),
+      thumbnail: recodeAudioCover,
+      url: "https://www.mirkaluberdova.sk/recodebody/",
+      isAudioBook: true,
+    },
+  ];
+
+  const packages = [
+    {
+      title: t("pricing.packages.basic.title"),
+      description: t("pricing.packages.basic.description"),
+      pricing: {
+        "1h": { price: "149 €", note: t("pricing.vatNote") },
+        "2h": { price: "239 €", note: t("pricing.vatNote") },
+        "3h": { price: "329 €", note: t("pricing.vatNote") },
+      },
+      features: [
+        t("pricing.packages.basic.features.recording"),
+        t("pricing.packages.basic.features.cameras"),
+        t("pricing.packages.basic.features.audio"),
+        t("pricing.packages.basic.features.technician"),
+      ],
+    },
+    {
+      title: t("pricing.packages.complete.title"),
+      description: t("pricing.packages.complete.description"),
+      pricing: {
+        "1h": { price: "249 €", note: t("pricing.vatNote") },
+        "2h": { price: "339 €", note: t("pricing.vatNote") },
+        "3h": { price: "429 €", note: t("pricing.vatNote") },
+      },
+      highlighted: true,
+      features: [
+        t("pricing.packages.complete.features.recording"),
+        t("pricing.packages.complete.features.editing"),
+        t("pricing.packages.complete.features.grading"),
+        t("pricing.packages.complete.features.revisions"),
+      ],
+    },
+    {
+      title: t("pricing.packages.completePro.title"),
+      description: t("pricing.packages.completePro.description"),
+      pricing: {
+        "1h": { price: "299 €", note: t("pricing.vatNote") },
+        "2h": { price: "389 €", note: t("pricing.vatNote") },
+        "3h": { price: "479 €", note: t("pricing.vatNote") },
+      },
+      features: [
+        t("pricing.packages.completePro.features.recording"),
+        t("pricing.packages.completePro.features.editing"),
+        t("pricing.packages.completePro.features.grading"),
+        t("pricing.packages.completePro.features.clips"),
+      ],
+    },
+  ];
 
   // Restrict date picker to weekdays only (Mon-Fri)
   useEffect(() => {
@@ -319,7 +406,7 @@ function App() {
         const selectedDate = new Date(e.target.value);
         const day = selectedDate.getDay(); // 0 = Sunday, 6 = Saturday
         if (day === 0 || day === 6) {
-          alert('Natáčanie je možné len v pracovné dni (Pondelok - Piatok)');
+          alert(t('contact.validation.weekendError'));
           e.target.value = '';
         }
       });
@@ -341,25 +428,25 @@ function App() {
       <header className="top-bar" role="banner">
         <button 
           className="logo" 
-          aria-label="Grindcast - Podcastové štúdio - Prejsť na začiatok stránky"
+          aria-label={t("hero.ariaLabelStudio")}
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
         >
           <span className="logo-word">Grindcast</span>
         </button>
         
         {/* Desktop Navigation */}
-        <nav className="nav desktop-nav" role="navigation" aria-label="Hlavná navigácia">
+        <nav className="nav desktop-nav" role="navigation" aria-label={t("common.ariaNav")}>
           {navigation.map((item) => (
-            <a key={item.href} href={item.href} aria-label={`Prejsť na sekciu ${item.label}`}>
+            <a key={item.href} href={item.href} aria-label={`${t("common.ariaSection")} ${item.label}`}>
               {item.label}
             </a>
           ))}
           <a
             className="cta-button"
             href="#kontakt"
-            aria-label="Prejsť na sekciu kontakt a rezervácia"
+            aria-label={`${t("common.ariaSection")} ${t("contact.title")}`}
           >
-            Rezervovať
+            {t("navigation.book")}
           </a>
         </nav>
 
@@ -448,26 +535,25 @@ function App() {
           aria-labelledby="hero-heading"
         >
           <div className="hero-text">
-            <span className="overline">Prémiové podcastové štúdio</span>
-            <h1 id="hero-heading">Nahrávajte obsah, ktorý znie aj vyzerá svetovo.</h1>
+            <span className="overline">{t("hero.overline")}</span>
+            <h1 id="hero-heading">{t("hero.title")}</h1>
             <p>
-              Profesionálne podcastové štúdio pre značky, agentúry aj autorov,
-              ktorí chcú prvotriedny zvuk, obraz a servis v Bratislave.
+              {t("hero.description")}
             </p>
             <div className="hero-actions">
               <a
                 className="cta-button"
                 href="#kontakt"
-                aria-label="Prejsť na sekciu cenník"
+                aria-label={t("common.ariaSection") + " " + t("contact.title")}
               >
-                Dohodnúť termín
+                {t("hero.cta")}
               </a>
               <a 
                 className="secondary-button" 
                 href="#kontakt"
-                aria-label="Prejsť na sekciu cenník"
+                aria-label={t("common.ariaSection") + " " + t("pricing.title")}
               >
-                Pozrieť cenník
+                {t("hero.ctaSecondary")}
               </a>
             </div>
           </div>
@@ -484,15 +570,16 @@ function App() {
           >
             <motion.img
               src={heroTech}
-              alt="Profesionálne štúdio vybavenie"
-              loading="lazy"
+              alt={t("common.altTech")}
+              loading="eager"
+              fetchPriority="high"
               className="hero-visual-primary"
               initial={{ y: 20 }}
               animate={{ y: 0, transition: { duration: 1.2, delay: 0.3 } }}
             />
             <motion.img
               src={detailMic}
-              alt="Profesionálny mikrofon"
+              alt={t("common.altMic")}
               loading="lazy"
               className="hero-visual-secondary"
               initial={{ opacity: 0, y: 30 }}
@@ -529,7 +616,7 @@ function App() {
                 animate={galleryReveal.controls}
                 whileHover={{ scale: 1.02, transition: { duration: 0.25 } }}
               >
-                <img src={imageSrc} alt="Podcastové štúdio Bratislava" />
+                <img src={imageSrc} alt={t("gallery.alt")} />
               </motion.figure>
             ))}
           </div>
@@ -543,13 +630,11 @@ function App() {
           animate={pricingReveal.controls}
         >
           <div className="section-header">
-            <span className="section-overline">Cenník</span>
-            <h2>Vyberte si balík, ktorý vám najviac sedí</h2>
-            <p className="pricing-subtitle single-line">
-              Pri prvej návšteve <strong>25% zľava na vyžiadanie</strong> na ktorýkoľvek balík.
-            </p>
+            <span className="section-overline">{t("pricing.overline")}</span>
+            <h2>{t("pricing.title")}</h2>
+            <p className="pricing-subtitle single-line" dangerouslySetInnerHTML={{__html: t("pricing.discount")}} />
           </div>
-          <div className="pricing-tabs" role="tablist" aria-label="Dĺžka nahrávania">
+          <div className="pricing-tabs" role="tablist" aria-label={t("pricing.sessionDuration")}>
             {sessionOptions.map((option) => (
               <button
                 key={option.id}
@@ -624,8 +709,8 @@ function App() {
           animate={servicesReveal.controls}
         >
           <div className="section-header">
-            <span className="section-overline">Čo všetko vybavíme</span>
-            <h2>Kompletný servis pre vaše podcasty a videá</h2>
+            <span className="section-overline">{t("services.overline")}</span>
+            <h2>{t("services.title")}</h2>
           </div>
           <div className="cards-grid">
             {services.map((service) => (
@@ -653,8 +738,8 @@ function App() {
           animate={recordingsReveal.controls}
         >
           <div className="section-header">
-            <span className="section-overline">Natáčali sme</span>
-            <h2>Ukážky projektov, ktoré vznikli v našom štúdiu</h2>
+            <span className="section-overline">{t("recordings.overline")}</span>
+            <h2>{t("recordings.title")}</h2>
           </div>
           <div className="recordings-grid">
             {recordings.map((item, index) => (
@@ -667,11 +752,11 @@ function App() {
                 initial={{ opacity: 0, y: 40 }}
                 animate={recordingsReveal.controls}
                 whileHover={{ scale: 1.02, transition: { duration: 0.25 } }}
-                aria-label={`${item.isAudioBook ? 'Pozrieť audio knihu' : 'Pozrieť video'}: ${item.title}`}
+                aria-label={`${item.isAudioBook ? t("recordings.viewAudio") : t("recordings.viewVideo")}: ${item.title}`}
               >
                 <img 
                   src={item.thumbnail} 
-                  alt={`Náhľad pre ${item.title} - ${item.description}`} 
+                  alt={`${item.title} - ${item.description}`} 
                   loading="lazy" 
                 />
                 <div className="recording-overlay">
@@ -679,7 +764,7 @@ function App() {
                     <strong>{item.title}</strong>
                     <p>{item.description}</p>
                     <span className="recording-label">
-                      {item.isAudioBook ? "POZRIEŤ AUDIO KNIHU" : "POZRIEŤ VIDEO"}
+                      {item.isAudioBook ? t("recordings.viewAudio") : t("recordings.viewVideo")}
                     </span>
                   </div>
                 </div>
@@ -688,7 +773,7 @@ function App() {
           </div>
           <div className="media-embed">
             <div className="media-embed-item">
-              <h3>Vypočujte si audio podcast z nášho štúdia</h3>
+              <h3>{t("recordings.audioPodcast")}</h3>
               <iframe
                 title="Spotify podcast ukážka"
                 src="https://open.spotify.com/embed/episode/1BTeeUOHah25Dq77qrBEvc?utm_source=generator"
@@ -700,7 +785,7 @@ function App() {
               />
             </div>
             <div className="media-embed-item">
-              <h3>Video podcast z nášho štúdia</h3>
+              <h3>{t("recordings.videoPodcast")}</h3>
               <iframe
                 width="100%"
                 height="315"
@@ -724,15 +809,15 @@ function App() {
         >
           <div className="contact-card">
             <div className="section-header">
-              <span className="section-overline">Rezervácia</span>
-              <h2>Rezervujte si termín v našom štúdiu</h2>
+            <span className="section-overline">{t("contact.overline")}</span>
+            <h2>{t("contact.title")}</h2>
             </div>
             
             {/* Custom Booking Form */}
             <form 
               name="booking" 
               className="booking-form"
-              onSubmit={handleFormSubmit}
+              onSubmit={createHandleFormSubmit(t)}
             >
               
               <div className="form-section">
@@ -884,8 +969,8 @@ function App() {
           animate={faqReveal.controls}
         >
           <div className="section-header">
-            <span className="section-overline">Časté otázky</span>
-            <h2>Opýtajte sa, radi poradíme</h2>
+            <span className="section-overline">{t("faq.overline")}</span>
+            <h2>{t("faq.title")}</h2>
           </div>
           <div className="faq-list">
             {faqs.map((faq) => (
@@ -911,8 +996,8 @@ function App() {
             <p>
               Melrose Apartments<br />
               Betliarska 3769/12<br />
-              851 07 Petržalka<br />
-              Bratislava, Slovensko
+              851 07 Bratislava – Petržalka<br />
+              Slovenská republika
             </p>
           </div>
           <div className="footer-contact">
@@ -925,10 +1010,13 @@ function App() {
               href="https://www.instagram.com/grindcaststudio/"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Instagram Grindcast"
+              aria-label={t("footer.ariaLabel")}
             >
               <img src="/icons/instagram.svg" alt="Instagram" />
             </a>
+          </div>
+          <div className="footer-language">
+            <LanguageSwitcher />
           </div>
         </div>
         <div className="footer-bottom">

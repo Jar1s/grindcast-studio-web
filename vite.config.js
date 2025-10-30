@@ -10,6 +10,12 @@ export default defineConfig({
     assetsDir: "assets",
     sourcemap: false,
     minify: "terser",
+    terserOptions: {
+      compress: {
+        drop_console: true,
+        drop_debugger: true,
+      },
+    },
     rollupOptions: {
       output: {
         manualChunks: {
@@ -20,10 +26,11 @@ export default defineConfig({
         chunkFileNames: 'assets/[name]-[hash]-v6.js',
         assetFileNames: 'assets/[name]-[hash]-v6.[ext]'
       }
-    }
+    },
+    chunkSizeWarningLimit: 600,
   },
   server: {
-    port: 5173,
-    host: true
+    port: 5175,
+    host: 'localhost'
   }
 });

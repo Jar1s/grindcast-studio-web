@@ -1,0 +1,199 @@
+{
+  "navigation": {
+    "pricing": "Pricing",
+    "offer": "Services",
+    "faq": "FAQ",
+    "contact": "Contact",
+    "book": "Book",
+    "reservation": "Reservation"
+  },
+  "hero": {
+    "overline": "Premium Podcast Studio",
+    "title": "Record content that sounds and looks world-class.",
+    "description": "Professional podcast studio for brands, agencies, and creators who want first-class audio, video, and service in Bratislava.",
+    "cta": "Book a Session",
+    "ctaSecondary": "View Pricing",
+    "ariaLabelStudio": "Grindcast - Podcast Studio - Go to top of page"
+  },
+  "gallery": {
+    "overline": "Studio Environment",
+    "title": "Take a look inside our space",
+    "alt": "Podcast Studio Bratislava"
+  },
+  "pricing": {
+    "overline": "Pricing",
+    "title": "Choose the package that fits you best",
+    "discount": "Get <strong>25% discount on request</strong> on any package for your first visit.",
+    "vatNote": "Price incl. VAT",
+    "sessionDuration": "Recording Duration",
+    "bookButton": "Book",
+    "sessions": {
+      "1h": "1 hour",
+      "2h": "2 hours",
+      "3h": "3 hours"
+    },
+    "packages": {
+      "basic": {
+        "title": "Basic Recording",
+        "description": "After recording, you'll receive all audio and video files ready for your further editing.",
+        "features": {
+          "recording": "{durationMinutes} min recording + 30 min setup",
+          "cameras": "Full HD recording on 3 cameras",
+          "audio": "Studio-quality sound (4 microphones)",
+          "technician": "Technician in studio throughout the session"
+        }
+      },
+      "complete": {
+        "title": "Complete Post-production",
+        "description": "We'll deliver a complete audio and video output ready for publishing.",
+        "features": {
+          "recording": "{durationMinutes} min recording + 30 min setup",
+          "editing": "Final video and audio editing in Full HD",
+          "grading": "Color grading and graphics",
+          "revisions": "One round of revision implementation"
+        }
+      },
+      "completePro": {
+        "title": "Complete Post-production Pro",
+        "description": "In addition to the final podcast, you'll get 4 vertical clips with subtitles and graphics ready for social media.",
+        "features": {
+          "recording": "{durationMinutes} min recording + 30 min setup",
+          "editing": "Final video and audio editing in Full HD",
+          "grading": "Color grading and graphics",
+          "clips": "4 vertical clips with subtitles"
+        }
+      }
+    }
+  },
+  "services": {
+    "overline": "What We Offer",
+    "title": "Complete service for your podcasts and videos",
+    "recording": {
+      "title": "Audio & Video Recording",
+      "description": "Studio equipped with professional microphones, cameras, and lighting for podcasts, interviews, and livestreams."
+    },
+    "technical": {
+      "title": "Technical Support",
+      "description": "Our technician will set up the scene, take care of audio and video, and oversee the entire recording session."
+    },
+    "postproduction": {
+      "title": "Post-production",
+      "description": "Editing, mixing, mastering, grading, subtitles, and export to required formats as part of the package or on request."
+    }
+  },
+  "recordings": {
+    "overline": "Our Work",
+    "title": "Showcase of projects created in our studio",
+    "audioPodcast": "Listen to an audio podcast from our studio",
+    "videoPodcast": "Video podcast from our studio",
+    "viewAudio": "VIEW AUDIO BOOK",
+    "viewVideo": "VIEW VIDEO",
+    "leaderXCast": "Unfiltered stories and dimensions of influential personalities of the world.",
+    "grindcast": "How to prepare for business in 2025.",
+    "recodeBody": "An audio book about changing mindset and a healthy body, which we created for the client."
+  },
+  "faq": {
+    "overline": "Frequently Asked Questions",
+    "title": "Ask us, we're happy to help",
+    "questions": [
+      {
+        "question": "What's included in the rental price?",
+        "answer": "The package includes a technician, 4 microphones, 3 static cameras, professional lighting, and sound monitoring throughout the session."
+      },
+      {
+        "question": "What equipment do we have in the studio?",
+        "answer": "Our studio is equipped with 4x Rode Pod Mic microphones, 1x Rodecaster Pro 2 mixing console, professional studio lighting, 2x Sony Alpha ZV-E10 II cameras, and 1x Sony A6400 camera."
+      },
+      {
+        "question": "How quickly can we get the final output?",
+        "answer": "For packages with post-production, we typically deliver finished video and audio within 3 business days. Reels are delivered at the same time, or by agreement, express delivery."
+      },
+      {
+        "question": "How many people fit in the studio?",
+        "answer": "Four guests can sit at the table during recording."
+      },
+      {
+        "question": "Can we bring our own cameraman or technician?",
+        "answer": "Yes. The studio is modular, so we can adapt the layout to the cameras you bring. Our technician will help with setup and audio."
+      },
+      {
+        "question": "How does booking work?",
+        "answer": "Select a package and recording length, click Book and fill out the booking form. After submission, we'll send you detailed preparation and a checklist within 24 hours."
+      },
+      {
+        "question": "Where can we park and how to get here by public transport?",
+        "answer": "Parking is available directly at the studio premises. The public transport stop is nearby - buses and trams stop at 'Betliarska' station, which is only 2 minutes walk from the studio."
+      }
+    ]
+  },
+  "contact": {
+    "overline": "Booking",
+    "title": "Book a session at our studio",
+    "contactInfo": "📞 Contact Information",
+    "bookingDetails": "📅 Booking Details",
+    "additionalInfo": "💬 Additional Information",
+    "form": {
+      "name": "Full Name",
+      "namePlaceholder": "Your full name",
+      "email": "Email",
+      "emailPlaceholder": "your@email.com",
+      "phone": "Phone Number",
+      "phonePlaceholder": "+421 123 456 789",
+      "billing": "Billing Details (address or Company ID)",
+      "billingPlaceholder": "Address or Company ID",
+      "date": "Preferred Date",
+      "time": "Preferred Time",
+      "timeSelect": "Select time",
+      "service": "Service Type",
+      "serviceSelect": "Select service",
+      "guests": "Number of Guests",
+      "guestsPlaceholder": "How many people will be in the studio?",
+      "message": "Your Message or Question",
+      "messagePlaceholder": "Do you have any special requests or questions?",
+      "submit": "📅 Send Booking Request",
+      "note": "After submitting the form, we'll contact you within 24 hours to confirm the appointment.",
+      "required": "*"
+    },
+    "validation": {
+      "nameRequired": "Name is required",
+      "emailRequired": "Email is required",
+      "emailInvalid": "Invalid email format",
+      "phoneRequired": "Phone number is required",
+      "dateRequired": "Date is required",
+      "datePast": "Date cannot be in the past",
+      "timeRequired": "Time is required",
+      "serviceRequired": "Service type is required",
+      "billingRequired": "Billing details are required",
+      "guestsRequired": "Number of guests is required",
+      "weekendError": "Recording is only available on weekdays (Monday - Friday)",
+      "fillAllFields": "Please fill in all required fields correctly."
+    },
+    "messages": {
+      "success": "Booking request successfully sent! We'll contact you within 24 hours.",
+      "error": "An error occurred while submitting. Please try again or contact us directly at info@grindcaststudio.sk",
+      "none": "None"
+    },
+    "serviceOptions": {
+      "1h-zakladna": "1h - Basic Recording (149€)",
+      "2h-zakladna": "2h - Basic Recording (239€)",
+      "3h-zakladna": "3h - Basic Recording (329€)",
+      "1h-kompletna": "1h - Complete Post-production (249€)",
+      "2h-kompletna": "2h - Complete Post-production (339€)",
+      "3h-kompletna": "3h - Complete Post-production (429€)",
+      "1h-pro": "1h - Complete Post-production Pro (349€)",
+      "2h-pro": "2h - Complete Post-production Pro (449€)",
+      "3h-pro": "3h - Complete Post-production Pro (549€)"
+    }
+  },
+  "footer": {
+    "address": "Melrose Apartments<br />Betliarska 3769/12<br />851 07 Petržalka<br />Bratislava, Slovakia",
+    "ariaLabel": "Instagram Grindcast"
+  },
+  "common": {
+    "altTech": "Professional studio equipment",
+    "altMic": "Professional microphone",
+    "ariaNav": "Main navigation",
+    "ariaSection": "Go to section"
+  }
+}
+
