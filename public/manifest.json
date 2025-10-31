@@ -9,10 +9,15 @@
   "orientation": "portrait-primary",
   "icons": [
     {
-      "src": "/favicon.svg",
+      "src": "https://www.grindcaststudio.sk/favicon.svg",
       "sizes": "any",
       "type": "image/svg+xml",
       "purpose": "any maskable"
+    },
+    {
+      "src": "https://www.grindcaststudio.sk/favicon.ico",
+      "sizes": "32x32",
+      "type": "image/x-icon"
     }
   ],
   "categories": ["business", "entertainment", "productivity"],
