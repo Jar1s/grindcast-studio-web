@@ -298,7 +298,7 @@ function App() {
     { href: "#cennik", label: t("navigation.pricing") },
     { href: "#ponuka", label: t("navigation.offer") },
     { href: "#faq", label: t("navigation.faq") },
-    { href: "#footer", label: t("navigation.contact") },
+    { href: "#kontakt", label: t("navigation.contact") },
   ];
 
   const sessionOptions = [
@@ -338,7 +338,7 @@ function App() {
       title: "Grindcast",
       description: t("recordings.grindcast"),
       thumbnail: grindcastLogo,
-      url: "https://www.youtube.com/@grindsetacademy",
+      url: "https://www.youtube.com/@grindsetacademy.",
     },
     {
       title: "ReCode Body Príbeh",
@@ -443,7 +443,7 @@ function App() {
           ))}
           <a
             className="cta-button"
-            href="#kontakt"
+            href="#rezervacia"
             aria-label={`${t("common.ariaSection")} ${t("contact.title")}`}
           >
             {t("navigation.book")}
@@ -454,7 +454,7 @@ function App() {
         <div className="mobile-header">
           <a
             className="mobile-rezervacia"
-            href="#kontakt"
+            href="#rezervacia"
             aria-label="Prejsť na sekciu kontakt a rezervácia"
           >
             Rezervácia
@@ -509,7 +509,7 @@ function App() {
               ))}
               <a
                 className="mobile-cta"
-                href="#kontakt"
+                href="#rezervacia"
                 aria-label="Prejsť na sekciu cenník"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
@@ -543,7 +543,7 @@ function App() {
             <div className="hero-actions">
               <a
                 className="cta-button"
-                href="#kontakt"
+                href="#rezervacia"
                 aria-label={t("common.ariaSection") + " " + t("contact.title")}
               >
                 {t("hero.cta")}
@@ -676,7 +676,7 @@ function App() {
                 </div>
                 <a
                   className="cta-button"
-                  href="#kontakt"
+                  href="#rezervacia"
                   aria-label="Rezervovať termín v podcastovom štúdiu"
                 >
                   Rezervovať
@@ -807,7 +807,7 @@ function App() {
           initial={{ opacity: 0, y: 40 }}
           animate={contactReveal.controls}
         >
-          <div className="contact-card">
+          <div id="rezervacia" className="contact-card">
             <div className="section-header">
             <span className="section-overline">{t("contact.overline")}</span>
             <h2>{t("contact.title")}</h2>

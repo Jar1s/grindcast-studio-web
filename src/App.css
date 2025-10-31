@@ -1657,6 +1657,9 @@
   .booking-form {
     padding: 1.5rem;
     margin: 1rem 0;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
   }
   
   .form-row {
@@ -1675,11 +1678,16 @@
   .form-group input,
   .form-group select,
   .form-group textarea {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
     padding: 0.6rem 0.8rem;
     font-size: 0.9rem;
   }
   
   .form-submit .cta-button {
+    width: 100%;
+    max-width: 100%;
     padding: 0.8rem 1.5rem;
     font-size: 0.95rem;
   }
@@ -1688,6 +1696,9 @@
 @media (max-width: 480px) {
   .booking-form {
     padding: 1rem;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
   }
   
   .form-section {
@@ -1696,5 +1707,13 @@
   
   .form-section h3 {
     font-size: 1rem;
+  }
+  
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
   }
 }
