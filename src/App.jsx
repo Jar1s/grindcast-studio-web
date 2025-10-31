@@ -127,7 +127,7 @@ const navigation = [
   { href: "#cennik", label: "Cenník" },
   { href: "#ponuka", label: "Ponuka" },
   { href: "#faq", label: "FAQ" },
-  { href: "#footer", label: "Kontakt" },
+  { href: "#kontakt", label: "Kontakt" },
 ];
 
 const VAT_NOTE = "Cena s DPH";
@@ -550,7 +550,7 @@ function App() {
               </a>
               <a 
                 className="secondary-button" 
-                href="#kontakt"
+                href="#cennik"
                 aria-label={t("common.ariaSection") + " " + t("pricing.title")}
               >
                 {t("hero.ctaSecondary")}
@@ -802,7 +802,6 @@ function App() {
 
         <motion.section
           ref={contactReveal.ref}
-          id="kontakt"
           className="section contact"
           initial={{ opacity: 0, y: 40 }}
           animate={contactReveal.controls}
@@ -989,7 +988,7 @@ function App() {
         </motion.section>
       </main>
 
-      <footer id="footer" className="footer">
+      <footer id="kontakt" className="footer">
         <div className="footer-content">
           <div className="footer-brand">
             <strong>Grindcast Studio Bratislava</strong>
