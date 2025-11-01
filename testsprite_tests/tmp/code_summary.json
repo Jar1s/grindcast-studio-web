@@ -1,0 +1,65 @@
+{
+  "project_name": "Grindcast Studio Bratislava",
+  "project_type": "frontend",
+  "tech_stack": {
+    "framework": "React 18.3.1",
+    "language": "JavaScript (ES6+)",
+    "build_tool": "Vite 5.2.0",
+    "ui_library": "React DOM 18.3.1",
+    "animations": "Framer Motion 12.23.24",
+    "css": "CSS3 with custom properties",
+    "intersection_observer": "react-intersection-observer 9.16.0"
+  },
+  "features": [
+    "Bilingual support (Slovak/English) with i18n",
+    "Responsive booking form with validation",
+    "EmailJS integration for form submissions",
+    "Scroll animations with Framer Motion",
+    "Image gallery with lazy loading",
+    "Mobile-responsive design",
+    "SEO optimization with meta tags and structured data",
+    "Sitemap generation",
+    "Social media integration (Instagram, LinkedIn, TikTok)",
+    "Podcast showcase with YouTube embeds",
+    "Spotify embed for audio podcasts",
+    "Pricing calculator with session duration selector",
+    "FAQ accordion section",
+    "Contact form with multiple fields",
+    "Language switcher component",
+    "Google Analytics integration"
+  ],
+  "key_components": [
+    "App.jsx - Main application component",
+    "LanguageSwitcher.jsx - Language toggle component",
+    "I18nProvider.jsx - Internationalization provider"
+  ],
+  "routes": [
+    "Home page with hero section",
+    "Pricing section with packages",
+    "Services section",
+    "Gallery section",
+    "Recordings showcase",
+    "FAQ section",
+    "Contact/Booking form section",
+    "Footer with contact info"
+  ],
+  "external_services": [
+    "EmailJS - Form submission",
+    "YouTube - Video embeds",
+    "Spotify - Audio podcast embeds",
+    "Google Analytics - Tracking"
+  ],
+  "build_config": {
+    "output_dir": "dist",
+    "assets_dir": "assets",
+    "minification": "terser",
+    "code_splitting": "manual chunks for vendor and animations",
+    "sourcemaps": false
+  },
+  "deployment": {
+    "platform": "GitHub Pages",
+    "domain": "grindcaststudio.sk",
+    "custom_domain": true
+  }
+}
+
