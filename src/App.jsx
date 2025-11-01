@@ -115,6 +115,11 @@ const createHandleFormSubmit = (t) => async (e) => {
       'S3qDc0FdS4g1VH59l'
     );
     
+    // Track Google Ads conversion
+    if (typeof gtag !== 'undefined') {
+      gtag('event', 'ads_conversion_N_kup_1', {});
+    }
+    
     alert(t("contact.messages.success"));
     e.target.reset();
   } catch (error) {
