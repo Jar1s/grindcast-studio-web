@@ -787,6 +787,11 @@ function App() {
                 frameBorder="0"
                 allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
                 loading="lazy"
+                onLoad={() => {}}
+                onError={(e) => {
+                  // Silently handle iframe loading errors
+                  e.preventDefault();
+                }}
               />
             </div>
             <div className="media-embed-item">
@@ -800,6 +805,11 @@ function App() {
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
                 loading="lazy"
+                onLoad={() => {}}
+                onError={(e) => {
+                  // Silently handle iframe loading errors
+                  e.preventDefault();
+                }}
               />
             </div>
           </div>
