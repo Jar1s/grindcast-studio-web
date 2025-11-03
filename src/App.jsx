@@ -117,7 +117,11 @@ const createHandleFormSubmit = (t) => async (e) => {
     
     // Track Google Ads conversion
     if (typeof gtag !== 'undefined') {
-      gtag('event', 'ads_conversion_N_kup_1', {});
+      gtag('event', 'conversion', {
+        'send_to': 'AW-17693861384/l0gbCN7P_7cbEIjMi_VB',
+        'value': 1.0,
+        'currency': 'EUR'
+      });
     }
     
     alert(t("contact.messages.success"));
