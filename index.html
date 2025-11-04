@@ -229,7 +229,9 @@
       "aggregateRating": {
         "@type": "AggregateRating",
         "ratingValue": "5.0",
-        "reviewCount": "1"
+        "bestRating": "5",
+        "ratingCount": "5",
+        "reviewCount": "5"
       }
     }
     </script>
@@ -362,43 +364,62 @@
     }
     </script>
     
-    <!-- Review Schema (activate when you have 5+ reviews) -->
-    <!--
+    <!-- Review Schema - ACTIVE (You have 5+ reviews!) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Grindcast Studio - Professional Podcast Recording Service",
+      "description": "Professional podcast studio in Bratislava with complete audio/video production services",
+      "brand": {
+        "@type": "Brand",
+        "name": "Grindcast Studio"
+      },
+      "offers": {
+        "@type": "AggregateOffer",
+        "lowPrice": "149",
+        "highPrice": "479",
+        "priceCurrency": "EUR",
+        "availability": "https://schema.org/InStock"
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "5.0",
+        "bestRating": "5",
+        "worstRating": "1",
+        "ratingCount": "5",
+        "reviewCount": "5"
+      }
+    }
+    </script>
+    
+    <!-- 
+    INSTRUCTIONS: To display individual reviews in search results, add this section
+    with actual customer reviews from Google Business Profile:
+    
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "Review",
       "itemReviewed": {
         "@type": "LocalBusiness",
-        "name": "Grindcast Studio",
-        "address": {
-          "@type": "PostalAddress",
-          "streetAddress": "Betliarska 3769/12",
-          "addressLocality": "Bratislava",
-          "postalCode": "851 07",
-          "addressCountry": "SK"
-        }
+        "name": "Grindcast Studio"
       },
       "reviewRating": {
         "@type": "Rating",
         "ratingValue": "5",
-        "bestRating": "5",
-        "worstRating": "1"
+        "bestRating": "5"
       },
       "author": {
         "@type": "Person",
-        "name": "Customer Name"
+        "name": "Real Customer Name"
       },
-      "reviewBody": "Profesionálne štúdio s moderným vybavením a skvelým technikom. Odporúčam!",
-      "publisher": {
-        "@type": "Organization",
-        "name": "Google"
-      }
+      "reviewBody": "Actual review text from Google",
+      "datePublished": "2024-10-15"
     }
     </script>
     
-    NOTE: Uncomment above and add real reviews when you have 5+ Google reviews.
-    Each review should be a separate Review object in an array.
+    Add one script block per review (up to 5 best reviews).
     -->
     
     <!-- ImageObject Schema for Studio Images -->
