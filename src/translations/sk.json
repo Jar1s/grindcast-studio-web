@@ -165,7 +165,6 @@
       "serviceRequired": "Typ služby je povinný",
       "billingRequired": "Fakturačné údaje sú povinné",
       "guestsRequired": "Počet hostí je povinný",
-      "weekendError": "Natáčanie je možné len v pracovné dni (Pondelok - Piatok)",
       "fillAllFields": "Prosím vyplňte všetky povinné polia správne."
     },
     "messages": {

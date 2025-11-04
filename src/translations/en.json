@@ -165,7 +165,6 @@
       "serviceRequired": "Service type is required",
       "billingRequired": "Billing details are required",
       "guestsRequired": "Number of guests is required",
-      "weekendError": "Recording is only available on weekdays (Monday - Friday)",
       "fillAllFields": "Please fill in all required fields correctly."
     },
     "messages": {
