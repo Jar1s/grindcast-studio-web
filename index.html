@@ -362,6 +362,136 @@
     }
     </script>
     
+    <!-- Review Schema (activate when you have 5+ reviews) -->
+    <!--
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Review",
+      "itemReviewed": {
+        "@type": "LocalBusiness",
+        "name": "Grindcast Studio",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Betliarska 3769/12",
+          "addressLocality": "Bratislava",
+          "postalCode": "851 07",
+          "addressCountry": "SK"
+        }
+      },
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "5",
+        "bestRating": "5",
+        "worstRating": "1"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Customer Name"
+      },
+      "reviewBody": "Profesionálne štúdio s moderným vybavením a skvelým technikom. Odporúčam!",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Google"
+      }
+    }
+    </script>
+    
+    NOTE: Uncomment above and add real reviews when you have 5+ Google reviews.
+    Each review should be a separate Review object in an array.
+    -->
+    
+    <!-- ImageObject Schema for Studio Images -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ImageGallery",
+      "name": "Grindcast Studio - Professional Podcast Studio Photos",
+      "description": "Professional podcast recording studio in Bratislava with modern equipment",
+      "image": [
+        {
+          "@type": "ImageObject",
+          "contentUrl": "https://www.grindcaststudio.sk/logo.png",
+          "name": "Grindcast Studio Logo",
+          "description": "Professional podcast studio logo - Grindcast Studio Bratislava",
+          "width": "512",
+          "height": "512"
+        },
+        {
+          "@type": "ImageObject",
+          "contentUrl": "https://www.grindcaststudio.sk/assets/hero-tech-Ci6I7y4L-v6.jpg",
+          "name": "Professional Podcast Equipment",
+          "description": "Professional podcast recording equipment with Rode microphones and Sony cameras at Grindcast Studio Bratislava",
+          "keywords": "podcast equipment, Rode microphones, Sony cameras, professional recording"
+        },
+        {
+          "@type": "ImageObject",
+          "contentUrl": "https://www.grindcaststudio.sk/assets/studio-space-1-DzO3Ysgi-v6.jpg",
+          "name": "Podcast Studio Recording Room",
+          "description": "Modern podcast recording room with professional lighting and camera setup in Bratislava",
+          "keywords": "podcast studio, recording room, professional lighting, Bratislava"
+        },
+        {
+          "@type": "ImageObject",
+          "contentUrl": "https://www.grindcaststudio.sk/assets/studio-space-2-D492vV5I-v6.jpg",
+          "name": "Podcast Studio Interior",
+          "description": "Interior view of professional podcast studio with acoustic treatment in Bratislava",
+          "keywords": "podcast studio interior, acoustic treatment, recording space"
+        },
+        {
+          "@type": "ImageObject",
+          "contentUrl": "https://www.grindcaststudio.sk/assets/studio-space-3-LcpIYF_z-v6.jpg",
+          "name": "Podcast Studio Control Room",
+          "description": "Professional control room with mixing console and monitoring equipment at Grindcast Studio",
+          "keywords": "control room, mixing console, podcast production, Rodecaster Pro"
+        }
+      ]
+    }
+    </script>
+    
+    <!-- How-To Schema for Featured Snippets -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "HowTo",
+      "name": "Ako nahrať profesionálny podcast v Bratislave",
+      "description": "Kompletný návod na nahrávanie profesionálneho podcastu v Grindcast Studio Bratislava",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "name": "Vyberte si balík a termín",
+          "text": "Vyberte si vhodný balík (Základný záznam od €149, Kompletná postprodukcia od €249, alebo Pro balík od €299) a rezervujte si termín cez online formulár."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "name": "Príprava obsahu",
+          "text": "Pripravte si tému, hosťov a scenár podcastu. Náš tím vám pošle detailný checklist a prípravu do 24 hodín po rezervácii."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "name": "Príchod do štúdia",
+          "text": "Príďte 30 minút pred nahrávaním. Náš technik pripraví všetko vybavenie - 4 mikrofóny, 3 kamery, profesionálne osvetlenie."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 4,
+          "name": "Nahrávanie",
+          "text": "Nahrávajte váš podcast. Technik monitoruje zvuk a obraz počas celej session, takže sa môžete sústrediť len na obsah."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 5,
+          "name": "Postprodukcia a dodanie",
+          "text": "Pri balíkoch s postprodukciou dostanete hotový výstup do 3 pracovných dní. Zahŕňa strih, mix, mastering, color grading a export."
+        }
+      ],
+      "totalTime": "PT3H"
+    }
+    </script>
+    
     <!-- EmailJS SDK -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script type="text/javascript">

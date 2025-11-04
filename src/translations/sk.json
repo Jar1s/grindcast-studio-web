@@ -18,7 +18,7 @@
   "gallery": {
     "overline": "Prostredie štúdia",
     "title": "Nahliadnite do nášho priestoru",
-    "alt": "Podcastové štúdio Bratislava"
+    "alt": "Moderné podcastové štúdio Bratislava - Nahrávací priestor s profesionálnym osvetlením, kamerami a akustickou úpravou v Grindcast Studio"
   },
   "pricing": {
     "overline": "Cenník",
@@ -190,8 +190,8 @@
     "ariaLabel": "Instagram Grindcast"
   },
   "common": {
-    "altTech": "Profesionálne štúdio vybavenie",
-    "altMic": "Profesionálny mikrofon",
+    "altTech": "Profesionálne podcastové štúdio vybavenie Bratislava - Rode mikrofóny, Sony kamery, Rodecaster Pro 2 mixážny pult v Grindcast Studio",
+    "altMic": "Rode Pod Mic profesionálny podcastový mikrofón v štúdiu Grindcast Bratislava",
     "ariaNav": "Hlavná navigácia",
     "ariaSection": "Prejsť na sekciu"
   }
