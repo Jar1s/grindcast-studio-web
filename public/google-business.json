@@ -1,0 +1,101 @@
+{
+  "name": "Grindcast Studio",
+  "description": "Profesionálne podcastové štúdio v Bratislave s kompletnou audio a video produkciou. Technická obsluha, postprodukcia a prenájom štúdia s moderným vybavením.",
+  "address": {
+    "streetAddress": "Betliarska 3769/12, Melrose Apartments",
+    "addressLocality": "Bratislava",
+    "addressRegion": "Bratislavský kraj",
+    "postalCode": "851 07",
+    "addressCountry": "SK"
+  },
+  "geo": {
+    "latitude": 48.1486,
+    "longitude": 17.1077
+  },
+  "url": "https://www.grindcaststudio.sk",
+  "telephone": "+421907513318",
+  "email": "info@grindcaststudio.sk",
+  "openingHours": [
+    "Monday 09:00-18:00",
+    "Tuesday 09:00-18:00",
+    "Wednesday 09:00-18:00",
+    "Thursday 09:00-18:00",
+    "Friday 09:00-18:00",
+    "Saturday Closed",
+    "Sunday Closed"
+  ],
+  "priceRange": "€€",
+  "categories": [
+    "Podcast Studio",
+    "Recording Studio",
+    "Video Production Service",
+    "Audio Visual Equipment Rental",
+    "Media Production Company"
+  ],
+  "attributes": {
+    "wheelchair_accessible": false,
+    "parking": true,
+    "accepts_credit_cards": true,
+    "accepts_cash": true,
+    "wifi": true,
+    "languages": ["Slovak", "English"]
+  },
+  "services": [
+    {
+      "name": "Podcast Recording",
+      "description": "Professional audio and video podcast recording with 3 cameras and 4 microphones",
+      "price": "From €149/hour"
+    },
+    {
+      "name": "Post-Production",
+      "description": "Complete video editing, audio mixing, mastering, and color grading",
+      "price": "Included in packages"
+    },
+    {
+      "name": "Technical Support",
+      "description": "Dedicated technician throughout your recording session",
+      "price": "Included in packages"
+    },
+    {
+      "name": "Studio Rental",
+      "description": "Professional studio with equipment for up to 4 people",
+      "price": "From €149/hour"
+    },
+    {
+      "name": "Social Media Content",
+      "description": "Vertical clips for Reels, TikTok, and Shorts with subtitles",
+      "price": "Included in Pro package"
+    }
+  ],
+  "photos": [
+    "https://www.grindcaststudio.sk/logo.png",
+    "https://www.grindcaststudio.sk/og-image.jpg",
+    "https://www.grindcaststudio.sk/assets/hero-tech-Ci6I7y4L-v3.jpg",
+    "https://www.grindcaststudio.sk/assets/studio-space-1-DzO3Ysgi-v3.jpg",
+    "https://www.grindcaststudio.sk/assets/studio-space-2-D492vV5I-v3.jpg",
+    "https://www.grindcaststudio.sk/assets/studio-space-3-LcpIYF_z-v3.jpg"
+  ],
+  "socialProfiles": {
+    "instagram": "https://www.instagram.com/grindcaststudio/"
+  },
+  "keywords": [
+    "podcast studio bratislava",
+    "podcastové štúdio",
+    "audio recording bratislava",
+    "video production",
+    "studio rental",
+    "podcast nahrávanie",
+    "technická obsluha",
+    "postprodukcia"
+  ],
+  "uniqueSellingPoints": [
+    "Complete turnkey solution - no technical knowledge required",
+    "Professional technician included in all packages",
+    "Fast 3-day turnaround for edited content",
+    "Modern Sony cameras and Rode microphones",
+    "Central Bratislava location with parking",
+    "Bilingual services (Slovak/English)",
+    "Vertical clips for social media included in Pro package"
+  ]
+}
+

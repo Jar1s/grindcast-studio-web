@@ -87,9 +87,15 @@
     <meta name="description" content="Grindcast Studio - Profesionálne podcastové štúdio v Bratislave na Betliarskej 3769/12. Kompletné audio/video nahrávanie s technikom od €149/hod. Moderna technika: 3 kamery, 4 Rode mikrofóny, postprodukcia do 3 dní." />
     <meta name="keywords" content="podcast štúdio Bratislava, podcastové štúdio Bratislava, audio nahrávanie Bratislava, video produkcia Bratislava, podcast nahrávanie, štúdio prenájom Bratislava, technická obsluha, postprodukcia, livestream, rozhovory, Grindcast Studio, Betliarska Bratislava" />
     <meta name="author" content="Grindcast Studio" />
-    <meta name="robots" content="index, follow" />
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
     <meta name="language" content="Slovak" />
     <meta name="revisit-after" content="7 days" />
+    <meta name="geo.region" content="SK-BL" />
+    <meta name="geo.placename" content="Bratislava" />
+    <meta name="geo.position" content="48.1486;17.1077" />
+    <meta name="ICBM" content="48.1486, 17.1077" />
+    <meta name="rating" content="General" />
+    <meta name="distribution" content="Global" />
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
@@ -227,6 +233,135 @@
       }
     }
     </script>
+    
+    <!-- FAQ Schema for Rich Results -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Čo je zahrnuté v cene prenájmu?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "V balíku máte technika, 4 mikrofóny, 3 statické kamery, profesionálne osvetlenie a monitoring zvuku počas celej session."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Aké máme vybavenie v štúdiu?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Naše štúdio je vybavené 4x Rode Pod Mic mikrofónmi, 1x Rodecaster Pro 2 mixážnym pultom, profesionálnym štúdiovým osvetlením, 2x Sony Alpha ZV-E10 II kamerami a 1x Sony A6400 kamerou."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Ako rýchlo vieme dostať finálny výstup?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Pri balíkoch s postprodukciou posielame hotové video a audio spravidla do 3 pracovných dní. Reels dodávame v rovnakom čase, alebo podľa dohody expresne."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Koľko ľudí sa zmestí do štúdia?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Počas nahrávania vedia pri stole sedieť štyria hostia."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Môžeme si priniesť vlastného kameramana alebo techniku?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Áno. Štúdio je modulárne, takže vieme prispôsobiť rozloženie kamerám, ktoré si donesiete. Náš technik vám pomôže so zapojením aj so zvukom."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Ako prebieha rezervácia termínu?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Vyberte si balík a dĺžku nahrávania, kliknite na Rezervovať a vyplňte rezervačný formulár. Po odoslaní vám do 24 hodín pošleme detailnú prípravu a checklist."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Kde sa dá zaparkovať a ako sa k nám dostanete MHD?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Parkovanie je dostupné priamo v areáli štúdia. MHD zastávka je v bezprostrednej blízkosti - autobusy a električky zastavujú na zastávke 'Betliarska', ktorá je len 2 minúty chôdze od štúdia."
+          }
+        }
+      ]
+    }
+    </script>
+    
+    <!-- Breadcrumb Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Domov",
+          "item": "https://www.grindcaststudio.sk/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Cenník",
+          "item": "https://www.grindcaststudio.sk/#cennik"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Ponuka",
+          "item": "https://www.grindcaststudio.sk/#ponuka"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "FAQ",
+          "item": "https://www.grindcaststudio.sk/#faq"
+        },
+        {
+          "@type": "ListItem",
+          "position": 5,
+          "name": "Kontakt",
+          "item": "https://www.grindcaststudio.sk/#kontakt"
+        }
+      ]
+    }
+    </script>
+    
+    <!-- Organization Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Grindcast Studio",
+      "url": "https://www.grindcaststudio.sk",
+      "logo": "https://www.grindcaststudio.sk/logo.png",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+421-907-513-318",
+        "contactType": "customer service",
+        "email": "info@grindcaststudio.sk",
+        "areaServed": "SK",
+        "availableLanguage": ["Slovak", "English"]
+      },
+      "sameAs": [
+        "https://www.instagram.com/grindcaststudio/"
+      ]
+    }
+    </script>
+    
     <!-- EmailJS SDK -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script type="text/javascript">
