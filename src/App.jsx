@@ -115,10 +115,10 @@ const createHandleFormSubmit = (t) => async (e) => {
       'S3qDc0FdS4g1VH59l'
     );
     
-    // Track Google Ads conversion
+    // Track Google Ads conversion - Odoslanie formulára pre potenciálnych zákazníkov
     if (typeof gtag !== 'undefined') {
       gtag('event', 'conversion', {
-        'send_to': 'AW-17693861384/l0gbCN7P_7cbEIjMi_VB',
+        'send_to': 'AW-17693861384/lOpLCJGD0bobEIjMi_VB',
         'value': 1.0,
         'currency': 'EUR'
       });
