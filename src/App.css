@@ -991,7 +991,7 @@
   gap: 1.5rem;
   grid-template-columns: repeat(3, 1fr);
   margin-top: 2.5rem;
-  max-width: 900px;
+  max-width: min(1400px, 90vw);
   margin-left: auto;
   margin-right: auto;
 }
@@ -1478,6 +1478,14 @@
   .recording-play {
     width: 2.8rem;
     height: 2.8rem;
+  }
+}
+
+/* Gallery responsive sizing for large screens */
+@media (min-width: 1600px) {
+  .gallery-grid {
+    max-width: 1600px;
+    gap: 2rem;
   }
 }
 
