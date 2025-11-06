@@ -1,13 +1,17 @@
 /* Reviews Section - Normal page section */
 .reviews-section {
-  padding: 3rem 1.5rem;
+  padding: 2rem 1.5rem;
   background: #0b0c10;
+}
+
+.reviews-section .section-header {
+  margin-bottom: 1.5rem;
 }
 
 .reviews-container {
   max-width: 1200px;
   margin: 0 auto;
-  margin-top: 1.5rem;
+  margin-top: 0;
 }
 
 /* Loading and Error States */
@@ -114,7 +118,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 1.5rem;
-  margin-bottom: 3rem;
+  margin-bottom: 0;
 }
 
 .review-card {
@@ -278,7 +282,11 @@
 /* Mobile Responsive */
 @media (max-width: 640px) {
   .reviews-section {
-    padding: 2.5rem 1rem;
+    padding: 1.5rem 1rem;
+  }
+  
+  .reviews-section .section-header {
+    margin-bottom: 1rem;
   }
 
   .reviews-summary {
