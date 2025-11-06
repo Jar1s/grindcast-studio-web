@@ -3,6 +3,7 @@ import { AnimatePresence, motion, useAnimation } from "framer-motion";
 import "./App.css";
 import { useI18n } from "./i18n/I18nProvider";
 import { LanguageSwitcher } from "./components/LanguageSwitcher";
+import GoogleBusinessWidget from "./components/GoogleBusinessWidget";
 import heroImage from "./assets/hero.jpg";
 import recordingThumbOne from "./assets/recording-1.jpg";
 import recordingThumbTwo from "./assets/recording-2.jpg";
@@ -415,6 +416,7 @@ function App() {
     sessionOptions.find((option) => option.id === activeSession) || sessionOptions[0];
   const heroReveal = useScrollReveal(0.35);
   const pricingReveal = useScrollReveal(0.25, 0.1);
+  const reviewsReveal = useScrollReveal(0.25, 0.125);
   const servicesReveal = useScrollReveal(0.25, 0.15);
   const recordingsReveal = useScrollReveal(0.2, 0.25);
   const galleryReveal = useScrollReveal(0.2, 0.3);
@@ -571,7 +573,7 @@ function App() {
               src={heroTech}
               alt={t("common.altTech")}
               loading="eager"
-              fetchPriority="high"
+              fetchpriority="high"
               className="hero-visual-primary"
               initial={{ y: 20 }}
               animate={{ y: 0, transition: { duration: 1.2, delay: 0.3 } }}
@@ -698,6 +700,16 @@ function App() {
               </motion.article>
             ))}
           </div>
+        </motion.section>
+
+        {/* Reviews Section */}
+        <motion.section
+          ref={reviewsReveal.ref}
+          className="section"
+          initial={{ opacity: 0, y: 40 }}
+          animate={reviewsReveal.controls}
+        >
+          <GoogleBusinessWidget />
         </motion.section>
 
         <motion.section
