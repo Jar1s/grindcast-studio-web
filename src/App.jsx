@@ -117,9 +117,13 @@ const createHandleFormSubmit = (t) => async (e) => {
     );
     
     // Track Google Ads conversion - Odoslanie formulára pre potenciálnych zákazníkov
-    if (typeof gtag !== 'undefined') {
+    // Používame novú funkciu gtag_report_conversion pre lepšie sledovanie
+    if (typeof gtag_report_conversion !== 'undefined') {
+      gtag_report_conversion();
+    } else if (typeof gtag !== 'undefined') {
+      // Fallback na starý spôsob, ak nová funkcia nie je dostupná
       gtag('event', 'conversion', {
-        'send_to': 'AW-17693861384/lOpLCJGD0bobEIjMi_VB',
+        'send_to': 'AW-17693861384/dyqACIPWiL0bEIjMi_VB',
         'value': 1.0,
         'currency': 'EUR'
       });
