@@ -41,17 +41,24 @@
     <script>
       // Univerzálna funkcia pre conversion tracking s ochranou proti dvojitému odpáleniu
       function gtag_report_conversion() {
-        if (typeof gtag !== 'function') return;
+        if (typeof gtag !== 'function') {
+          console.warn('gtag is not available');
+          return;
+        }
         
         // Lock proti dvojitému odpáleniu
-        if (window.__convFired__) return;
+        if (window.__convFired__) {
+          console.log('Conversion already fired, skipping duplicate');
+          return;
+        }
         window.__convFired__ = true;
         
+        // Jednoduchý event snippet podľa Google Ads inštrukcií
         gtag('event', 'conversion', {
-          'send_to': 'AW-17693861834/dyqACIPWiLObEIjMi_VB',
-          'value': 1.0,
-          'currency': 'EUR'
+          'send_to': 'AW-17693861834/dyqACIPWiLObEIjMi_VB'
         });
+        
+        console.log('Conversion sent');
         
         // Reset locku po 4 sekundách (ak by user poslal ďalší formulár)
         setTimeout(() => { window.__convFired__ = false; }, 4000);
