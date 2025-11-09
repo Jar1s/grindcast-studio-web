@@ -20,10 +20,10 @@ const GoogleBusinessWidget = () => {
       date: "2024-11-03"
     },
     {
-      author: "Alex Chen",
+      author: "Simon Stancik",
       rating: 5,
-      text: "Služby na vysokej úrovni.",
-      date: "2024-11-03"
+      text: "Ako kameraman si potrpim na spravnu kompoziciu, osvetlenie a riadne ozvucenie pocas nahravania podcastov. Viem s istotou povedat, ze vsetky tieto policka chalani z Grindcast Studio splnaju. Nehovoriac o prijemnej komunikacii, profesionalite a ochote splnit moje poziadavky, bola moja spokojnost s ich sluzbami viacej ako vysoka. Odporucam vsetkymi desiatimi. Dakujem",
+      date: "2024-11-08"
     }
   ];
 
