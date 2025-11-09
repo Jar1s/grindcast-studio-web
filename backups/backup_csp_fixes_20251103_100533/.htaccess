@@ -1,0 +1,8 @@
+RewriteEngine On
+
+# Force HTTPS and www
+RewriteCond %{HTTP_HOST} !^www\. [NC]
+RewriteRule ^(.*)$ https://www.grindcaststudio.sk/$1 [R=301,L]
+
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://www.grindcaststudio.sk/$1 [R=301,L]

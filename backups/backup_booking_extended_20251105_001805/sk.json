@@ -1,0 +1,198 @@
+{
+  "navigation": {
+    "pricing": "Cenník",
+    "offer": "Ponuka",
+    "faq": "FAQ",
+    "contact": "Kontakt",
+    "book": "Rezervovať",
+    "reservation": "Rezervácia"
+  },
+  "hero": {
+    "overline": "Prémiové podcastové štúdio",
+    "title": "Nahrávajte obsah, ktorý znie aj vyzerá svetovo.",
+    "description": "Profesionálne podcastové štúdio pre značky, agentúry aj autorov, ktorí chcú prvotriedny zvuk, obraz a servis v Bratislave.",
+    "cta": "Dohodnúť termín",
+    "ctaSecondary": "Pozrieť cenník",
+    "ariaLabelStudio": "Grindcast - Podcastové štúdio - Prejsť na začiatok stránky"
+  },
+  "gallery": {
+    "overline": "Prostredie štúdia",
+    "title": "Nahliadnite do nášho priestoru",
+    "alt": "Moderné podcastové štúdio Bratislava - Nahrávací priestor s profesionálnym osvetlením, kamerami a akustickou úpravou v Grindcast Studio"
+  },
+  "pricing": {
+    "overline": "Cenník",
+    "title": "Vyberte si balík, ktorý vám najviac sedí",
+    "discount": "Pri prvej návšteve <strong>25% zľava na vyžiadanie</strong> na ktorýkoľvek balík.",
+    "vatNote": "Cena s DPH",
+    "sessionDuration": "Dĺžka nahrávania",
+    "bookButton": "Rezervovať",
+    "sessions": {
+      "1h": "1 hodina",
+      "2h": "2 hodiny",
+      "3h": "3 hodiny"
+    },
+    "packages": {
+      "basic": {
+        "title": "Základný záznam",
+        "description": "Po nahrávaní dostanete všetky audio a video súbory pripravené pre vašu ďalšiu úpravu.",
+        "features": {
+          "recording": "{durationMinutes} min nahrávanie + 30 min príprava",
+          "cameras": "Full HD záznam na 3 kamery",
+          "audio": "Zvuk v štúdiovej kvalite (4 mikrofóny)",
+          "technician": "Technik v štúdiu počas celého času"
+        }
+      },
+      "complete": {
+        "title": "Kompletná postprodukcia",
+        "description": "Dodáme kompletný audio aj video výstup pripravený na publikovanie.",
+        "features": {
+          "recording": "{durationMinutes} min nahrávanie + 30 min príprava",
+          "editing": "Finálny strih videa a audia vo Full HD",
+          "grading": "Color grading a grafika",
+          "revisions": "Jedno kolo zapracovania pripomienok"
+        }
+      },
+      "completePro": {
+        "title": "Kompletná postprodukcia Pro",
+        "description": "Okrem finálneho podcastu získate 4 vertikálne klipy s titulkami a grafikou pripravené na sociálne siete.",
+        "features": {
+          "recording": "{durationMinutes} min nahrávanie + 30 min príprava",
+          "editing": "Finálny strih videa a audia vo Full HD",
+          "grading": "Color grading a grafika",
+          "clips": "4 vertikálne klipy s titulkami"
+        }
+      }
+    }
+  },
+  "services": {
+    "overline": "Čo všetko vybavíme",
+    "title": "Kompletný servis pre vaše podcasty a videá",
+    "recording": {
+      "title": "Audio & video nahrávanie",
+      "description": "Štúdio vybavené profesionálnymi mikrofónmi, kamerami a svetlami pre podcasty, rozhovory a livestreamy."
+    },
+    "technical": {
+      "title": "Technická obsluha",
+      "description": "Náš technik pripraví scénu, postará sa o zvuk a obraz a dohliadne na priebeh celej nahrávacej session."
+    },
+    "postproduction": {
+      "title": "Postprodukcia",
+      "description": "Strih, mix, mastering, grading, titulky a export do požadovaných formátov v rámci balíka alebo na objednávku."
+    }
+  },
+  "recordings": {
+    "overline": "Natáčali sme",
+    "title": "Ukážky projektov, ktoré vznikli v našom štúdiu",
+    "audioPodcast": "Vypočujte si audio podcast z nášho štúdia",
+    "videoPodcast": "Video podcast z nášho štúdia",
+    "viewAudio": "POZRIEŤ AUDIO KNIHU",
+    "viewVideo": "POZRIEŤ VIDEO",
+    "leaderXCast": "Nefiltrované príbehy a dimenzie vplyvných osobností sveta.",
+    "grindcast": "Ako sa pripraviť na podnikanie v roku 2025.",
+    "recodeBody": "Audio kniha o zmene mindsetu a zdravom tele, ktorú sme vytvorili pre klienta."
+  },
+  "faq": {
+    "overline": "Časté otázky",
+    "title": "Opýtajte sa, radi poradíme",
+    "questions": [
+      {
+        "question": "Čo je zahrnuté v cene prenájmu?",
+        "answer": "V balíku máte technika, 4 mikrofóny, 3 statické kamery, profesionálne osvetlenie a monitoring zvuku počas celej session."
+      },
+      {
+        "question": "Aké máme vybavenie v štúdiu?",
+        "answer": "Naše štúdio je vybavené 4x Rode Pod Mic mikrofónmi, 1x Rodecaster Pro 2 mixážnym pultom, profesionálnym štúdiovým osvetlením, 2x Sony Alpha ZV-E10 II kamerami a 1x Sony A6400 kamerou."
+      },
+      {
+        "question": "Ako rýchlo vieme dostať finálny výstup?",
+        "answer": "Pri balíkoch s postprodukciou posielame hotové video a audio spravidla do 3 pracovných dní. Reels dodávame v rovnakom čase, alebo podľa dohody expresne."
+      },
+      {
+        "question": "Koľko ľudí sa zmestí do štúdia?",
+        "answer": "Počas nahrávania vedia pri stole sedieť štyria hostia."
+      },
+      {
+        "question": "Môžeme si priniesť vlastného kameramana alebo techniku?",
+        "answer": "Áno. Štúdio je modulárne, takže vieme prispôsobiť rozloženie kamerám, ktoré si donesiete. Náš technik vám pomôže so zapojením aj so zvukom."
+      },
+      {
+        "question": "Ako prebieha rezervácia termínu?",
+        "answer": "Vyberte si balík a dĺžku nahrávania, kliknite na Rezervovať a vyplňte rezervačný formulár. Po odoslaní vám do 24 hodín pošleme detailnú prípravu a checklist."
+      },
+      {
+        "question": "Kde sa dá zaparkovať a ako sa k nám dostanete MHD?",
+        "answer": "Parkovanie je dostupné priamo v areáli štúdia. MHD zastávka je v bezprostrednej blízkosti - autobusy a električky zastavujú na zastávke 'Betliarska', ktorá je len 2 minúty chôdze od štúdia."
+      }
+    ]
+  },
+  "contact": {
+    "overline": "Rezervácia",
+    "title": "Rezervujte si termín v našom štúdiu",
+    "contactInfo": "📞 Kontaktné informácie",
+    "bookingDetails": "📅 Detaily rezervácie",
+    "additionalInfo": "💬 Dodatočné informácie",
+    "form": {
+      "name": "Meno a priezvisko",
+      "namePlaceholder": "Vaše meno a priezvisko",
+      "email": "Email",
+      "emailPlaceholder": "vas@email.sk",
+      "phone": "Telefónne číslo",
+      "phonePlaceholder": "+421 123 456 789",
+      "billing": "Fakturačné údaje (adresa alebo IČO)",
+      "billingPlaceholder": "Adresa bydliska alebo IČO",
+      "date": "Preferovaný dátum",
+      "time": "Preferovaný čas",
+      "timeSelect": "Vyberte čas",
+      "service": "Typ služby",
+      "serviceSelect": "Vyberte službu",
+      "guests": "Počet hostí",
+      "guestsPlaceholder": "Koľko ľudí bude v štúdiu?",
+      "message": "Vaša správa alebo otázka",
+      "messagePlaceholder": "Máte nejaké špeciálne požiadavky alebo otázky?",
+      "submit": "📅 Odoslať rezervačnú požiadavku",
+      "note": "Po odoslaní formulára vás budeme kontaktovať do 24 hodín na potvrdenie termínu.",
+      "required": "*"
+    },
+    "validation": {
+      "nameRequired": "Meno je povinné",
+      "emailRequired": "Email je povinný",
+      "emailInvalid": "Neplatný email formát",
+      "phoneRequired": "Telefónne číslo je povinné",
+      "dateRequired": "Dátum je povinný",
+      "datePast": "Dátum nemôže byť v minulosti",
+      "timeRequired": "Čas je povinný",
+      "serviceRequired": "Typ služby je povinný",
+      "billingRequired": "Fakturačné údaje sú povinné",
+      "guestsRequired": "Počet hostí je povinný",
+      "fillAllFields": "Prosím vyplňte všetky povinné polia správne."
+    },
+    "messages": {
+      "success": "Rezervačná požiadavka bola úspešne odoslaná! Ozveme sa vám do 24 hodín.",
+      "error": "Nastala chyba pri odosielaní. Skúste to prosím znova alebo nás kontaktujte priamo na info@grindcaststudio.sk",
+      "none": "Žiadne"
+    },
+    "serviceOptions": {
+      "1h-zakladna": "1h - Základný záznam (149€)",
+      "2h-zakladna": "2h - Základný záznam (239€)",
+      "3h-zakladna": "3h - Základný záznam (329€)",
+      "1h-kompletna": "1h - Kompletná postprodukcia (249€)",
+      "2h-kompletna": "2h - Kompletná postprodukcia (339€)",
+      "3h-kompletna": "3h - Kompletná postprodukcia (429€)",
+      "1h-pro": "1h - Kompletná postprodukcia Pro (349€)",
+      "2h-pro": "2h - Kompletná postprodukcia Pro (449€)",
+      "3h-pro": "3h - Kompletná postprodukcia Pro (549€)"
+    }
+  },
+  "footer": {
+    "address": "Melrose Apartments<br />Betliarska 3769/12<br />851 07 Petržalka<br />Bratislava, Slovensko",
+    "ariaLabel": "Instagram Grindcast"
+  },
+  "common": {
+    "altTech": "Profesionálne podcastové štúdio vybavenie Bratislava - Rode mikrofóny, Sony kamery, Rodecaster Pro 2 mixážny pult v Grindcast Studio",
+    "altMic": "Rode Pod Mic profesionálny podcastový mikrofón v štúdiu Grindcast Bratislava",
+    "ariaNav": "Hlavná navigácia",
+    "ariaSection": "Prejsť na sekciu"
+  }
+}
+

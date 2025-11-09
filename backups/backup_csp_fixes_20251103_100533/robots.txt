@@ -1,0 +1,32 @@
+User-agent: *
+Allow: /
+
+# Preferred domain
+Host: www.grindcaststudio.sk
+
+# Mobile-specific optimizations
+User-agent: Googlebot-Mobile
+Allow: /
+
+# Security crawlers
+User-agent: Cisco-Umbrella
+Allow: /
+
+# Sitemaps
+Sitemap: https://www.grindcaststudio.sk/sitemap.xml
+Sitemap: https://www.grindcaststudio.sk/sitemap-index.xml
+
+# Security and verification files
+Allow: /.well-known/security.txt
+Allow: /.well-known/apple-app-site-association
+Allow: /.well-known/assetlinks.json
+
+# Crawl-delay
+Crawl-delay: 1
+
+# Disallow admin or private areas (if any)
+# Disallow: /admin/
+# Disallow: /private/
+
+# Allow mobile-specific content
+Allow: /mobile/

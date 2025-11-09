@@ -457,3 +457,4 @@ Otvorené: Po-Pia 9:00-18:00
 
 **Tip:** Always customize the description slightly for each platform to avoid duplicate content penalties!
 
+
