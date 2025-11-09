@@ -32,24 +32,29 @@
       });
       
       // Google Ads
-      gtag('config', 'AW-17693861384', {
+      gtag('config', 'AW-17693861834', {
         send_page_view: false
       });
     </script>
     
     <!-- Event snippet for Rezervácia formulára – Grindcast Studio conversion page -->
     <script>
-      function gtag_report_conversion(url) {
-        var callback = function () {
-          if (typeof(url) != 'undefined') {
-            window.location = url;
-          }
-        };
+      // Univerzálna funkcia pre conversion tracking s ochranou proti dvojitému odpáleniu
+      function gtag_report_conversion() {
+        if (typeof gtag !== 'function') return;
+        
+        // Lock proti dvojitému odpáleniu
+        if (window.__convFired__) return;
+        window.__convFired__ = true;
+        
         gtag('event', 'conversion', {
-            'send_to': 'AW-17693861384/dyqACIPWiL0bEIjMi_VB',
-            'event_callback': callback
+          'send_to': 'AW-17693861834/dyqACIPWiLObEIjMi_VB',
+          'value': 1.0,
+          'currency': 'EUR'
         });
-        return false;
+        
+        // Reset locku po 4 sekundách (ak by user poslal ďalší formulár)
+        setTimeout(() => { window.__convFired__ = false; }, 4000);
       }
     </script>
     

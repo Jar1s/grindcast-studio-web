@@ -117,13 +117,13 @@ const createHandleFormSubmit = (t) => async (e) => {
     );
     
     // Track Google Ads conversion - Odoslanie formulára pre potenciálnych zákazníkov
-    // Používame novú funkciu gtag_report_conversion pre lepšie sledovanie
-    if (typeof gtag_report_conversion !== 'undefined') {
-      gtag_report_conversion();
+    // Používame funkciu gtag_report_conversion s ochranou proti dvojitému odpáleniu
+    if (typeof window.gtag_report_conversion === 'function') {
+      window.gtag_report_conversion();
     } else if (typeof gtag !== 'undefined') {
-      // Fallback na starý spôsob, ak nová funkcia nie je dostupná
+      // Fallback na priamy gtag call, ak funkcia nie je dostupná
       gtag('event', 'conversion', {
-        'send_to': 'AW-17693861384/dyqACIPWiL0bEIjMi_VB',
+        'send_to': 'AW-17693861834/dyqACIPWiLObEIjMi_VB',
         'value': 1.0,
         'currency': 'EUR'
       });
