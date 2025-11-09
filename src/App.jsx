@@ -123,7 +123,7 @@ const createHandleFormSubmit = (t) => async (e) => {
     } else if (typeof gtag !== 'undefined') {
       // Fallback na priamy gtag call, ak funkcia nie je dostupná
       gtag('event', 'conversion', {
-        'send_to': 'AW-17693861834/dyqACIPWiLObEIjMi_VB',
+        'send_to': 'AW-17693861384/dyqACIPWiLObEIjMi_VB',
         'value': 1.0,
         'currency': 'EUR'
       });
