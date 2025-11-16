@@ -11,9 +11,33 @@
     "overline": "Premium Podcast Studio",
     "title": "Record content that sounds and looks world-class.",
     "description": "Professional podcast studio for brands, agencies, and creators who want first-class audio, video, and service in Bratislava.",
-    "cta": "Book a Session",
+    "cta": "Reserve Recording",
     "ctaSecondary": "View Pricing",
-    "ariaLabelStudio": "Grindcast - Podcast Studio - Go to top of page"
+    "ariaLabelStudio": "Grindcast - Podcast Studio - Go to top of page",
+    "price": {
+      "from": "From",
+      "amount": "149",
+      "currency": "€",
+      "unit": "/hour",
+      "note": "incl. VAT",
+      "bestPrice": "Best price in Bratislava"
+    },
+    "urgency": {
+      "text": "Last available slots this week",
+      "discount": "Book now and get 10% off"
+    },
+    "socialProof": {
+      "clients": "50+ satisfied clients",
+      "recordings": "100+ recordings",
+      "rating": "5.0★ out of 5 stars"
+    },
+    "trustBadges": {
+      "rating": "5.0 out of 5 stars",
+      "reviews": "5 reviews",
+      "clients": "50+ satisfied clients",
+      "availability": "Available 7 days a week",
+      "delivery": "Delivery in 3 days"
+    }
   },
   "gallery": {
     "overline": "Studio Environment",
@@ -27,6 +51,17 @@
     "vatNote": "Price incl. VAT",
     "sessionDuration": "Recording Duration",
     "bookButton": "Book",
+    "badges": {
+      "popular": "Most Popular",
+      "recommended": "Recommended",
+      "bestValue": "Best Value"
+    },
+    "comparison": {
+      "title": "Comparison with competitors",
+      "ourPrice": "Our price",
+      "competitorPrice": "Competitors",
+      "savings": "You save"
+    },
     "sessions": {
       "1h": "1 hour",
       "2h": "2 hours",
@@ -152,7 +187,10 @@
       "messagePlaceholder": "Do you have any special requests or questions?",
       "submit": "📅 Send Booking Request",
       "note": "After submitting the form, we'll contact you within 24 hours to confirm the appointment.",
-      "required": "*"
+      "required": "*",
+      "optional": "optional",
+      "billingHint": "Can be filled later - we only need it for invoicing",
+      "guestsHint": "Default: 1 guest (you can change this)"
     },
     "validation": {
       "nameRequired": "Name is required",
@@ -187,6 +225,10 @@
   "footer": {
     "address": "Melrose Apartments<br />Betliarska 3769/12<br />851 07 Petržalka<br />Bratislava, Slovakia",
     "ariaLabel": "Instagram Grindcast"
+  },
+  "reviews": {
+    "overline": "Reviews",
+    "title": "What our clients say"
   },
   "common": {
     "altTech": "Professional podcast studio equipment Bratislava - Rode microphones, Sony cameras, Rodecaster Pro 2 mixing console at Grindcast Studio",

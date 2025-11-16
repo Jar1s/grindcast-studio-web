@@ -1,6 +1,9 @@
 import './GoogleBusinessWidget.css';
+import { useI18n } from '../i18n/I18nProvider';
 
 const GoogleBusinessWidget = () => {
+  const { t } = useI18n();
+  
   // Static reviews from Google Business Profile
   // Update these manually when you get new reviews on Google
   // To get reviews: Go to https://www.google.com/maps/place/Grindcast+Studio
@@ -30,8 +33,8 @@ const GoogleBusinessWidget = () => {
   return (
     <section id="recenzie" className="section reviews-section">
       <div className="section-header">
-        <span className="section-overline">Recenzie</span>
-        <h2>Čo hovoria naši klienti</h2>
+        <span className="section-overline">{t("reviews.overline")}</span>
+        <h2>{t("reviews.title")}</h2>
       </div>
 
       <div className="reviews-container">

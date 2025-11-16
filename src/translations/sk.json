@@ -11,9 +11,33 @@
     "overline": "Prémiové podcastové štúdio",
     "title": "Nahrávajte obsah, ktorý znie aj vyzerá svetovo.",
     "description": "Profesionálne podcastové štúdio pre značky, agentúry aj autorov, ktorí chcú prvotriedny zvuk, obraz a servis v Bratislave.",
-    "cta": "Dohodnúť termín",
+    "cta": "Rezervuj si nahrávanie",
     "ctaSecondary": "Pozrieť cenník",
-    "ariaLabelStudio": "Grindcast - Podcastové štúdio - Prejsť na začiatok stránky"
+    "ariaLabelStudio": "Grindcast - Podcastové štúdio - Prejsť na začiatok stránky",
+    "price": {
+      "from": "Od",
+      "amount": "149",
+      "currency": "€",
+      "unit": "/hod",
+      "note": "s DPH",
+      "bestPrice": "Najlepšia cena v Bratislave"
+    },
+    "urgency": {
+      "text": "Posledné voľné termíny tento týždeň",
+      "discount": "Rezervujte teraz a získajte 10% zľavu"
+    },
+    "socialProof": {
+      "clients": "50+ spokojných klientov",
+      "recordings": "100+ nahrávok",
+      "rating": "5.0★ z 5 hviezd"
+    },
+    "trustBadges": {
+      "rating": "5.0 z 5 hviezd",
+      "reviews": "5 recenzií",
+      "clients": "50+ spokojných klientov",
+      "availability": "Dostupné 7 dní v týždni",
+      "delivery": "Dodanie do 3 dní"
+    }
   },
   "gallery": {
     "overline": "Prostredie štúdia",
@@ -27,6 +51,17 @@
     "vatNote": "Cena s DPH",
     "sessionDuration": "Dĺžka nahrávania",
     "bookButton": "Rezervovať",
+    "badges": {
+      "popular": "Najobľúbenejší",
+      "recommended": "Odporúčané",
+      "bestValue": "Najlepšia hodnota"
+    },
+    "comparison": {
+      "title": "Porovnanie s konkurenciou",
+      "ourPrice": "Naša cena",
+      "competitorPrice": "Konkurencia",
+      "savings": "Ušetríte"
+    },
     "sessions": {
       "1h": "1 hodina",
       "2h": "2 hodiny",
@@ -152,7 +187,10 @@
       "messagePlaceholder": "Máte nejaké špeciálne požiadavky alebo otázky?",
       "submit": "📅 Odoslať rezervačnú požiadavku",
       "note": "Po odoslaní formulára vás budeme kontaktovať do 24 hodín na potvrdenie termínu.",
-      "required": "*"
+      "required": "*",
+      "optional": "voliteľné",
+      "billingHint": "Môžete doplniť neskôr - potrebujeme len pre fakturáciu",
+      "guestsHint": "Predvolená hodnota: 1 hosť (môžete zmeniť)"
     },
     "validation": {
       "nameRequired": "Meno je povinné",
@@ -187,6 +225,10 @@
   "footer": {
     "address": "Melrose Apartments<br />Betliarska 3769/12<br />851 07 Petržalka<br />Bratislava, Slovensko",
     "ariaLabel": "Instagram Grindcast"
+  },
+  "reviews": {
+    "overline": "Recenzie",
+    "title": "Čo hovoria naši klienti"
   },
   "common": {
     "altTech": "Profesionálne podcastové štúdio vybavenie Bratislava - Rode mikrofóny, Sony kamery, Rodecaster Pro 2 mixážny pult v Grindcast Studio",

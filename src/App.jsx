@@ -69,6 +69,41 @@ const validateForm = (formData, t) => {
   return errors;
 };
 
+// Form field tracking function
+const trackFormFieldInteraction = (fieldName, action) => {
+  if (typeof gtag !== 'undefined') {
+    gtag('event', 'form_field_interaction', {
+      'field_name': fieldName,
+      'action': action, // 'focus', 'blur', 'change'
+      'form_type': 'booking_form'
+    });
+  }
+  if (typeof fbq !== 'undefined') {
+    fbq('track', 'ViewContent', {
+      content_name: `Form Field: ${fieldName}`,
+      content_category: action
+    });
+  }
+};
+
+// Conversion funnel tracking function
+const trackFunnelStep = (step, data = {}) => {
+  if (typeof gtag !== 'undefined') {
+    gtag('event', 'funnel_step', {
+      'funnel_step': step,
+      'funnel_type': 'booking',
+      ...data
+    });
+  }
+  if (typeof fbq !== 'undefined') {
+    fbq('track', 'ViewContent', {
+      content_name: step,
+      content_category: 'conversion_funnel',
+      ...data
+    });
+  }
+};
+
 const createHandleFormSubmit = (t) => async (e) => {
   e.preventDefault();
   
@@ -128,6 +163,41 @@ const createHandleFormSubmit = (t) => async (e) => {
         'currency': 'EUR'
       });
     }
+    
+    // Track Facebook conversion - Odoslanie formulára
+    if (typeof window.fb_report_conversion === 'function') {
+      // Vypočítame hodnotu na základe vybranej služby
+      const serviceValue = data['service-type']?.includes('pro') ? 299 : 
+                          data['service-type']?.includes('kompletna') ? 249 : 149;
+      window.fb_report_conversion('Lead', serviceValue, 'EUR');
+    } else if (typeof fbq !== 'undefined') {
+      // Fallback na priamy fbq call
+      const serviceValue = data['service-type']?.includes('pro') ? 299 : 
+                          data['service-type']?.includes('kompletna') ? 249 : 149;
+      fbq('track', 'Lead', {
+        value: serviceValue,
+        currency: 'EUR',
+        content_name: 'Booking Form Submission'
+      });
+    }
+    
+    // Track Google Analytics event
+    if (typeof gtag !== 'undefined') {
+      gtag('event', 'form_submission', {
+        'form_type': 'booking_form',
+        'form_name': 'booking',
+        'value': 1
+      });
+    }
+    
+    // Track conversion funnel - form submitted
+    trackFunnelStep('form_submitted', {
+      service_type: data['service-type'],
+      guests: data.guests,
+      utm_source: sessionStorage.getItem('utm_source') || 'direct',
+      utm_medium: sessionStorage.getItem('utm_medium') || 'none',
+      utm_campaign: sessionStorage.getItem('utm_campaign') || 'none'
+    });
     
     alert(t("contact.messages.success"));
     e.target.reset();
@@ -267,11 +337,17 @@ const packages = [
 const hosts = [
 ];
 
-function useScrollReveal(threshold = 0.25, delay = 0) {
+function useScrollReveal(threshold = 0.25, delay = 0, language = 'sk') {
   const controls = useAnimation();
   const ref = useRef(null);
+  const observerRef = useRef(null);
 
   useEffect(() => {
+    // Clean up previous observer
+    if (observerRef.current) {
+      observerRef.current.disconnect();
+    }
+    
     const observer = new IntersectionObserver(
       (entries, observerInstance) => {
         entries.forEach((entry) => {
@@ -288,16 +364,37 @@ function useScrollReveal(threshold = 0.25, delay = 0) {
       { threshold }
     );
 
+    observerRef.current = observer;
+
     const node = ref.current;
     if (node) {
-      observer.observe(node);
+      // Check if element is already in viewport - if so, animate immediately
+      const rect = node.getBoundingClientRect();
+      const viewportHeight = window.innerHeight;
+      const isInViewport = 
+        rect.top < viewportHeight * (1 - threshold) &&
+        rect.bottom > viewportHeight * threshold;
+      
+      if (isInViewport) {
+        // Element is already visible, animate immediately
+        controls.start({
+          opacity: 1,
+          y: 0,
+          transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1], delay },
+        });
+      } else {
+        // Element not in viewport, set initial state and observe
+        controls.set({ opacity: 0, y: 40 });
+        observer.observe(node);
+      }
     }
 
     return () => {
-      if (node) observer.unobserve(node);
-      observer.disconnect();
+      if (observerRef.current) {
+        observerRef.current.disconnect();
+      }
     };
-  }, [controls, threshold, delay]);
+  }, [controls, threshold, delay, language]);
 
   return { ref, controls };
 }
@@ -415,17 +512,217 @@ function App() {
   // Date picker allows all days including weekends
   useEffect(() => {
     // No restrictions on weekends - booking available 7 days a week
+    
+    // ========== UTM PARAMETER TRACKING ==========
+    const urlParams = new URLSearchParams(window.location.search);
+    const utmSource = urlParams.get('utm_source');
+    const utmMedium = urlParams.get('utm_medium');
+    const utmCampaign = urlParams.get('utm_campaign');
+    
+      if (utmSource || utmMedium || utmCampaign) {
+        if (typeof gtag !== 'undefined') {
+          // Store UTM in custom parameters
+          gtag('event', 'page_view_utm', {
+            'utm_source': utmSource || 'direct',
+            'utm_medium': utmMedium || 'none',
+            'utm_campaign': utmCampaign || 'none'
+          });
+        }
+      if (typeof fbq !== 'undefined') {
+        fbq('track', 'PageView', {
+          content_name: utmCampaign || 'direct',
+          content_category: utmSource || 'direct'
+        });
+      }
+      
+      // Store in sessionStorage for conversion tracking
+      sessionStorage.setItem('utm_source', utmSource || 'direct');
+      sessionStorage.setItem('utm_medium', utmMedium || 'none');
+      sessionStorage.setItem('utm_campaign', utmCampaign || 'none');
+    }
+    
+    // ========== HEATMAP TRACKING (Click Positions) ==========
+    const trackClick = (e) => {
+      // Ignore clicks on form elements to avoid spam
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT' || e.target.tagName === 'TEXTAREA') {
+        return;
+      }
+      
+      const clickX = Math.round((e.clientX / window.innerWidth) * 100);
+      const clickY = Math.round((e.clientY / window.innerHeight) * 100);
+      const element = e.target.tagName;
+      const elementText = e.target.textContent?.substring(0, 50) || '';
+      const elementId = e.target.id || '';
+      const elementClass = e.target.className || '';
+      
+      if (typeof gtag !== 'undefined') {
+        gtag('event', 'click_position', {
+          'x_percent': clickX,
+          'y_percent': clickY,
+          'element_type': element,
+          'element_id': elementId,
+          'element_class': elementClass,
+          'click_text': elementText
+        });
+      }
+    };
+    
+    document.addEventListener('click', trackClick, { passive: true });
+    
+    // ========== FORM ABANDONMENT TRACKING ==========
+    let formStartTime = null;
+    let formFieldsStarted = new Set();
+    let formAbandonmentTracked = false;
+    let abandonmentTimeout = null;
+    
+    const form = document.querySelector('.booking-form');
+    
+    // Track when user starts filling form
+    const handleFormFocus = (e) => {
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT' || e.target.tagName === 'TEXTAREA') {
+          if (!formStartTime) {
+            formStartTime = Date.now();
+            if (typeof gtag !== 'undefined') {
+              gtag('event', 'form_start', {
+                'form_type': 'booking_form',
+                'form_name': 'booking'
+              });
+            }
+          if (typeof fbq !== 'undefined') {
+            fbq('track', 'InitiateCheckout', {
+              content_name: 'Booking Form Started'
+            });
+          }
+        }
+        formFieldsStarted.add(e.target.name);
+      }
+    };
+    
+    // Track form abandonment
+    const handleFormBlur = (e) => {
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT' || e.target.tagName === 'TEXTAREA') {
+        // Clear previous timeout
+        if (abandonmentTimeout) {
+          clearTimeout(abandonmentTimeout);
+        }
+        
+        // Track abandonment after 10 seconds of inactivity
+        abandonmentTimeout = setTimeout(() => {
+          if (form && !form.checkValidity() && formFieldsStarted.size > 0 && !formAbandonmentTracked) {
+            const timeSpent = formStartTime ? Math.round((Date.now() - formStartTime) / 1000) : 0;
+            formAbandonmentTracked = true;
+            
+              if (typeof gtag !== 'undefined') {
+                gtag('event', 'form_abandonment', {
+                  'form_type': 'booking_form',
+                  'fields_started': formFieldsStarted.size,
+                  'time_spent_seconds': timeSpent,
+                  'last_field': e.target.name || 'unknown'
+                });
+              }
+            if (typeof fbq !== 'undefined') {
+              fbq('track', 'AddToCart', {
+                content_name: 'Form Abandoned',
+                value: formFieldsStarted.size,
+                currency: 'EUR'
+              });
+            }
+          }
+        }, 10000); // Track after 10 seconds of inactivity
+      }
+    };
+    
+    if (form) {
+      form.addEventListener('focus', handleFormFocus, true);
+      form.addEventListener('blur', handleFormBlur, true);
+    }
+    
+    // ========== TRACK USER ENGAGEMENT EVENTS ==========
+    const trackButtonClick = (buttonText, location) => {
+      if (typeof gtag !== 'undefined') {
+        gtag('event', 'button_click', {
+          'button_text': buttonText,
+          'button_location': location
+        });
+      }
+      if (typeof fbq !== 'undefined') {
+        fbq('track', 'ViewContent', {
+          content_name: buttonText,
+          content_category: location
+        });
+      }
+    };
+    
+    // Track CTA button clicks (excluding ones with onClick handlers)
+    const ctaButtons = document.querySelectorAll('.cta-button:not([onclick]), .secondary-button:not([onclick])');
+    ctaButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        trackButtonClick(button.textContent.trim(), 'header_or_hero');
+      });
+    });
+    
+    // ========== TRACK SCROLL DEPTH ==========
+    let maxScroll = 0;
+    const trackScroll = () => {
+      const scrollPercent = Math.round(
+        (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100
+      );
+      if (scrollPercent > maxScroll) {
+        maxScroll = scrollPercent;
+        // Track milestones: 25%, 50%, 75%, 100%
+        if ([25, 50, 75, 100].includes(scrollPercent)) {
+          if (typeof gtag !== 'undefined') {
+            gtag('event', 'scroll_depth', {
+              'scroll_percent': scrollPercent,
+              'scroll_depth': `${scrollPercent}%`
+            });
+          }
+        }
+      }
+    };
+    window.addEventListener('scroll', trackScroll, { passive: true });
+    
+    // ========== TRACK TIME ON PAGE ==========
+    setTimeout(() => {
+      if (typeof gtag !== 'undefined') {
+        gtag('event', 'timing_complete', {
+          'name': 'time_on_page',
+          'value': 30
+        });
+      }
+    }, 30000);
+    
+    // Cleanup
+    return () => {
+      document.removeEventListener('click', trackClick);
+      ctaButtons.forEach(button => {
+        button.removeEventListener('click', trackButtonClick);
+      });
+      window.removeEventListener('scroll', trackScroll);
+      
+      // Cleanup form event listeners
+      const formElement = document.querySelector('.booking-form');
+      if (formElement) {
+        formElement.removeEventListener('focus', handleFormFocus, true);
+        formElement.removeEventListener('blur', handleFormBlur, true);
+      }
+      
+      // Clear any pending timeouts
+      if (abandonmentTimeout) {
+        clearTimeout(abandonmentTimeout);
+      }
+    };
   }, []);
   const activeSessionMeta =
     sessionOptions.find((option) => option.id === activeSession) || sessionOptions[0];
-  const heroReveal = useScrollReveal(0.35);
-  const pricingReveal = useScrollReveal(0.25, 0.1);
-  const reviewsReveal = useScrollReveal(0.25, 0.125);
-  const servicesReveal = useScrollReveal(0.25, 0.15);
-  const recordingsReveal = useScrollReveal(0.2, 0.25);
-  const galleryReveal = useScrollReveal(0.2, 0.3);
-  const faqReveal = useScrollReveal(0.2, 0.35);
-  const contactReveal = useScrollReveal(0.2, 0.4);
+  const heroReveal = useScrollReveal(0.35, 0, language);
+  const pricingReveal = useScrollReveal(0.25, 0.1, language);
+  const reviewsReveal = useScrollReveal(0.25, 0.125, language);
+  const servicesReveal = useScrollReveal(0.25, 0.15, language);
+  const recordingsReveal = useScrollReveal(0.2, 0.25, language);
+  const galleryReveal = useScrollReveal(0.2, 0.3, language);
+  const faqReveal = useScrollReveal(0.2, 0.35, language);
+  const contactReveal = useScrollReveal(0.2, 0.4, language);
 
 
   return (
@@ -460,9 +757,9 @@ function App() {
           <a
             className="mobile-rezervacia"
             href="#rezervacia"
-            aria-label="Prejsť na sekciu kontakt a rezervácia"
+            aria-label={`${t("common.ariaSection")} ${t("contact.title")}`}
           >
-            Rezervácia
+            {t("navigation.reservation")}
           </a>
           
           <button
@@ -515,10 +812,10 @@ function App() {
               <a
                 className="mobile-cta"
                 href="#rezervacia"
-                aria-label="Prejsť na sekciu cenník"
+                aria-label={`${t("common.ariaSection")} ${t("contact.title")}`}
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                Rezervovať
+                {t("navigation.book")}
               </a>
             </motion.nav>
           )}
@@ -545,18 +842,39 @@ function App() {
             <p>
               {t("hero.description")}
             </p>
+            
+            {/* Social Proof */}
+            <div className="hero-social-proof">
+              <span className="social-proof-item">
+                <strong>{t("hero.socialProof.clients")}</strong>
+              </span>
+              <span className="social-proof-separator">•</span>
+              <span className="social-proof-item">
+                <strong>{t("hero.socialProof.recordings")}</strong>
+              </span>
+            </div>
+            
             <div className="hero-actions">
               <a
                 className="cta-button"
                 href="#rezervacia"
                 aria-label={t("common.ariaSection") + " " + t("contact.title")}
+                onClick={() => {
+                  // Conversion funnel tracking
+                  trackFunnelStep('hero_cta_click');
+                }}
               >
+                <span className="cta-icon">📅</span>
                 {t("hero.cta")}
               </a>
               <a 
                 className="secondary-button" 
                 href="#cennik"
                 aria-label={t("common.ariaSection") + " " + t("pricing.title")}
+                onClick={() => {
+                  // Conversion funnel tracking
+                  trackFunnelStep('hero_secondary_cta_click');
+                }}
               >
                 {t("hero.ctaSecondary")}
               </a>
@@ -610,8 +928,8 @@ function App() {
           aria-labelledby="gallery-heading"
         >
           <div className="section-header">
-            <span className="section-overline">Prostredie štúdia</span>
-            <h2 id="gallery-heading">Nahliadnite do nášho priestoru</h2>
+            <span className="section-overline">{t("gallery.overline")}</span>
+            <h2 id="gallery-heading">{t("gallery.title")}</h2>
           </div>
           <div className="gallery-grid">
             {[galleryStudio1, galleryStudio2, galleryStudio3].map((imageSrc, index) => (
@@ -682,9 +1000,15 @@ function App() {
                 <a
                   className="cta-button"
                   href="#rezervacia"
-                  aria-label="Rezervovať termín v podcastovom štúdiu"
+                  aria-label={`${t("common.ariaSection")} ${t("contact.title")}`}
+                  onClick={() => {
+                    trackFunnelStep('pricing_cta_click', { 
+                      package: pack.title,
+                      session: activeSession
+                    });
+                  }}
                 >
-                  Rezervovať
+                  {t("pricing.bookButton")}
                 </a>
                 <ul className="pricing-features">
                   {pack.features.map((feature) => {
@@ -845,70 +1169,92 @@ function App() {
             >
               
               <div className="form-section">
-                <h3>📞 Kontaktné informácie</h3>
+                <h3>{t("contact.contactInfo")}</h3>
                 <div className="form-row">
                   <div className="form-group">
-                    <label htmlFor="name">Meno a priezvisko *</label>
+                    <label htmlFor="name">{t("contact.form.name")} {t("contact.form.required")}</label>
                     <input 
                       type="text" 
                       id="name" 
                       name="name" 
                       required 
-                      placeholder="Vaše meno a priezvisko"
+                      placeholder={t("contact.form.namePlaceholder")}
+                      onFocus={() => trackFormFieldInteraction('name', 'focus')}
+                      onChange={() => trackFormFieldInteraction('name', 'change')}
+                      onBlur={() => trackFormFieldInteraction('name', 'blur')}
                     />
                   </div>
                   <div className="form-group">
-                    <label htmlFor="email">Email *</label>
+                    <label htmlFor="email">{t("contact.form.email")} {t("contact.form.required")}</label>
                     <input 
                       type="email" 
                       id="email" 
                       name="email" 
                       required 
-                      placeholder="vas@email.sk"
+                      placeholder={t("contact.form.emailPlaceholder")}
+                      onFocus={() => trackFormFieldInteraction('email', 'focus')}
+                      onChange={() => trackFormFieldInteraction('email', 'change')}
+                      onBlur={() => trackFormFieldInteraction('email', 'blur')}
                     />
                   </div>
                 </div>
                 <div className="form-row">
                   <div className="form-group">
-                    <label htmlFor="phone">Telefónne číslo *</label>
+                    <label htmlFor="phone">{t("contact.form.phone")} {t("contact.form.required")}</label>
                     <input 
                       type="tel" 
                       id="phone" 
                       name="phone" 
                       required 
-                      placeholder="+421 123 456 789"
+                      placeholder={t("contact.form.phonePlaceholder")}
+                      onFocus={() => trackFormFieldInteraction('phone', 'focus')}
+                      onChange={() => trackFormFieldInteraction('phone', 'change')}
+                      onBlur={() => trackFormFieldInteraction('phone', 'blur')}
                     />
                   </div>
                   <div className="form-group">
-                    <label htmlFor="billing">Fakturačné údaje (adresa alebo IČO) *</label>
+                    <label htmlFor="billing">{t("contact.form.billing")} {t("contact.form.required")}</label>
                     <input 
                       type="text" 
                       id="billing" 
                       name="billing" 
                       required 
-                      placeholder="Adresa bydliska alebo IČO"
+                      placeholder={t("contact.form.billingPlaceholder")}
+                      onFocus={() => trackFormFieldInteraction('billing', 'focus')}
+                      onChange={() => trackFormFieldInteraction('billing', 'change')}
+                      onBlur={() => trackFormFieldInteraction('billing', 'blur')}
                     />
                   </div>
                 </div>
               </div>
 
               <div className="form-section">
-                <h3>📅 Detaily rezervácie</h3>
+                <h3>{t("contact.bookingDetails")}</h3>
                 <div className="form-row">
                   <div className="form-group">
-                    <label htmlFor="preferred-date">Preferovaný dátum *</label>
+                    <label htmlFor="preferred-date">{t("contact.form.date")} {t("contact.form.required")}</label>
                     <input 
                       type="date" 
                       id="preferred-date" 
                       name="preferred-date" 
                       required 
                       min={new Date().toISOString().split('T')[0]}
+                      onFocus={() => trackFormFieldInteraction('preferred-date', 'focus')}
+                      onChange={() => trackFormFieldInteraction('preferred-date', 'change')}
+                      onBlur={() => trackFormFieldInteraction('preferred-date', 'blur')}
                     />
                   </div>
                   <div className="form-group">
-                    <label htmlFor="preferred-time">Preferovaný čas *</label>
-                    <select id="preferred-time" name="preferred-time" required>
-                      <option value="">Vyberte čas</option>
+                    <label htmlFor="preferred-time">{t("contact.form.time")} {t("contact.form.required")}</label>
+                    <select 
+                      id="preferred-time" 
+                      name="preferred-time" 
+                      required
+                      onFocus={() => trackFormFieldInteraction('preferred-time', 'focus')}
+                      onChange={() => trackFormFieldInteraction('preferred-time', 'change')}
+                      onBlur={() => trackFormFieldInteraction('preferred-time', 'blur')}
+                    >
+                      <option value="">{t("contact.form.timeSelect")}</option>
                       <option value="07:00">07:00</option>
                       <option value="07:30">07:30</option>
                       <option value="08:00">08:00</option>
@@ -948,27 +1294,34 @@ function App() {
                 </div>
                 <div className="form-row">
                   <div className="form-group full-width">
-                    <label htmlFor="service-type">Typ služby *</label>
-                    <select id="service-type" name="service-type" required>
-                      <option value="">Vyberte službu</option>
-                      <option value="1h-zakladna">1h - Základný záznam (149€)</option>
-                      <option value="2h-zakladna">2h - Základný záznam (239€)</option>
-                      <option value="3h-zakladna">3h - Základný záznam (329€)</option>
-                      <option value="1h-kompletna">1h - Kompletná postprodukcia (249€)</option>
-                      <option value="2h-kompletna">2h - Kompletná postprodukcia (339€)</option>
-                      <option value="3h-kompletna">3h - Kompletná postprodukcia (429€)</option>
-                      <option value="1h-pro">1h - Kompletná postprodukcia Pro (349€)</option>
-                      <option value="2h-pro">2h - Kompletná postprodukcia Pro (449€)</option>
-                      <option value="3h-pro">3h - Kompletná postprodukcia Pro (549€)</option>
+                    <label htmlFor="service-type">{t("contact.form.service")} {t("contact.form.required")}</label>
+                    <select 
+                      id="service-type" 
+                      name="service-type" 
+                      required
+                      onFocus={() => trackFormFieldInteraction('service-type', 'focus')}
+                      onChange={() => trackFormFieldInteraction('service-type', 'change')}
+                      onBlur={() => trackFormFieldInteraction('service-type', 'blur')}
+                    >
+                      <option value="">{t("contact.form.serviceSelect")}</option>
+                      <option value="1h-zakladna">{t("contact.serviceOptions.1h-zakladna")}</option>
+                      <option value="2h-zakladna">{t("contact.serviceOptions.2h-zakladna")}</option>
+                      <option value="3h-zakladna">{t("contact.serviceOptions.3h-zakladna")}</option>
+                      <option value="1h-kompletna">{t("contact.serviceOptions.1h-kompletna")}</option>
+                      <option value="2h-kompletna">{t("contact.serviceOptions.2h-kompletna")}</option>
+                      <option value="3h-kompletna">{t("contact.serviceOptions.3h-kompletna")}</option>
+                      <option value="1h-pro">{t("contact.serviceOptions.1h-pro")}</option>
+                      <option value="2h-pro">{t("contact.serviceOptions.2h-pro")}</option>
+                      <option value="3h-pro">{t("contact.serviceOptions.3h-pro")}</option>
                     </select>
                   </div>
                 </div>
               </div>
 
               <div className="form-section">
-                <h3>💬 Dodatočné informácie</h3>
+                <h3>{t("contact.additionalInfo")}</h3>
                 <div className="form-group">
-                  <label htmlFor="guests">Počet hostí *</label>
+                  <label htmlFor="guests">{t("contact.form.guests")} {t("contact.form.required")}</label>
                   <input 
                     type="number" 
                     id="guests" 
@@ -976,26 +1329,32 @@ function App() {
                     min="1" 
                     max="4" 
                     required
-                    placeholder="Koľko ľudí bude v štúdiu?"
+                    placeholder={t("contact.form.guestsPlaceholder")}
+                    onFocus={() => trackFormFieldInteraction('guests', 'focus')}
+                    onChange={() => trackFormFieldInteraction('guests', 'change')}
+                    onBlur={() => trackFormFieldInteraction('guests', 'blur')}
                   />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="message">Vaša správa alebo otázka</label>
+                  <label htmlFor="message">{t("contact.form.message")}</label>
                   <textarea 
                     id="message" 
                     name="message" 
                     rows="4" 
-                    placeholder="Máte nejaké špeciálne požiadavky alebo otázky?"
+                    placeholder={t("contact.form.messagePlaceholder")}
+                    onFocus={() => trackFormFieldInteraction('message', 'focus')}
+                    onChange={() => trackFormFieldInteraction('message', 'change')}
+                    onBlur={() => trackFormFieldInteraction('message', 'blur')}
                   ></textarea>
                 </div>
               </div>
 
               <div className="form-submit">
                 <button type="submit" className="cta-button">
-                  📅 Odoslať rezervačnú požiadavku
+                  {t("contact.form.submit")}
                 </button>
                 <p className="form-note">
-                  Po odoslaní formulára vás budeme kontaktovať do 24 hodín na potvrdenie termínu.
+                  {t("contact.form.note")}
                 </p>
               </div>
             </form>
@@ -1043,7 +1402,12 @@ function App() {
           </div>
           <div className="footer-contact">
             <a href="mailto:info@grindcaststudio.sk">info@grindcaststudio.sk</a>
-            <span>+421 907 513 318</span>
+            <a href="tel:+421907513318" className="footer-phone">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style={{marginRight: '0.5rem'}}>
+                <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+              </svg>
+              +421 907 513 318
+            </a>
           </div>
           <div className="footer-social">
             <a
