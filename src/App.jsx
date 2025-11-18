@@ -4,6 +4,7 @@ import "./App.css";
 import { useI18n } from "./i18n/I18nProvider";
 import { LanguageSwitcher } from "./components/LanguageSwitcher";
 import GoogleBusinessWidget from "./components/GoogleBusinessWidget";
+import checkTracking from "./utils/trackingDiagnostics";
 import heroImage from "./assets/hero.jpg";
 import recordingThumbOne from "./assets/recording-1.jpg";
 import recordingThumbTwo from "./assets/recording-2.jpg";
@@ -712,6 +713,19 @@ function App() {
         clearTimeout(abandonmentTimeout);
       }
     };
+    
+    // ========== TRACKING DIAGNOSTICS (Development only) ==========
+    // Make checkTracking available globally for debugging
+    if (typeof window !== 'undefined') {
+      window.checkTracking = checkTracking;
+      
+      // Auto-run diagnostics in development mode after page load
+      if (process.env.NODE_ENV === 'development') {
+        setTimeout(() => {
+          console.log('%c💡 Tip: Zavolajte checkTracking() v konzole pre diagnostiku trackingu', 'color: #9C27B0; font-style: italic;');
+        }, 2000);
+      }
+    }
   }, []);
   const activeSessionMeta =
     sessionOptions.find((option) => option.id === activeSession) || sessionOptions[0];
