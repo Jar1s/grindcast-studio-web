@@ -49,14 +49,22 @@
       'https://connect.facebook.net/en_US/fbevents.js');
       
       // Facebook Pixel ID: 1901606854118106
-      // Inicializácia Pixelu po načítaní skriptu
+      // Inicializácia Pixelu po načítaní skriptu (len raz)
       (function() {
         var pixelId = '1901606854118106';
+        var pixelInitialized = false;
+        
         function initPixel() {
+          // Zabrániť duplicitnej inicializácii
+          if (pixelInitialized) {
+            return;
+          }
+          
           if (typeof fbq !== 'undefined' && fbq && typeof fbq.init === 'function') {
             try {
               fbq('init', pixelId);
               fbq('track', 'PageView');
+              pixelInitialized = true;
             } catch(e) {
               console.warn('Facebook Pixel chyba pri inicializácii:', e);
             }
@@ -65,13 +73,13 @@
             setTimeout(initPixel, 100);
           }
         }
-        // Skúsiť inicializovať hneď
-        initPixel();
-        // A tiež po načítaní stránky
+        
+        // Skúsiť inicializovať po načítaní stránky (len raz)
         if (document.readyState === 'loading') {
-          document.addEventListener('DOMContentLoaded', initPixel);
+          document.addEventListener('DOMContentLoaded', initPixel, { once: true });
         } else {
-          window.addEventListener('load', initPixel);
+          // Stránka je už načítaná, inicializovať hneď
+          initPixel();
         }
       })();
     </script>
