@@ -430,6 +430,51 @@
   max-width: 40rem;
 }
 
+/* Hero Urgency Signal */
+.hero-urgency {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin: 1.5rem 0;
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(135deg, rgba(255, 87, 34, 0.15), rgba(255, 152, 0, 0.1));
+  border-radius: 50px;
+  border: 1px solid rgba(255, 152, 0, 0.3);
+  animation: pulse-urgency 2s ease-in-out infinite;
+}
+
+.urgency-icon {
+  font-size: 1.2rem;
+  animation: rotate-clockwise 3s linear infinite;
+}
+
+.urgency-text {
+  color: #ff9800;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+@keyframes pulse-urgency {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(255, 152, 0, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(255, 152, 0, 0);
+  }
+}
+
+@keyframes rotate-clockwise {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 /* Hero Social Proof */
 .hero-social-proof {
   display: flex;
@@ -2105,6 +2150,8 @@
   font-family: inherit;
   transition: all 0.3s ease;
   backdrop-filter: blur(10px);
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .form-group input:focus,
@@ -2247,5 +2294,210 @@
     width: 100%;
     max-width: 100%;
     box-sizing: border-box;
+  }
+  
+  .form-success-message,
+  .form-error-message {
+    padding: 0.75rem 1rem;
+    font-size: 0.9rem;
+  }
+  
+  .billing-toggle {
+    display: block;
+    margin-left: 0;
+    margin-top: 0.25rem;
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* Form Field Error Styling */
+.form-field-error {
+  border-color: #e74c3c !important;
+  box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.1) !important;
+}
+
+.field-error-text {
+  display: block;
+  color: #e74c3c;
+  font-size: 0.8rem;
+  margin-top: 0.25rem;
+  padding-left: 0;
+}
+
+/* Form Success/Error Messages */
+.form-success-message {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+  margin-bottom: 1.5rem;
+  background: rgba(46, 213, 115, 0.1);
+  border: 1px solid rgba(46, 213, 115, 0.3);
+  border-radius: 12px;
+  color: #2ed573;
+}
+
+.success-icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.form-success-message strong {
+  display: block;
+  margin-bottom: 0.25rem;
+  color: #2ed573;
+}
+
+.form-success-message p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: rgba(46, 213, 115, 0.8);
+}
+
+.form-error-message {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 1.5rem;
+  margin-bottom: 1.5rem;
+  background: rgba(231, 76, 60, 0.1);
+  border: 1px solid rgba(231, 76, 60, 0.3);
+  border-radius: 12px;
+  color: #e74c3c;
+}
+
+.error-icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+
+/* Billing Toggle Button */
+.billing-toggle {
+  margin-left: 0.5rem;
+  padding: 0.25rem 0.75rem;
+  background: rgba(241, 201, 76, 0.1);
+  border: 1px solid rgba(241, 201, 76, 0.3);
+  border-radius: 6px;
+  color: #f1c94c;
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.billing-toggle:hover {
+  background: rgba(241, 201, 76, 0.2);
+  border-color: rgba(241, 201, 76, 0.5);
+}
+
+.form-group label {
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+/* Loading Spinner */
+.loading-spinner {
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid rgba(241, 201, 76, 0.3);
+  border-top-color: #f1c94c;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+  margin-right: 0.5rem;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.cta-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Floating Phone Button */
+.floating-phone-button {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #f1c94c, #d4af37);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #0b0c10;
+  text-decoration: none;
+  box-shadow: 0 4px 20px rgba(241, 201, 76, 0.4), 0 0 0 0 rgba(241, 201, 76, 0.5);
+  z-index: 1000;
+  transition: all 0.3s ease;
+  animation: pulse-phone 2s ease-in-out infinite;
+}
+
+.floating-phone-button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 25px rgba(241, 201, 76, 0.6), 0 0 0 0 rgba(241, 201, 76, 0.7);
+}
+
+.floating-phone-button:active {
+  transform: scale(0.95);
+}
+
+.floating-phone-button svg {
+  width: 28px;
+  height: 28px;
+}
+
+@keyframes pulse-phone {
+  0%, 100% {
+    box-shadow: 0 4px 20px rgba(241, 201, 76, 0.4), 0 0 0 0 rgba(241, 201, 76, 0.5);
+  }
+  50% {
+    box-shadow: 0 4px 20px rgba(241, 201, 76, 0.4), 0 0 0 10px rgba(241, 201, 76, 0);
+  }
+}
+
+/* Mobile responsiveness for floating phone button */
+@media (max-width: 768px) {
+  .floating-phone-button {
+    width: 56px;
+    height: 56px;
+    bottom: 1.5rem;
+    right: 1.5rem;
+  }
+  
+  .floating-phone-button svg {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .floating-phone-button {
+    width: 52px;
+    height: 52px;
+    bottom: 1rem;
+    right: 1rem;
+  }
+  
+  .floating-phone-button svg {
+    width: 22px;
+    height: 22px;
+  }
+  
+  .hero-urgency {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.85rem;
+  }
+  
+  .urgency-text {
+    font-size: 0.8rem;
   }
 }

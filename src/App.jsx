@@ -5,6 +5,7 @@ import { useI18n } from "./i18n/I18nProvider";
 import { LanguageSwitcher } from "./components/LanguageSwitcher";
 import GoogleBusinessWidget from "./components/GoogleBusinessWidget";
 import checkTracking from "./utils/trackingDiagnostics";
+import emailjs from '@emailjs/browser';
 import heroImage from "./assets/hero.jpg";
 import recordingThumbOne from "./assets/recording-1.jpg";
 import recordingThumbTwo from "./assets/recording-2.jpg";
@@ -22,6 +23,19 @@ import galleryStudio3 from "./assets/studio-space-3.jpg";
 
 const CALENDLY_URL = "https://calendly.com/grindcaststudio/new-meeting";
 
+// Auto-format phone number
+const formatPhoneNumber = (value) => {
+  // Remove all non-digits
+  const phoneNumber = value.replace(/\D/g, '');
+  
+  // Format: +421 XXX XXX XXX
+  if (phoneNumber.length === 0) return '';
+  if (phoneNumber.length <= 3) return `+421 ${phoneNumber}`;
+  if (phoneNumber.length <= 6) return `+421 ${phoneNumber.slice(0, 3)} ${phoneNumber.slice(3)}`;
+  if (phoneNumber.length <= 9) return `+421 ${phoneNumber.slice(0, 3)} ${phoneNumber.slice(3, 6)} ${phoneNumber.slice(6)}`;
+  return `+421 ${phoneNumber.slice(0, 3)} ${phoneNumber.slice(3, 6)} ${phoneNumber.slice(6, 9)}`;
+};
+
 // Form validation and enhancement
 const validateForm = (formData, t) => {
   const errors = {};
@@ -38,6 +52,12 @@ const validateForm = (formData, t) => {
   
   if (!formData.phone?.trim()) {
     errors.phone = t("contact.validation.phoneRequired");
+  } else {
+    // Validate phone format (should have at least 9 digits)
+    const phoneDigits = formData.phone.replace(/\D/g, '');
+    if (phoneDigits.length < 9) {
+      errors.phone = t("contact.validation.phoneInvalid");
+    }
   }
   
   if (!formData['preferred-date']) {
@@ -59,15 +79,23 @@ const validateForm = (formData, t) => {
     errors['service-type'] = t("contact.validation.serviceRequired");
   }
   
-  if (!formData.billing?.trim()) {
-    errors.billing = t("contact.validation.billingRequired");
-  }
-  
-  if (!formData.guests?.trim()) {
-    errors.guests = t("contact.validation.guestsRequired");
-  }
+  // Billing and guests are now optional - no validation needed
   
   return errors;
+};
+
+// Calculate form progress
+const calculateFormProgress = (formData) => {
+  const requiredFields = ['name', 'email', 'phone', 'preferred-date', 'preferred-time', 'service-type'];
+  const filledFields = requiredFields.filter(field => {
+    const value = formData[field];
+    return value && value.toString().trim() !== '';
+  });
+  return {
+    filled: filledFields.length,
+    total: requiredFields.length,
+    percentage: Math.round((filledFields.length / requiredFields.length) * 100)
+  };
 };
 
 // Form field tracking function
@@ -152,12 +180,10 @@ const createHandleFormSubmit = (t) => async (e) => {
       'S3qDc0FdS4g1VH59l'
     );
     
-    // Track Google Ads conversion - Odoslanie formulára pre potenciálnych zákazníkov
-    // Používame funkciu gtag_report_conversion s ochranou proti dvojitému odpáleniu
+    // Track Google Ads conversion
     if (typeof window.gtag_report_conversion === 'function') {
       window.gtag_report_conversion();
     } else if (typeof gtag !== 'undefined') {
-      // Fallback na priamy gtag call, ak funkcia nie je dostupná
       gtag('event', 'conversion', {
         'send_to': 'AW-17693861384/dyqACIPWiL0bEljMi_VB',
         'value': 1.0,
@@ -165,40 +191,11 @@ const createHandleFormSubmit = (t) => async (e) => {
       });
     }
     
-    // Track Facebook conversion - Odoslanie formulára
-    if (typeof window.fb_report_conversion === 'function') {
-      // Vypočítame hodnotu na základe vybranej služby
-      const serviceValue = data['service-type']?.includes('pro') ? 299 : 
-                          data['service-type']?.includes('kompletna') ? 249 : 149;
-      window.fb_report_conversion('Lead', serviceValue, 'EUR');
-    } else if (typeof fbq !== 'undefined') {
-      // Fallback na priamy fbq call
-      const serviceValue = data['service-type']?.includes('pro') ? 299 : 
-                          data['service-type']?.includes('kompletna') ? 249 : 149;
-      fbq('track', 'Lead', {
-        value: serviceValue,
-        currency: 'EUR',
-        content_name: 'Booking Form Submission'
-      });
+    // Track Facebook Pixel Lead event
+    if (typeof fbq !== 'undefined') {
+      fbq('track', 'Lead');
+      fbq('track', 'Contact');
     }
-    
-    // Track Google Analytics event
-    if (typeof gtag !== 'undefined') {
-      gtag('event', 'form_submission', {
-        'form_type': 'booking_form',
-        'form_name': 'booking',
-        'value': 1
-      });
-    }
-    
-    // Track conversion funnel - form submitted
-    trackFunnelStep('form_submitted', {
-      service_type: data['service-type'],
-      guests: data.guests,
-      utm_source: sessionStorage.getItem('utm_source') || 'direct',
-      utm_medium: sessionStorage.getItem('utm_medium') || 'none',
-      utm_campaign: sessionStorage.getItem('utm_campaign') || 'none'
-    });
     
     alert(t("contact.messages.success"));
     e.target.reset();
@@ -935,31 +932,6 @@ function App() {
         </motion.section>
 
         <motion.section
-          ref={galleryReveal.ref}
-          className="section gallery"
-          initial={{ opacity: 0, y: 40 }}
-          animate={galleryReveal.controls}
-          aria-labelledby="gallery-heading"
-        >
-          <div className="section-header">
-            <span className="section-overline">{t("gallery.overline")}</span>
-            <h2 id="gallery-heading">{t("gallery.title")}</h2>
-          </div>
-          <div className="gallery-grid">
-            {[galleryStudio1, galleryStudio2, galleryStudio3].map((imageSrc, index) => (
-              <motion.figure
-                key={imageSrc + index}
-                initial={{ opacity: 0, y: 30 }}
-                animate={galleryReveal.controls}
-                whileHover={{ scale: 1.02, transition: { duration: 0.25 } }}
-              >
-                <img src={imageSrc} alt={t("gallery.alt")} />
-              </motion.figure>
-            ))}
-          </div>
-        </motion.section>
-
-        <motion.section
           ref={pricingReveal.ref}
           id="cennik"
           className="section pricing"
@@ -1044,16 +1016,6 @@ function App() {
           </div>
         </motion.section>
 
-        {/* Reviews Section */}
-        <motion.section
-          ref={reviewsReveal.ref}
-          className="section"
-          initial={{ opacity: 0, y: 40 }}
-          animate={reviewsReveal.controls}
-        >
-          <GoogleBusinessWidget />
-        </motion.section>
-
         <motion.section
           ref={servicesReveal.ref}
           id="ponuka"
@@ -1082,6 +1044,16 @@ function App() {
               </motion.article>
             ))}
           </div>
+        </motion.section>
+
+        {/* Reviews Section */}
+        <motion.section
+          ref={reviewsReveal.ref}
+          className="section"
+          initial={{ opacity: 0, y: 40 }}
+          animate={reviewsReveal.controls}
+        >
+          <GoogleBusinessWidget />
         </motion.section>
 
         <motion.section
@@ -1183,92 +1155,70 @@ function App() {
             >
               
               <div className="form-section">
-                <h3>{t("contact.contactInfo")}</h3>
+                <h3>📞 Kontaktné informácie</h3>
                 <div className="form-row">
                   <div className="form-group">
-                    <label htmlFor="name">{t("contact.form.name")} {t("contact.form.required")}</label>
+                    <label htmlFor="name">Meno a priezvisko *</label>
                     <input 
                       type="text" 
                       id="name" 
                       name="name" 
                       required 
-                      placeholder={t("contact.form.namePlaceholder")}
-                      onFocus={() => trackFormFieldInteraction('name', 'focus')}
-                      onChange={() => trackFormFieldInteraction('name', 'change')}
-                      onBlur={() => trackFormFieldInteraction('name', 'blur')}
+                      placeholder="Vaše meno a priezvisko"
                     />
                   </div>
                   <div className="form-group">
-                    <label htmlFor="email">{t("contact.form.email")} {t("contact.form.required")}</label>
+                    <label htmlFor="email">Email *</label>
                     <input 
                       type="email" 
                       id="email" 
                       name="email" 
                       required 
-                      placeholder={t("contact.form.emailPlaceholder")}
-                      onFocus={() => trackFormFieldInteraction('email', 'focus')}
-                      onChange={() => trackFormFieldInteraction('email', 'change')}
-                      onBlur={() => trackFormFieldInteraction('email', 'blur')}
+                      placeholder="vas@email.sk"
                     />
                   </div>
                 </div>
                 <div className="form-row">
                   <div className="form-group">
-                    <label htmlFor="phone">{t("contact.form.phone")} {t("contact.form.required")}</label>
+                    <label htmlFor="phone">Telefónne číslo *</label>
                     <input 
                       type="tel" 
                       id="phone" 
                       name="phone" 
                       required 
-                      placeholder={t("contact.form.phonePlaceholder")}
-                      onFocus={() => trackFormFieldInteraction('phone', 'focus')}
-                      onChange={() => trackFormFieldInteraction('phone', 'change')}
-                      onBlur={() => trackFormFieldInteraction('phone', 'blur')}
+                      placeholder="+421 123 456 789"
                     />
                   </div>
                   <div className="form-group">
-                    <label htmlFor="billing">{t("contact.form.billing")} {t("contact.form.required")}</label>
+                    <label htmlFor="billing">Fakturačné údaje (adresa alebo IČO) *</label>
                     <input 
                       type="text" 
                       id="billing" 
                       name="billing" 
                       required 
-                      placeholder={t("contact.form.billingPlaceholder")}
-                      onFocus={() => trackFormFieldInteraction('billing', 'focus')}
-                      onChange={() => trackFormFieldInteraction('billing', 'change')}
-                      onBlur={() => trackFormFieldInteraction('billing', 'blur')}
+                      placeholder="Adresa bydliska alebo IČO"
                     />
                   </div>
                 </div>
               </div>
 
               <div className="form-section">
-                <h3>{t("contact.bookingDetails")}</h3>
+                <h3>📅 Detaily rezervácie</h3>
                 <div className="form-row">
                   <div className="form-group">
-                    <label htmlFor="preferred-date">{t("contact.form.date")} {t("contact.form.required")}</label>
+                    <label htmlFor="preferred-date">Preferovaný dátum *</label>
                     <input 
                       type="date" 
                       id="preferred-date" 
                       name="preferred-date" 
                       required 
                       min={new Date().toISOString().split('T')[0]}
-                      onFocus={() => trackFormFieldInteraction('preferred-date', 'focus')}
-                      onChange={() => trackFormFieldInteraction('preferred-date', 'change')}
-                      onBlur={() => trackFormFieldInteraction('preferred-date', 'blur')}
                     />
                   </div>
                   <div className="form-group">
-                    <label htmlFor="preferred-time">{t("contact.form.time")} {t("contact.form.required")}</label>
-                    <select 
-                      id="preferred-time" 
-                      name="preferred-time" 
-                      required
-                      onFocus={() => trackFormFieldInteraction('preferred-time', 'focus')}
-                      onChange={() => trackFormFieldInteraction('preferred-time', 'change')}
-                      onBlur={() => trackFormFieldInteraction('preferred-time', 'blur')}
-                    >
-                      <option value="">{t("contact.form.timeSelect")}</option>
+                    <label htmlFor="preferred-time">Preferovaný čas *</label>
+                    <select id="preferred-time" name="preferred-time" required>
+                      <option value="">Vyberte čas</option>
                       <option value="07:00">07:00</option>
                       <option value="07:30">07:30</option>
                       <option value="08:00">08:00</option>
@@ -1308,34 +1258,27 @@ function App() {
                 </div>
                 <div className="form-row">
                   <div className="form-group full-width">
-                    <label htmlFor="service-type">{t("contact.form.service")} {t("contact.form.required")}</label>
-                    <select 
-                      id="service-type" 
-                      name="service-type" 
-                      required
-                      onFocus={() => trackFormFieldInteraction('service-type', 'focus')}
-                      onChange={() => trackFormFieldInteraction('service-type', 'change')}
-                      onBlur={() => trackFormFieldInteraction('service-type', 'blur')}
-                    >
-                      <option value="">{t("contact.form.serviceSelect")}</option>
-                      <option value="1h-zakladna">{t("contact.serviceOptions.1h-zakladna")}</option>
-                      <option value="2h-zakladna">{t("contact.serviceOptions.2h-zakladna")}</option>
-                      <option value="3h-zakladna">{t("contact.serviceOptions.3h-zakladna")}</option>
-                      <option value="1h-kompletna">{t("contact.serviceOptions.1h-kompletna")}</option>
-                      <option value="2h-kompletna">{t("contact.serviceOptions.2h-kompletna")}</option>
-                      <option value="3h-kompletna">{t("contact.serviceOptions.3h-kompletna")}</option>
-                      <option value="1h-pro">{t("contact.serviceOptions.1h-pro")}</option>
-                      <option value="2h-pro">{t("contact.serviceOptions.2h-pro")}</option>
-                      <option value="3h-pro">{t("contact.serviceOptions.3h-pro")}</option>
+                    <label htmlFor="service-type">Typ služby *</label>
+                    <select id="service-type" name="service-type" required>
+                      <option value="">Vyberte službu</option>
+                      <option value="1h-zakladna">1h - Základný záznam (149€)</option>
+                      <option value="2h-zakladna">2h - Základný záznam (239€)</option>
+                      <option value="3h-zakladna">3h - Základný záznam (329€)</option>
+                      <option value="1h-kompletna">1h - Kompletná postprodukcia (249€)</option>
+                      <option value="2h-kompletna">2h - Kompletná postprodukcia (339€)</option>
+                      <option value="3h-kompletna">3h - Kompletná postprodukcia (429€)</option>
+                      <option value="1h-pro">1h - Kompletná postprodukcia Pro (349€)</option>
+                      <option value="2h-pro">2h - Kompletná postprodukcia Pro (449€)</option>
+                      <option value="3h-pro">3h - Kompletná postprodukcia Pro (549€)</option>
                     </select>
                   </div>
                 </div>
               </div>
 
               <div className="form-section">
-                <h3>{t("contact.additionalInfo")}</h3>
+                <h3>💬 Dodatočné informácie</h3>
                 <div className="form-group">
-                  <label htmlFor="guests">{t("contact.form.guests")} {t("contact.form.required")}</label>
+                  <label htmlFor="guests">Počet hostí *</label>
                   <input 
                     type="number" 
                     id="guests" 
@@ -1343,35 +1286,54 @@ function App() {
                     min="1" 
                     max="4" 
                     required
-                    placeholder={t("contact.form.guestsPlaceholder")}
-                    onFocus={() => trackFormFieldInteraction('guests', 'focus')}
-                    onChange={() => trackFormFieldInteraction('guests', 'change')}
-                    onBlur={() => trackFormFieldInteraction('guests', 'blur')}
+                    placeholder="Koľko ľudí bude v štúdiu?"
                   />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="message">{t("contact.form.message")}</label>
+                  <label htmlFor="message">Vaša správa alebo otázka</label>
                   <textarea 
                     id="message" 
                     name="message" 
                     rows="4" 
-                    placeholder={t("contact.form.messagePlaceholder")}
-                    onFocus={() => trackFormFieldInteraction('message', 'focus')}
-                    onChange={() => trackFormFieldInteraction('message', 'change')}
-                    onBlur={() => trackFormFieldInteraction('message', 'blur')}
+                    placeholder="Máte nejaké špeciálne požiadavky alebo otázky?"
                   ></textarea>
                 </div>
               </div>
 
               <div className="form-submit">
                 <button type="submit" className="cta-button">
-                  {t("contact.form.submit")}
+                  📅 Odoslať rezervačnú požiadavku
                 </button>
                 <p className="form-note">
-                  {t("contact.form.note")}
+                  Po odoslaní formulára vás budeme kontaktovať do 24 hodín na potvrdenie termínu.
                 </p>
               </div>
             </form>
+          </div>
+        </motion.section>
+
+        <motion.section
+          ref={galleryReveal.ref}
+          className="section gallery"
+          initial={{ opacity: 0, y: 40 }}
+          animate={galleryReveal.controls}
+          aria-labelledby="gallery-heading"
+        >
+          <div className="section-header">
+            <span className="section-overline">{t("gallery.overline")}</span>
+            <h2 id="gallery-heading">{t("gallery.title")}</h2>
+          </div>
+          <div className="gallery-grid">
+            {[galleryStudio1, galleryStudio2, galleryStudio3].map((imageSrc, index) => (
+              <motion.figure
+                key={imageSrc + index}
+                initial={{ opacity: 0, y: 30 }}
+                animate={galleryReveal.controls}
+                whileHover={{ scale: 1.02, transition: { duration: 0.25 } }}
+              >
+                <img src={imageSrc} alt={t("gallery.alt")} />
+              </motion.figure>
+            ))}
           </div>
         </motion.section>
 
@@ -1442,6 +1404,30 @@ function App() {
           <p className="footer-meta">© {new Date().getFullYear()} Grindcast Studio Bratislava</p>
         </div>
       </footer>
+
+      {/* Floating Phone Button */}
+      <a 
+        href="tel:+421907513318" 
+        className="floating-phone-button"
+        aria-label="Zavolať na +421 907 513 318"
+        onClick={() => {
+          // Track phone button click
+          if (typeof gtag !== 'undefined') {
+            gtag('event', 'button_click', {
+              button_text: 'Floating Phone Button',
+              button_location: 'floating'
+            });
+          }
+          // Facebook Pixel tracking
+          if (typeof fbq !== 'undefined') {
+            fbq('track', 'Contact');
+          }
+        }}
+      >
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+        </svg>
+      </a>
     </div>
   );
 }

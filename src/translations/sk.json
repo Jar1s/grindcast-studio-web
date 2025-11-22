@@ -197,6 +197,7 @@
       "emailRequired": "Email je povinný",
       "emailInvalid": "Neplatný email formát",
       "phoneRequired": "Telefónne číslo je povinné",
+      "phoneInvalid": "Telefónne číslo musí obsahovať aspoň 9 číslic",
       "dateRequired": "Dátum je povinný",
       "datePast": "Dátum nemôže byť v minulosti",
       "timeRequired": "Čas je povinný",
